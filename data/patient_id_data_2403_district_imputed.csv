@@ -1,0 +1,566 @@
+,ageEstimate,city,contractedFrom,district,district-imputed,gender,notes,onsetEstimate,patientId,relationship,reportedOn,state,status,travel,country
+0,20,Thrissur,,Thrissur,Thrissur,female,Travelled from Wuhan,,1,[],30/01/2020,Kerala,Recovered,['Wuhan'],India
+1,,Alappuzha,,Alappuzha,Alappuzha,female,Travelled from Wuhan,,2,[],02/02/2020,Kerala,Recovered,['Wuhan'],India
+2,,Kasaragod,,Kasaragod,Kasaragod,female,Travelled from Wuhan,,3,[],03/02/2020,Kerala,Recovered,['Wuhan'],India
+3,45,East Delhi (Mayur Vihar),,East Delhi,East Delhi,male,"Travelled from Austria, Italy",,4,[],02/03/2020,Delhi,Recovered,"['Austria', 'Italy']",India
+4,24,Hyderabad,,Hyderabad,Hyderabad,male,,,5,[],02/03/2020,Telangana,Recovered,[],India
+5,69,Jaipur,,Jaipur,Jaipur,male,Travelled from Italy,,6,[],03/03/2020,Rajasthan,Recovered,['Italy'],India
+6,55,Gurugram,P6,Gurugram,Gurugram,female,Travelled from Italy,,7,[],04/03/2020,Haryana,Hospitalized,['Italy'],India
+7,55,Gurugram,P6,Gurugram,Gurugram,female,Travelled from Italy,,8,[],04/03/2020,Haryana,Hospitalized,['Italy'],India
+8,55,Gurugram,P6,Gurugram,Gurugram,female,Travelled from Italy,,9,[],04/03/2020,Haryana,Hospitalized,['Italy'],India
+9,55,Gurugram,P6,Gurugram,Gurugram,female,Travelled from Italy,,10,[],04/03/2020,Haryana,Hospitalized,['Italy'],India
+10,55,Gurugram,P6,Gurugram,Gurugram,female,Travelled from Italy,,11,[],04/03/2020,Haryana,Hospitalized,['Italy'],India
+11,55,Gurugram,P6,Gurugram,Gurugram,female,Travelled from Italy,,12,[],04/03/2020,Haryana,Hospitalized,['Italy'],India
+12,55,Gurugram,P6,Gurugram,Gurugram,female,Travelled from Italy,,13,[],04/03/2020,Haryana,Hospitalized,['Italy'],India
+13,55,Gurugram,P6,Gurugram,Gurugram,female,Travelled from Italy,,14,[],04/03/2020,Haryana,Hospitalized,['Italy'],India
+14,55,Gurugram,P6,Gurugram,Gurugram,female,Travelled from Italy,,15,[],04/03/2020,Haryana,Hospitalized,['Italy'],India
+15,55,Gurugram,P6,Gurugram,Gurugram,female,Travelled from Italy,,16,[],04/03/2020,Haryana,Hospitalized,['Italy'],India
+16,55,Gurugram,P6,Gurugram,Gurugram,female,Travelled from Italy,,17,[],04/03/2020,Haryana,Hospitalized,['Italy'],India
+17,55,Gurugram,P6,Gurugram,Gurugram,female,Travelled from Italy,,18,[],04/03/2020,Haryana,Hospitalized,['Italy'],India
+18,55,Gurugram,P6,Gurugram,Gurugram,female,Travelled from Italy,,19,[],04/03/2020,Haryana,Hospitalized,['Italy'],India
+19,55,Gurugram,P6,Gurugram,Gurugram,female,Travelled from Italy,,20,[],04/03/2020,Haryana,Hospitalized,['Italy'],India
+20,70,Jaipur,P6,Jaipur,Jaipur,female,"Travelled from Italy, Wife of P6",,21,"[{'link': 'Wife', 'with': ['P6']}]",04/03/2020,Rajasthan,Recovered,['Italy'],India
+21,,Agra,P4,Agra,Agra,female,Family members of P4,,22,"[{'link': 'Family Member', 'with': ['P4']}]",04/03/2020,Uttar Pradesh,Hospitalized,[],India
+22,,Agra,P4,Agra,Agra,female,Family members of P4,,23,"[{'link': 'Family Member', 'with': ['P4']}]",04/03/2020,Uttar Pradesh,Hospitalized,[],India
+23,,Agra,P4,Agra,Agra,female,Family members of P4,,24,"[{'link': 'Family Member', 'with': ['P4']}]",04/03/2020,Uttar Pradesh,Hospitalized,[],India
+24,,Agra,P4,Agra,Agra,female,Family members of P4,,25,"[{'link': 'Family Member', 'with': ['P4']}]",04/03/2020,Uttar Pradesh,Hospitalized,[],India
+25,,Agra,P4,Agra,Agra,female,Family members of P4,,26,"[{'link': 'Family Member', 'with': ['P4']}]",04/03/2020,Uttar Pradesh,Hospitalized,[],India
+26,,Agra,P4,Agra,Agra,female,Family members of P4,,27,"[{'link': 'Family Member', 'with': ['P4']}]",04/03/2020,Uttar Pradesh,Hospitalized,[],India
+27,,,P6,,,female,"Accompanied the Italian tourists, Nationality: Indian",,28,[],04/03/2020,Uttar Pradesh,Hospitalized,[],India
+28,27,Janakpuri,,,West Delhi,male,"Travelled from Italy PayTm Emp, ",,29,[],05/03/2020,Delhi,Hospitalized,['Italy'],India
+29,59,Ghaziabad,,Ghaziabad,Ghaziabad,male,Travelled from Iran,,30,[],05/03/2020,Uttar Pradesh,Recovered,['Iran'],India
+30,,Uttam Nagar,,West Delhi,West Delhi,female,Travelled from Thailand and Malaysia,,31,[],06/03/2020,Delhi,Recovered,"['Thailand', 'Malaysia']",India
+31,65,Ladakh,,Leh,Leh,male,Travelled from Iran,,32,[],07/03/2020,Ladakh,Hospitalized,['Iran'],India
+32,75,Ladakh,,Leh,Leh,male,,,33,[],07/03/2020,Ladakh,Hospitalized,[],India
+33,45,Kancheepuram,,Chennai,Chennai,male,Travelled from Oman to Chennai Airport on 28.02.2020,,34,[],07/03/2020,Tamil Nadu,Recovered,['Oman'],India
+34,24,Ranni,,Pathanamthitta,Pathanamthitta,male,Travelled from Italy on 29/02/2020 through Doha,,35,[],08/03/2020,Kerala,Hospitalized,"['Italy', 'Doha']",India
+35,54,Ranni,P35,Pathanamthitta,Pathanamthitta,male,Travelled from Italy on 29/02/2020 through Doha,,36,[],08/03/2020,Kerala,Hospitalized,"['Italy', 'Doha']",India
+36,53,Ranni,P35,Pathanamthitta,Pathanamthitta,female,Travelled from Italy on 29/02/2020 through Doha,,37,[],08/03/2020,Kerala,Hospitalized,"['Italy', 'Doha']",India
+37,65,Ranni,P35,Pathanamthitta,Pathanamthitta,male,Relative and neighbour of P35-P37,,38,"[{'link': 'Relative and neighbour', 'with': ['P35', 'P37']}]",08/03/2020,Kerala,Hospitalized,[],India
+38,61,Ranni,P35,Pathanamthitta,Pathanamthitta,female,Relative  and neighbour of P35-P37,,39,"[{'link': '  and neighbour', 'with': ['P35', 'P37']}]",08/03/2020,Kerala,Hospitalized,[],India
+39,25,Tri Nagar,P29,,Delhi,female,No travel history,,40,[],09/03/2020,Delhi,Hospitalized,[],India
+40,63,Jammu,,,Jammu,female,Travelled from Iran,,41,[],09/03/2020,Jammu and Kashmir,Hospitalized,['Iran'],India
+41,,Bengaluru,,Bengaluru,Bengaluru,male,"Travelled from US via London, Mindtree Employee",,42,[],09/03/2020,Karnataka,Hospitalized,"['US', 'London']",India
+42,3,Kannur,,Kannur,Kannur,male,Travelled from Italy on 07/03/2020 (Parents in isolation),,43,[],09/03/2020,Kerala,Hospitalized,['Italy'],India
+43,,Pune,,Pune,Pune,male,"Travelled from Dubai on 1 March, Husband of P45",,44,"[{'link': 'Husband', 'with': ['P45']}]",09/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+44,,Pune,,Pune,Pune,female,"Travelled from Dubai on 1 March, Wife of P44",,45,"[{'link': 'Wife', 'with': ['P44']}]",09/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+45,,Amritsar,,Amritsar,Amritsar,male,Travelled from Italy,,46,[],09/03/2020,Punjab,Hospitalized,['Italy'],India
+46,48,Agra,P4,,Agra,male,Factory Manager contact with businessman from Italy,,47,[],09/03/2020,Uttar Pradesh,Recovered,['Italy'],India
+47,,Agra,P22,,Agra,female,Was in contact with P22-P27,,48,[],09/03/2020,Uttar Pradesh,Hospitalized,[],India
+48,,Kozhencherry,"P35, P36, P37",Pathanamthitta,Pathanamthitta,female,"Friends of P35, P36, P37",,49,"[{'link': 'Friends', 'with': ['P35', 'P36', 'P37']}]",10/03/2020,Kerala,Hospitalized,[],India
+49,,Kozhencherry,"P35, P36, P37",Pathanamthitta,Pathanamthitta,female,"Friends of P35, P36, P37",,50,"[{'link': 'Friends', 'with': ['P35', 'P36', 'P37']}]",10/03/2020,Kerala,Hospitalized,[],India
+50,40,Bengaluru,,Bengaluru,Bengaluru,male,"Travelled from US on Feb 28, Dell Employee",,51,[],10/03/2020,Karnataka,Recovered,['US'],India
+51,,Bengaluru,P51,Bengaluru,Bengaluru,female,Wife of P51,,52,"[{'link': 'Wife', 'with': ['P51']}]",10/03/2020,Karnataka,Recovered,[],India
+52,13,Bengaluru,P51,Bengaluru,Bengaluru,female,Daughter of P51 and P52,,53,"[{'link': 'Daughter', 'with': ['P51', 'P52']}]",10/03/2020,Karnataka,Hospitalized,[],India
+53,,Kochi,P43,Ernakulam,Ernakulam,male,Father of P43,,54,"[{'link': 'Father', 'with': ['P43']}]",10/03/2020,Kerala,Hospitalized,[],India
+54,,Kochi,P43,Ernakulam,Ernakulam,female,Mother of P43,,55,"[{'link': 'Mother', 'with': ['P43']}]",10/03/2020,Kerala,Hospitalized,[],India
+55,96,Ranni,"P36, P37, P38",Pathanamthitta,Pathanamthitta,male,Father of P36,,56,"[{'link': 'Father', 'with': ['P36']}]",10/03/2020,Kerala,Hospitalized,[],India
+56,89,Ranni,"P36, P37, P38",Pathanamthitta,Pathanamthitta,female,Mother of P36,,57,"[{'link': 'Mother', 'with': ['P36']}]",10/03/2020,Kerala,Hospitalized,[],India
+57,,Chengalam,"P36, P37, P38",Kottayam,Kottayam,male,Daughter of P36 & P37,,58,"[{'link': 'Daughter', 'with': ['P36', 'P37']}]",10/03/2020,Kerala,Hospitalized,[],India
+58,,Chengalam,"P36, P37, P38",Kottayam,Kottayam,female,Son in law of P36 & P37,,59,"[{'link': 'law', 'with': ['P36', 'P37']}]",10/03/2020,Kerala,Hospitalized,[],India
+59,3,Pune,"P44, P45",Pune,Pune,female,Daughter of P44 & P45,,60,"[{'link': 'Daughter', 'with': ['P44', 'P45']}]",10/03/2020,Maharashtra,Hospitalized,[],India
+60,,Pune,"P44, P45",Pune,Pune,female,Co-passenger with P44 & P45 in cab of P62 from Mumbai airport to Pune,,61,"[{'link': 'cab', 'with': ['P62']}]",10/03/2020,Maharashtra,Hospitalized,"['Mumbai', 'Pune']",India
+61,,Pune,"P44, P45",Pune,Pune,male,"Cab driver who ferried P44, P45, P61 from Mumbai airport to Pune",,62,[],10/03/2020,Maharashtra,Hospitalized,"['Mumbai', 'Pune']",India
+62,85,Jaipur,,Jaipur,Jaipur,male,Travelled from Dubai,,63,[],10/03/2020,Rajasthan,Recovered,['Dubai'],India
+63,46,Janakpuri,,South West Delhi,South West Delhi,male,"Travelled from Japan, Switzerland and Italy",,64,[],11/03/2020,Delhi,Hospitalized,"['Japan', 'Switzerland', 'Italy']",India
+64,,Chuchot,,Leh,Leh,male,Travelled from Iran,,65,[],11/03/2020,Ladakh,Hospitalized,['Iran'],India
+65,70,Mumbai,,Mumbai,Mumbai,male,"Travelled from Dubai, Co-passengers P44, P45, spouse of P67",,66,"[{'link': 'spouse', 'with': ['P67']}]",11/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+66,68,Mumbai,,Mumbai,Mumbai,female,"Travelled from Dubai, Co-passengers P44, P45, spouse of P66",,67,"[{'link': 'spouse', 'with': ['P66']}]",11/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+67,,Pune,,Pune,Pune,female,"Travelled from Dubai, Co-passengers P44, P45",,68,[],11/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+68,,Pune,,Pune,Pune,female,"Travelled from Dubai, Co-passengers P44, P45",,69,[],11/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+69,,Pune,,Pune,Pune,female,"Travelled from Dubai, Co-passengers P44, P45",,70,[],11/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+70,27,Nellore,,S.P.S. Nellore,S.P.S. Nellore,male,Travelled from Italy on March 6th,,71,[],12/03/2020,Andhra Pradesh,Hospitalized,['Italy'],India
+71,69,Janakpuri,P64,South West Delhi,South West Delhi,female,Mother of P64,,72,"[{'link': 'Mother', 'with': ['P64']}]",12/03/2020,Delhi,Deceased,[],India
+72,26,Bengaluru,,Bengaluru,Bengaluru,male,"Travelled from Greece to Mumbai on March 6th, Google Employee",,73,[],12/03/2020,Karnataka,Recovered,"['Greece', 'Mumbai']",India
+73,76,Kalaburgi,,Kalaburagi,Kalaburagi,male,"Travelled from Saudi on Feb 29, First death in India",,74,[],12/03/2020,Karnataka,Deceased,['India'],India
+74,,Kannur,,Kannur,Kannur,female,"Travelled from Dubai, SG 54",,75,[],12/03/2020,Kerala,Recovered,['Dubai'],India
+75,,Thrissur,,Thrissur,Thrissur,female,Travelled from Qatar,,76,[],12/03/2020,Kerala,Hospitalized,['Qatar'],India
+76,65,Mumbai,,Mumbai,Mumbai,male,"Travelled from Dubai on March 8, Third death in India, , Was hospitalised in Kasturba Hospital",,77,[],12/03/2020,Maharashtra,Deceased,"['Dubai', 'India']",India
+77,45,Nagpur,,Nagpur,Nagpur,male,Travelled from US on 6th March,,78,[],12/03/2020,Maharashtra,Hospitalized,['US'],India
+78,33,Pune,,Pune,Pune,male,Travelled from US on 1st March,,79,[],12/03/2020,Maharashtra,Hospitalized,['US'],India
+79,33,Thane,,Thane,Thane,male,Travelled from France on March 8,,80,[],12/03/2020,Maharashtra,Hospitalized,['France'],India
+80,,Lucknow,,Lucknow,Lucknow,female,"Travelled from UK, Canadian Doctor",,81,[],12/03/2020,Uttar Pradesh,Hospitalized,['UK'],India
+81,27,Ghaziabad,P30,Ghaziabad,Ghaziabad,male,Son of P30,,82,"[{'link': 'Son', 'with': ['P30']}]",12/03/2020,Uttar Pradesh,Hospitalized,[],India
+82,,Delhi,,,Delhi,male,"Travelled from Italy, Restaurant worker, Was evacuated",,83,[],13/03/2020,Delhi,Hospitalized,['Italy'],India
+83,,Jammu,P41,,Jammu,female,Close contact of P41,,84,"[{'link': 'contact', 'with': ['P41']}]",13/03/2020,Jammu and Kashmir,Hospitalized,[],India
+84,,Varkala,,Thiruvananthapuram,Thiruvananthapuram,female,"Travelled from Italy, Italian national stayed in a resort at Varkala",,85,[],13/03/2020,Kerala,Hospitalized,"['Italy', 'Varkala']",India
+85,,Nedumangad,,Thiruvananthapuram,Thiruvananthapuram,female,"Travelled from Dubai, has visited Italy",,86,[],13/03/2020,Kerala,Hospitalized,"['Dubai', 'Italy']",India
+86,,Thiruvanathapuram,,Thiruvananthapuram,Thiruvananthapuram,male,Travelled from London via Bahrain,,87,[],13/03/2020,Kerala,Hospitalized,"['London', 'Bahrain']",India
+87,,Nagpur,P78,Nagpur,Nagpur,female,Wife of P78,,88,"[{'link': 'Wife', 'with': ['P78']}]",13/03/2020,Maharashtra,Hospitalized,[],India
+88,,Nagpur,P78,Nagpur,Nagpur,male,Friend of P78,,89,"[{'link': 'Friend', 'with': ['P78']}]",13/03/2020,Maharashtra,Hospitalized,[],India
+89,,Pune,,Pune,Pune,female,Travelled from US,,90,[],13/03/2020,Maharashtra,Hospitalized,['US'],India
+90,,Agra,P73,Agra,Agra,female,Wife of P73,,91,"[{'link': 'Wife', 'with': ['P73']}]",13/03/2020,Uttar Pradesh,Hospitalized,[],India
+91,,Ahmednagar,,Ahmadnagar,Ahmadnagar,female,Travelled from Dubai,,92,[],14/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+92,,Mumbai,P77,Mumbai,Mumbai,female,Wife of P77,,93,"[{'link': 'Wife', 'with': ['P77']}]",14/03/2020,Maharashtra,Hospitalized,[],India
+93,,Mumbai,P77,Mumbai,Mumbai,male,"Travelled from Dubai on March 8, son of P77",,94,"[{'link': 'son', 'with': ['P77']}]",14/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+94,37,Mumbai,,Mumbai,Mumbai,male,"Travelled from US , From Kalyan",,95,[],14/03/2020,Maharashtra,Hospitalized,['US'],India
+95,59,Mumbai,,Mumbai,Mumbai,female,Travelled from Philippines and were brought in from the Mumbai Airport,,96,[],14/03/2020,Maharashtra,Hospitalized,['Philippines'],India
+96,,Mumbai,,Mumbai,Mumbai,female,Have international history and were brought in from the Mumbai Airport,,97,[],14/03/2020,Maharashtra,Hospitalized,[],India
+97,43,Nagpur,P78,Nagpur,Nagpur,male,"Travelled from US, travelled along with P78",,98,[],14/03/2020,Maharashtra,Hospitalized,['US'],India
+98,,Pune,,Pune,Pune,female,First contacts or family members of the group of 40 who came back from Dubai earlier,,99,"[{'link': 'Family Member', 'with': []}, {'link': 'group', 'with': []}]",14/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+99,,Pune,,Pune,Pune,female,First contacts or family members of the group of 40 who came back from Dubai earlier,,100,"[{'link': 'Family Member', 'with': []}, {'link': 'group', 'with': []}]",14/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+100,,Pune,,Pune,Pune,female,First contacts or family members of the group of 40 who came back from Dubai earlier,,101,"[{'link': 'Family Member', 'with': []}, {'link': 'group', 'with': []}]",14/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+101,,Pune,,Pune,Pune,male,First contacts or family members of the group of 40 who came back from Dubai earlier,,102,"[{'link': 'Family Member', 'with': []}, {'link': 'group', 'with': []}]",14/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+102,21,Pune,,Pune,Pune,male,Travelled from Thailand,,103,[],14/03/2020,Maharashtra,Hospitalized,['Thailand'],India
+103,,Yavatmal,,Yavatmal,Yavatmal,female,Travelled from Dubai on 1st March,,104,[],14/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+104,,Yavatmal,,Yavatmal,Yavatmal,female,Travelled from Dubai on 1st March,,105,[],14/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+105,24,Jaipur,,Jaipur,Jaipur,male,Travelled from Spain,,106,[],14/03/2020,Rajasthan,Hospitalized,['Spain'],India
+106,,Hyderabad,,Hyderabad,Hyderabad,female,Travelled from Italy,,107,[],14/03/2020,Telangana,Hospitalized,['Italy'],India
+107,,Munnar,,Idukki,Idukki,male,"Travelled from Dubai, British citizen who had resided in Munnar resort",,108,[],15/03/2020,Kerala,Hospitalized,['Dubai'],India
+108,,Thiruvananthapuram,,Thiruvananthapuram,Thiruvananthapuram,male,"Travelled from Spain, Doctor",,109,[],15/03/2020,Kerala,Hospitalized,['Spain'],India
+109,59,Aurangabad,,Aurangabad,Aurangabad,female,Travelled from Russia and Kazakhstan,,110,[],15/03/2020,Maharashtra,Hospitalized,"['Russia', 'Kazakhstan']",India
+110,,Pimpri-Chinchwad,,Pune,Pune,male,Travelled from Japan and Dubai before his return on March 3,,111,[],15/03/2020,Maharashtra,Hospitalized,"['Japan', 'Dubai']",India
+111,46,Hyderabad,,Hyderabad,Hyderabad,female,Travelled from Netherlands March 9,,112,[],15/03/2020,Telangana,Hospitalized,['Netherlands'],India
+112,,Dehradun,,,Dehradun,male,"Travelled from Spain, Italy and Russia March 11",,113,[],15/03/2020,Uttarakhand,Hospitalized,"['Spain', 'Italy', 'Russia']",India
+113,,Rajouri,,Jammu,Jammu,female,Travelled from Saudi,,114,[],16/03/2020,Jammu and Kashmir,Hospitalized,[],India
+114,32,Bengaluru,,Bengaluru,Bengaluru,male,"Travelled from US via London on March 8, Co Passenger of P82",,115,"[{'link': 'Passenger', 'with': ['P82']}]",16/03/2020,Karnataka,Hospitalized,"['US', 'London']",India
+115,45,Kalaburagi,P74,Kalaburagi,Kalaburagi,female,Daughter of P74,,116,"[{'link': 'Daughter', 'with': ['P74']}]",16/03/2020,Karnataka,Hospitalized,[],India
+116,,Kalanadu,,Kasaragod,Kasaragod,female,Travelled from Middle East,,117,[],16/03/2020,Kerala,Hospitalized,[],India
+117,,Malappuram,,Malappuram,Malappuram,female,Travelled from Middle East,,118,[],16/03/2020,Kerala,Hospitalized,[],India
+118,,Malappuram,,Malappuram,Malappuram,female,Travelled from Middle East,,119,[],16/03/2020,Kerala,Hospitalized,[],India
+119,47,Mumbai,,,Mumbai,female,"Travelled from Philippines,  Came to Navi Mumbai",,120,[],16/03/2020,Maharashtra,Hospitalized,"['Philippines', 'Mumbai']",India
+120,42,Mumbai,,,Mumbai,female,"Travelled from Philippines,  Came to Navi Mumbai",,121,[],16/03/2020,Maharashtra,Hospitalized,"['Philippines', 'Mumbai']",India
+121,33,Mumbai,P95,,Mumbai,female,"Spouse of P95, From Kalyan",,122,"[{'link': 'Spouse', 'with': ['P95']}]",16/03/2020,Maharashtra,Hospitalized,[],India
+122,3,Mumbai,P95,,Mumbai,female,"3 year old from Kalyan, Father P95 /Mother P122",,123,[],16/03/2020,Maharashtra,Hospitalized,[],India
+123,44,Mumbai,,,Mumbai,female,Travelled from to Lisbon in Portugal,,124,[],16/03/2020,Maharashtra,Hospitalized,"['Lisbon', 'Portugal']",India
+124,51,Yavatmal,,,Yavatmal,female,Travelled from Dubai on March 1,,125,[],16/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+125,31,Bhubaneswar,,,Khordha,male,Travelled from Italy,,126,[],16/03/2020,Odisha,Hospitalized,['Italy'],India
+126,,Hyderabad,,Hyderabad,Hyderabad,male,Travelled from Scotland,,127,[],16/03/2020,Telangana,Hospitalized,['Scotland'],India
+127,,Delhi,,,Delhi,female,"Travelled from Italy, 2nd evacuee from Italy in ITBP Chhawla Camp",,128,[],17/03/2020,Delhi,Hospitalized,"['Italy', 'Italy']",India
+128,,Delhi,,,Delhi,female,"Travelled from Italy, 3rd evacuee from Italy in ITBP Chhawla Camp",,129,[],17/03/2020,Delhi,Hospitalized,"['Italy', 'Italy']",India
+129,,Saket,,,South Delhi,female,Travelled from Singapore (Feb) and Canada (Mar),,130,[],17/03/2020,Delhi,Migrated,"['Singapore', 'Canada']",India
+130,29,Gurugram,,Gurugram,Gurugram,female,Travelled from Malaysia,,131,[],17/03/2020,Haryana,Hospitalized,['Malaysia'],India
+131,,Kargil,,Kargil,Kargil,female,Travelled from Iran,,132,[],17/03/2020,Ladakh,Hospitalized,['Iran'],India
+132,,Leh,,Leh,Leh,female,,,133,[],17/03/2020,Ladakh,Hospitalized,[],India
+133,,Leh,,Leh,Leh,female,,,134,[],17/03/2020,Ladakh,Hospitalized,[],India
+134,20,Bengaluru,,Bengaluru,Bengaluru,female,Travelled from UK,,135,[],17/03/2020,Karnataka,Hospitalized,['UK'],India
+135,67,Bengaluru,,Bengaluru,Bengaluru,female,Travelled from Dubai,,136,[],17/03/2020,Karnataka,Hospitalized,['Dubai'],India
+136,63,Kalaburagi,P74,Kalaburagi,Kalaburagi,male,Doctor of P74,,137,"[{'link': 'Doctor', 'with': ['P74']}]",17/03/2020,Karnataka,Hospitalized,[],India
+137,49,Mumbai,,Mumbai,Mumbai,male,Travelled from US on March 7,,138,[],17/03/2020,Maharashtra,Hospitalized,['US'],India
+138,26,Pune,,Pune,Pune,male,Travelled from US on March 14,,139,[],17/03/2020,Maharashtra,Hospitalized,['US'],India
+139,68,"Travelled from Abhu Dhabi, EY 250",,Mahe,Mahe,female,Travelled from UAE,,140,[],17/03/2020,Puducherry,Hospitalized,[],India
+140,52,Hyderabad,,Hyderabad,Hyderabad,male,"Indonesian national; The patient had flown into Delhi on March 9 and after a few days took a train to Karimnagar, about 170 km from Hyderabad, for a religious meeting with a group from Indonesia and Malaysia.",,141,[],17/03/2020,Telangana,Hospitalized,"['Delhi', 'Karimnagar', 'Hyderabad', 'Indonesia', 'Malaysia']",India
+141,,Gautam Buddha Nagar,P64,Gautam Buddha Nagar,Gautam Buddha Nagar,male,Sector 78; Contracted from his boss,,142,[],17/03/2020,Uttar Pradesh,Hospitalized,[],India
+142,21,Gautam Buddha Nagar,,Gautam Buddha Nagar,Gautam Buddha Nagar,female,"Travelled from France, Sector 100; ",,143,[],17/03/2020,Uttar Pradesh,Hospitalized,['France'],India
+143,18,Kolkata,,Kolkata,Kolkata,male,Travelled from United Kingdom (quarantined),,144,[],17/03/2020,West Bengal,Hospitalized,['United Kingdom'],India
+144,34,Leh,P146,Leh,Leh,male,Indian Army jawan,,145,[],17/03/2020,Ladakh,Hospitalized,[],India
+145,,Leh,,Leh,Leh,male,"Travelled from Iran, Father of P145, ",,146,"[{'link': 'Father', 'with': ['P145']}]",17/03/2020,Ladakh,Hospitalized,['Iran'],India
+146,28,Pune,,Pune,Pune,female,"Travelled from France & Netherlands, Kasaba Peth Woman,Retuned to India on March 15th",,147,[],18/03/2020,Maharashtra,Hospitalized,"['France', 'Netherlands', 'India']",India
+147,25,Lucknow,P81,Lucknow,Lucknow,male,KGMU Doctor treating infected patients,,148,[],18/03/2020,Uttar Pradesh,Hospitalized,[],India
+148,22,Hyderabad,,Hyderabad,Hyderabad,male,"Studying BBA at Scotland, Travelled from UK",,149,[],18/03/2020,Telangana,Hospitalized,"['Scotland', 'UK']",India
+149,56,Bengaluru,,Bengaluru,Bengaluru,female,Travelled from US,,150,[],18/03/2020,Karnataka,Hospitalized,['US'],India
+150,25,Bengaluru,,Bengaluru,Bengaluru,male,Travelled from Spain AI136,,151,[],18/03/2020,Karnataka,Hospitalized,[],India
+151,,Gautam Buddha Nagar,,Gautam Buddha Nagar,Gautam Buddha Nagar,female,Travelled from Indonesia,,152,[],18/03/2020,Uttar Pradesh,Hospitalized,['Indonesia'],India
+152,44,Gurugram,,Gurugram,Gurugram,male,Travelled from UK,,153,[],18/03/2020,Haryana,Hospitalized,['UK'],India
+153,20,Chennai,,,Chennai,male,Reached Chennai MGR Central from Delhi via Train on 12.03.2020,,154,[],18/03/2020,Tamil Nadu,Hospitalized,['Delhi'],India
+154,68,Mumbai,P138,,Mumbai,female,"Residing at N Ward,Close contact of P138",,155,"[{'link': 'contact', 'with': ['P138']}]",18/03/2020,Maharashtra,Hospitalized,[],India
+155,35,Bengaluru,,Bengaluru,Bengaluru,male,Travelled from the US,,156,[],18/03/2020,Karnataka,Hospitalized,['US'],India
+156,21,Pimpri-Chinchwad,,,Pune,male,"Travelled from Philippines, Singapore and Sri Lanka",,157,[],18/03/2020,Maharashtra,Hospitalized,"['Philippines', 'Singapore', 'Sri Lanka']",India
+157,50,Shrungartali,,Ratnagiri,Ratnagiri,female,Travelled from Dubai.,,158,[],18/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+158,67,Khanyar,,Srinagar,Srinagar,female,Travelled from Saudi Arabia,,159,[],18/03/2020,Jammu and Kashmir,Hospitalized,['Saudi Arabia'],India
+159,33,Jhunjhunu,,Jhunjhunu,Jhunjhunu,male,Travelled from Italy on March 8,,160,[],18/03/2020,Rajasthan,Hospitalized,['Italy'],India
+160,30,Jhunjhunu,P160,Jhunjhunu,Jhunjhunu,female,Travelled from Italy on March 8,,161,[],18/03/2020,Rajasthan,Hospitalized,['Italy'],India
+161,3,Jhunjhunu,P160,Jhunjhunu,Jhunjhunu,female,Travelled from Italy on March 8,,162,[],18/03/2020,Rajasthan,Hospitalized,['Italy'],India
+162,,Hyderabad,P141,Hyderabad,Hyderabad,female,Indonesian,,163,[],18/03/2020,Telangana,Hospitalized,[],India
+163,,Hyderabad,P141,Hyderabad,Hyderabad,female,Indonesian,,164,[],18/03/2020,Telangana,Hospitalized,[],India
+164,,Hyderabad,P141,Hyderabad,Hyderabad,female,Indonesian,,165,[],18/03/2020,Telangana,Hospitalized,[],India
+165,,Hyderabad,P141,Hyderabad,Hyderabad,female,Indonesian,,166,[],18/03/2020,Telangana,Hospitalized,[],India
+166,,Hyderabad,P141,Hyderabad,Hyderabad,female,Indonesian,,167,[],18/03/2020,Telangana,Hospitalized,[],India
+167,,Hyderabad,P141,Hyderabad,Hyderabad,female,Indonesian,,168,[],18/03/2020,Telangana,Hospitalized,[],India
+168,,Hyderabad,P141,Hyderabad,Hyderabad,female,Indonesian,,169,[],18/03/2020,Telangana,Hospitalized,[],India
+169,,Gurugram,P153,Gurugram,Gurugram,female,Wife of P153,,170,"[{'link': 'Wife', 'with': ['P153']}]",18/03/2020,Haryana,Hospitalized,[],India
+170,38,Dilshad Garden,,,East Delhi,female,Travelled from Saudi Arabia,,171,[],18/03/2020,Delhi,Hospitalized,['Saudi Arabia'],India
+171,23,Chandigarh,,Chandigarh,Chandigarh,female,Travelled from UK,,172,[],19/03/2020,Chandigarh,Hospitalized,['UK'],India
+172,22,Mumbai,,,Mumbai,female,Travelled from UK,,173,[],19/03/2020,Maharashtra,Hospitalized,['UK'],India
+173,49,Mumbai,,,Mumbai,female,Travelled from Dubai,,174,[],19/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+174,35,Kodagu,,Kodagu,Kodagu,male,Travelled from Saudi Arabia,,175,[],19/03/2020,Karnataka,Hospitalized,['Saudi Arabia'],India
+175,24,Ongole,,Prakasam,Prakasam,male,Travelled from UK,,176,[],19/03/2020,Andhra Pradesh,Hospitalized,['UK'],India
+176,24,Raipur,,,Raipur,female,Travelled from UK,,177,[],19/03/2020,Chhattisgarh,Hospitalized,['UK'],India
+177,,Noida,,Gautam Buddha Nagar,Gautam Buddha Nagar,male,Travelled from Japan. HCL Emp,,178,[],19/03/2020,Uttar Pradesh,Hospitalized,['Japan'],India
+178,,Lucknow,,Lucknow,Lucknow,female,Travelled from UK,,179,[],19/03/2020,Uttar Pradesh,Hospitalized,['UK'],India
+179,,Lakhimpur kheri,,Lucknow,Lucknow,female,Travelled from Turkey,,180,[],19/03/2020,Uttar Pradesh,Hospitalized,['Turkey'],India
+180,21,Chennai,,Chennai,Chennai,male,"Travelled from Dublin, Ireland on 17/3",,181,[],19/03/2020,Tamil Nadu,Hospitalized,"['Dublin', 'Ireland']",India
+181,70,Banga,,Shaheed Bhagat Singh Nagar,Shaheed Bhagat Singh Nagar,male,Travelled from Germany via Italy,,182,[],19/03/2020,Punjab,Deceased,"['Germany', 'Italy']",India
+182,47,Eriyal,,Kasaragod,Kasaragod,male,Travelled from Dubai via Kozhikode Air India Express IX 344,,183,[],19/03/2020,Kerala,Hospitalized,['Dubai'],India
+183,32,Rajkot,,Rajkot,Rajkot,male,"Travelled from Mecca, Saudi Arabia",,184,[],19/03/2020,Gujarat,Hospitalized,"['Mecca', 'Saudi Arabia']",India
+184,21,Surat,,Surat,Surat,female,"Travelled from London, UK via Mumbai",,185,[],19/03/2020,Gujarat,Hospitalized,"['London', 'UK', 'Mumbai']",India
+185,,Pimpri-Chinchwad,,Pune,Pune,female,,,186,[],19/03/2020,Maharashtra,Hospitalized,[],India
+186,51,Ahmednagar,,,Ahmednagar,male,Travelled from Dubai,,187,[],19/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+187,,Dehradun,,,Dehradun,female,Travelled from Spain; Indira Gandhi National Forest Academy Trainee,,188,[],19/03/2020,Uttarakhand,Hospitalized,['Spain'],India
+188,,Dehradun,,,Dehradun,female,Travelled from Spain; Indira Gandhi National Forest Academy Trainee,,189,[],19/03/2020,Uttarakhand,Hospitalized,['Spain'],India
+189,,Hyderabad,,Hyderabad,Hyderabad,female,Travelled from UK on 10th Mar,,190,[],19/03/2020,Telangana,Hospitalized,['UK'],India
+190,,Hyderabad,,Hyderabad,Hyderabad,female,Travelled from Dubai on 14 Mar,,191,[],19/03/2020,Telangana,Hospitalized,['Dubai'],India
+191,,Hyderabad,,Hyderabad,Hyderabad,female,Travelled from UK,,192,[],19/03/2020,Telangana,Hospitalized,['UK'],India
+192,19,Bhubaneswar,,,Khordha,male,Travelled from UK,,193,[],19/03/2020,Odisha,Hospitalized,['UK'],India
+193,,Jaipur,,Jaipur,Jaipur,male,Travelled from Spain via Dubai - New Delhi on 18 Mar; Husband of P195,,194,"[{'link': 'Husband', 'with': ['P195']}]",19/03/2020,Rajasthan,Hospitalized,"['Spain', 'Dubai', 'New Delhi']",India
+194,,Jaipur,,Jaipur,Jaipur,female,Travelled from Spain via Dubai - New Delhi on 18 Mar; Wife of P194,,195,"[{'link': 'Wife', 'with': ['P194']}]",19/03/2020,Rajasthan,Hospitalized,"['Spain', 'Dubai', 'New Delhi']",India
+195,65,Visakapatnam,,Visakhapatnam,Visakhapatnam,male,Travelled from Saudi Arabia on 12 Mar,,196,[],19/03/2020,Andhra Pradesh,Hospitalized,['Saudi Arabia'],India
+196,22,Rana Pratap Bagh,,,North Delhi,female,Travelled from London,,197,[],19/03/2020,Delhi,Hospitalized,['London'],India
+197,22,Ashok Vihar,,,North West Delhi,male,Travelled from UK,,198,[],19/03/2020,Delhi,Hospitalized,['UK'],India
+198,32,Gautam Puri,,,Delhi,male,Travelled from Mexico,,199,[],19/03/2020,Delhi,Hospitalized,['Mexico'],India
+199,22,Kolkata,,,Kolkata,male,Travelled to UK,,200,[],20/03/2020,West Bengal,Hospitalized,['UK'],India
+200,69,Mohali,,Sahibzada Ajit Singh Nagar,Sahibzada Ajit Singh Nagar,female,Travelled from UK,,201,[],20/03/2020,Punjab,Hospitalized,['UK'],India
+201,,Chusot,,Leh,Leh,female,Related to SBI employee (Patient ID Unknown),,202,[],20/03/2020,Ladakh,Hospitalized,[],India
+202,,Chusot,,Leh,Leh,female,Details awaited,,203,[],20/03/2020,Ladakh,Hospitalized,[],India
+203,,Jahangirpuri,P171,,North West Delhi,male,Brother of P171,,204,"[{'link': 'Brother', 'with': ['P171']}]",20/03/2020,Delhi,Hospitalized,[],India
+204,,Jahangirpuri,P171,,North West Delhi,female,Mother of P171,,205,"[{'link': 'Mother', 'with': ['P171']}]",20/03/2020,Delhi,Hospitalized,[],India
+205,58,North Delhi,,,North Delhi,male,Travelled from UK,,206,[],20/03/2020,Delhi,Hospitalized,['UK'],India
+206,24,Pimpri-Chinchwad,P157,,Pune,male,Brother of P157,,207,"[{'link': 'Brother', 'with': ['P157']}]",20/03/2020,Maharashtra,Hospitalized,[],India
+207,38,Mumbai,,,Mumbai,male,Travelled from Turkey,,208,[],20/03/2020,Maharashtra,Hospitalized,['Turkey'],India
+208,20,Mumbai,,,Mumbai,male,Travelled from UK,,209,[],20/03/2020,Maharashtra,Hospitalized,['UK'],India
+209,22,Ahmedabad,,Ahmedabad,Ahmedabad,female,Travelled from US,,210,[],20/03/2020,Gujarat,Hospitalized,['US'],India
+210,34,Ahmedabad,,Ahmedabad,Ahmedabad,female,Travelled from Finland via Delhi,,211,[],20/03/2020,Gujarat,Hospitalized,"['Finland', 'Delhi']",India
+211,47,Vadodara,,Vadodara,Vadodara,male,Travelled from Spain via Mumbai,,212,[],20/03/2020,Gujarat,Hospitalized,"['Spain', 'Mumbai']",India
+212,37,Lucknow,P142,,Lucknow,male,"Relative of P142, junior resident at KGMU",,213,"[{'link': 'Relative', 'with': ['P142']}]",20/03/2020,Uttar Pradesh,Hospitalized,[],India
+213,35,Lucknow,P142,,Lucknow,male,"Relative of P142, junior resident at KGMU",,214,"[{'link': 'Relative', 'with': ['P142']}]",20/03/2020,Uttar Pradesh,Hospitalized,[],India
+214,20,Lucknow,P142,,Lucknow,female,"Relative of P142, junior resident at KGMU",,215,"[{'link': 'Relative', 'with': ['P142']}]",20/03/2020,Uttar Pradesh,Hospitalized,[],India
+215,41,Lucknow,,,Lucknow,female,Travelled from UK,,216,[],20/03/2020,Uttar Pradesh,Hospitalized,['UK'],India
+216,,Jaipur,,Jaipur,Jaipur,female,"Rangoli Garden, Vaishali Nagar",,217,[],20/03/2020,Rajasthan,Hospitalized,[],India
+217,,Bhilwara,,Bhilwara,Bhilwara,female,"Doctor, Had a guest who returned from Saudi Arabia",,218,[],20/03/2020,Rajasthan,Hospitalized,['Saudi Arabia'],India
+218,,Bhilwara,P218,Bhilwara,Bhilwara,female,Doctor,,219,[],20/03/2020,Rajasthan,Hospitalized,[],India
+219,18,Hyderabad,,Hyderabad,Hyderabad,female,Travelled from London,,220,[],20/03/2020,Telangana,Hospitalized,['London'],India
+220,,Jaipur,,Jaipur,Jaipur,female,Details awaited,,221,[],20/03/2020,Rajasthan,Hospitalized,[],India
+221,69,Vadodara,,Vadodara,Vadodara,female,Travelled from Sri Lanka,,222,[],20/03/2020,Gujarat,Hospitalized,['Sri Lanka'],India
+222,27,Ahmedabad,,Ahmedabad,Ahmedabad,male,Travelled from UK,,223,[],20/03/2020,Gujarat,Hospitalized,['UK'],India
+223,,Chandigarh,P172,Chandigarh,Chandigarh,female,Mother of P172,,224,"[{'link': 'Mother', 'with': ['P172']}]",20/03/2020,Chandigarh,Hospitalized,[],India
+224,,Chandigarh,P172,Chandigarh,Chandigarh,male,Brother of P172,,225,"[{'link': 'Brother', 'with': ['P172']}]",20/03/2020,Chandigarh,Hospitalized,[],India
+225,,Chandigarh,P172,Chandigarh,Chandigarh,male,Cook of P172,,226,"[{'link': 'Cook', 'with': ['P172']}]",20/03/2020,Chandigarh,Hospitalized,[],India
+226,26,Chandigarh,,Chandigarh,Chandigarh,female,"Travelled from UK, Sector 19; ",,227,[],20/03/2020,Chandigarh,Hospitalized,['UK'],India
+227,,Kochi,P108,Ernakulam,Ernakulam,female,Travelled from Dubai. UK Tourist,,228,[],20/03/2020,Kerala,Hospitalized,"['Dubai', 'UK']",India
+228,,Kochi,P108,Ernakulam,Ernakulam,male,Travelled from Dubai. UK Tourist,,229,[],20/03/2020,Kerala,Hospitalized,"['Dubai', 'UK']",India
+229,,Kochi,P108,Ernakulam,Ernakulam,male,Travelled from Dubai. UK Tourist,,230,[],20/03/2020,Kerala,Hospitalized,"['Dubai', 'UK']",India
+230,,Kochi,P108,Ernakulam,Ernakulam,male,Travelled from Dubai. UK Tourist,,231,[],20/03/2020,Kerala,Hospitalized,"['Dubai', 'UK']",India
+231,,Kochi,P108,Ernakulam,Ernakulam,male,Travelled from Dubai. UK Tourist,,232,[],20/03/2020,Kerala,Hospitalized,"['Dubai', 'UK']",India
+232,,Bhilwara,,Bhilwara,Bhilwara,female,Bangar Hospital Doctor,,233,[],20/03/2020,Rajasthan,Hospitalized,[],India
+233,,Bhilwara,,Bhilwara,Bhilwara,female,Bangar Hospital Compounder,,234,[],20/03/2020,Rajasthan,Hospitalized,[],India
+234,,Bhilwara,,Bhilwara,Bhilwara,female,Bangar Hospital Compounder,,235,[],20/03/2020,Rajasthan,Hospitalized,[],India
+235,,Bhilwara,,Bhilwara,Bhilwara,female,Bangar Hospital Compounder,,236,[],20/03/2020,Rajasthan,Hospitalized,[],India
+236,52,Faridabad,,,Faridabad,female,Travelled from Spain,,237,[],20/03/2020,Haryana,Hospitalized,['Spain'],India
+237,21,Panipat,,,Panipat,male,Travelled from UK,,238,[],20/03/2020,Haryana,Hospitalized,['UK'],India
+238,52,Kasaragod,,Kasaragod,Kasaragod,male,Travelled from Sharjah,,239,[],20/03/2020,Kerala,Hospitalized,[],India
+239,27,Kasaragod,,Kasaragod,Kasaragod,male,Travelled from Dubai via Mangalore,,240,[],20/03/2020,Kerala,Hospitalized,['Dubai'],India
+240,,Kasaragod,P117,Kasaragod,Kasaragod,male,Travelled in a car with P117,,241,[],20/03/2020,Kerala,Hospitalized,[],India
+241,,Kasaragod,P117,Kasaragod,Kasaragod,female,Relative of P117,,242,"[{'link': 'Relative', 'with': ['P117']}]",20/03/2020,Kerala,Hospitalized,[],India
+242,,Kasaragod,P117,Kasaragod,Kasaragod,female,Relative of P117,,243,"[{'link': 'Relative', 'with': ['P117']}]",20/03/2020,Kerala,Hospitalized,[],India
+243,2,Kasaragod,P117,Kasaragod,Kasaragod,female,Relative of P117,,244,"[{'link': 'Relative', 'with': ['P117']}]",20/03/2020,Kerala,Hospitalized,[],India
+244,,Kochi,,Ernakulam,Ernakulam,male,Travelled from UK. Palakkad native,,245,[],20/03/2020,Kerala,Hospitalized,['UK'],India
+245,,Kangra,,Kangra,Kangra,female,Travelled from Dubai,,246,[],20/03/2020,Himachal Pradesh,Hospitalized,['Dubai'],India
+246,,Kangra,,Kangra,Kangra,male,Travelled from Singapore,,247,[],20/03/2020,Himachal Pradesh,Hospitalized,['Singapore'],India
+247,59,Jabalpur,,Jabalpur,Jabalpur,male,Travelled from Dubai and Thailand(Family),,248,[],20/03/2020,Madhya Pradesh,Hospitalized,"['Dubai', 'Thailand']",India
+248,45,Jabalpur,P248,Jabalpur,Jabalpur,female,Travelled from Dubai and Thailand(Family),,249,[],20/03/2020,Madhya Pradesh,Hospitalized,"['Dubai', 'Thailand']",India
+249,22,Jabalpur,P248,Jabalpur,Jabalpur,female,Travelled from Dubai and Thailand(Family),,250,[],20/03/2020,Madhya Pradesh,Hospitalized,"['Dubai', 'Thailand']",India
+250,24,Jabalpur,,Jabalpur,Jabalpur,male,Travelled from Germany and Switzerland,,251,[],20/03/2020,Madhya Pradesh,Hospitalized,"['Germany', 'Switzerland']",India
+251,27,Karimnagar,P141,Karimnagar,Karimnagar,male,Indonesian citizen,,252,[],20/03/2020,Telangana,Hospitalized,[],India
+252,60,Karimnagar,P141,Karimnagar,Karimnagar,male,Indonesian citizen,,253,[],20/03/2020,Telangana,Hospitalized,[],India
+253,32,West Delhi,,,West Delhi,male,Travelled from France,,254,[],20/03/2020,Delhi,Hospitalized,['France'],India
+254,,,,,,female,Details awaited,,255,[],20/03/2020,Delhi,Hospitalized,[],India
+255,,,,,,female,Details awaited,,256,[],20/03/2020,Delhi,Hospitalized,[],India
+256,53,Kalyan,,,Thane,male,Travelled from Dubai,,257,[],20/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+257,20,Pune,,,Pune,male,Travelled from UK,,258,[],20/03/2020,Maharashtra,Hospitalized,['UK'],India
+258,23,Habra,,North 24 Parganas,North 24 Parganas,female,Travelled from UK via Mumbai,,259,[],21/03/2020,West Bengal,Hospitalized,"['UK', 'Mumbai']",India
+259,,Bhilwara,,Bhilwara,Bhilwara,female,Staff of Private Hospital,,260,"[{'link': 'Staff', 'with': []}]",21/03/2020,Rajasthan,Hospitalized,[],India
+260,,Bhilwara,,Bhilwara,Bhilwara,female,Staff of Private Hospital,,261,"[{'link': 'Staff', 'with': []}]",21/03/2020,Rajasthan,Hospitalized,[],India
+261,,Bhilwara,,Bhilwara,Bhilwara,female,Staff of Private Hospital,,262,"[{'link': 'Staff', 'with': []}]",21/03/2020,Rajasthan,Hospitalized,[],India
+262,,Bhilwara,,Bhilwara,Bhilwara,female,Staff of Private Hospital,,263,"[{'link': 'Staff', 'with': []}]",21/03/2020,Rajasthan,Hospitalized,[],India
+263,,Bhilwara,,Bhilwara,Bhilwara,female,Staff of Private Hospital,,264,"[{'link': 'Staff', 'with': []}]",21/03/2020,Rajasthan,Hospitalized,[],India
+264,,Jaipur,,Jaipur,Jaipur,female,Details awaited,,265,[],21/03/2020,Rajasthan,Hospitalized,[],India
+265,42,Mohali,,Sahibzada Ajit Singh Nagar,Sahibzada Ajit Singh Nagar,male,Travelled from UK,,266,[],21/03/2020,Punjab,Hospitalized,['UK'],India
+266,74,Mohali,P201,Sahibzada Ajit Singh Nagar,Sahibzada Ajit Singh Nagar,female,Sister of P201,,267,"[{'link': 'Sister', 'with': ['P201']}]",21/03/2020,Punjab,Hospitalized,[],India
+267,28,Mohali,P172,Sahibzada Ajit Singh Nagar,Sahibzada Ajit Singh Nagar,female,"Employee of P172, Accompanied P224 & Driver",,268,"[{'link': 'Employee', 'with': ['P172', 'P224']}]",21/03/2020,Punjab,Hospitalized,[],India
+268,52,Vadodara,,Vadodara,Vadodara,male,"Travelled from Sri Lanka, same group as P222",,269,[],21/03/2020,Gujarat,Hospitalized,['Sri Lanka'],India
+269,63,Mumbai,,,Mumbai,male,"Travelled from UK, had a chronic history of diabetes, high blood pressure, and ischemic heart disease.",,270,"[{'link': 'history', 'with': []}]",21/03/2020,Maharashtra,Deceased,['UK'],India
+270,,Mumbai,,,Mumbai,female,Details awaited,,271,[],21/03/2020,Maharashtra,Hospitalized,[],India
+271,41,Pune,,Pune,Pune,female,Admitted on Swine Flu suspicion; COVID19 confirmed,,272,[],21/03/2020,Maharashtra,Hospitalized,[],India
+272,,Pune,,Pune,Pune,female,Travelled from Ireland,,273,[],21/03/2020,Maharashtra,Hospitalized,['Ireland'],India
+273,,Mumbai,,,Mumbai,female,Details awaited,,274,[],21/03/2020,Maharashtra,Hospitalized,[],India
+274,,Mumbai,,,Mumbai,female,Details awaited,,275,[],21/03/2020,Maharashtra,Hospitalized,[],India
+275,,Mumbai,,,Mumbai,female,Details awaited,,276,[],21/03/2020,Maharashtra,Hospitalized,[],India
+276,,Mumbai,,,Mumbai,female,Details awaited,,277,[],21/03/2020,Maharashtra,Hospitalized,[],India
+277,,Mumbai,,,Mumbai,female,"Airport Official, Details awaited",,278,[],21/03/2020,Maharashtra,Hospitalized,[],India
+278,24,,P171,,,female,Daughter of P171,,279,"[{'link': 'Daughter', 'with': ['P171']}]",21/03/2020,Delhi,Hospitalized,[],India
+279,26,,P171,,,female,Daughter of P171,,280,"[{'link': 'Daughter', 'with': ['P171']}]",21/03/2020,Delhi,Hospitalized,[],India
+280,,,,,,female,Details awaited; MoHFW reported 26 on 21 Mar AM,,281,[],21/03/2020,Delhi,Hospitalized,[],India
+281,,,,,,female,Details awaited; MoHFW reported 26 on 21 Mar AM,,282,[],21/03/2020,Delhi,Hospitalized,[],India
+282,,,,,,female,Details awaited; MoHFW reported 26 on 21 Mar AM,,283,[],21/03/2020,Delhi,Hospitalized,[],India
+283,,,,,,female,Details awaited; MoHFW reported 26 on 21 Mar AM,,284,[],21/03/2020,Delhi,Hospitalized,[],India
+284,32,Gowribidanur,,Chikkaballapura,Chikkaballapura,male,"Travelled from Mecca, Saudi Arabia",,285,[],21/03/2020,Karnataka,Hospitalized,"['Mecca', 'Saudi Arabia']",India
+285,,Noida,,Gautam Buddha Nagar,Gautam Buddha Nagar,female,"Supertech Capetown, Sector 74, NOIDA",,286,[],21/03/2020,Uttar Pradesh,Hospitalized,[],India
+286,38,Panchkula,P172,Panchkula,Panchkula,female,Worked at a beauty salon that Chandigarh’s first coronavirus patient visited,,287,[],21/03/2020,Haryana,Hospitalized,[],India
+287,,Leh,,Leh,Leh,female,Relative of Leh Patient (ID Unknown),,288,"[{'link': 'Relative', 'with': []}]",21/03/2020,Ladakh,Hospitalized,[],India
+288,,Leh,,Leh,Leh,female,Relative of Leh Patient (ID Unknown),,289,"[{'link': 'Relative', 'with': []}]",21/03/2020,Ladakh,Hospitalized,[],India
+289,,Sankoo Valley,P132,Kargil,Kargil,female,Relative of P132,,290,"[{'link': 'Relative', 'with': ['P132']}]",21/03/2020,Ladakh,Hospitalized,[],India
+290,,Ahmedabad,,Ahmedabad,Ahmedabad,female,Details awaited,,291,[],21/03/2020,Gujarat,Hospitalized,[],India
+291,,Ahmedabad,,Ahmedabad,Ahmedabad,female,Details awaited,,292,[],21/03/2020,Gujarat,Hospitalized,[],India
+292,,Surat,,Surat,Surat,female,"No Travel History, Details awaited",,293,[],21/03/2020,Gujarat,Hospitalized,[],India
+293,67,Surat,,Surat,Surat,male,Travelled to Delhi & Jaipur,,294,[],21/03/2020,Gujarat,Deceased,['Delhi'],India
+294,,Gandhinagar,,Gandhinagar,Gandhinagar,female,Details awaited,,295,[],21/03/2020,Gujarat,Hospitalized,[],India
+295,53,Bengaluru,P137,Bengaluru,Bengaluru,female,Domestic worker of P137,,296,"[{'link': 'worker', 'with': ['P137']}]",21/03/2020,Karnataka,Hospitalized,[],India
+296,39,Bengaluru,,Bengaluru,Bengaluru,male,Travelled from Netherlands Flight No. KL 1227,,297,[],21/03/2020,Karnataka,Hospitalized,['Netherlands'],India
+297,19,Moradabad,,Moradabad,Moradabad,female,Travelled from France,,298,[],21/03/2020,Uttar Pradesh,Hospitalized,['France'],India
+298,35,Hyderabad,P191,Hyderabad,Hyderabad,male,Contact of P191,,299,"[{'link': 'Contact', 'with': ['P191']}]",21/03/2020,Telangana,Hospitalized,[],India
+299,33,Hyderabad,,Hyderabad,Hyderabad,male,"Travelled from Dubai, Beliseema MSE Cruise Emp; ",,300,[],21/03/2020,Telangana,Hospitalized,['Dubai'],India
+300,69,Perundurai,,Erode,Erode,male,Travelled from Phuket to New Delhi to Erode railway station,,301,[],21/03/2020,Tamil Nadu,Hospitalized,"['Phuket', 'New Delhi']",India
+301,75,Perundurai,,Erode,Erode,male,Travelled from Phuket to New Delhi to Erode railway station on 11.03.2020,,302,[],21/03/2020,Tamil Nadu,Hospitalized,"['Phuket', 'New Delhi']",India
+302,65,Chennai,,Chennai,Chennai,male,"Travelled from New Zealand, Singapore, Chennai airport on 15.03.2020",,303,[],21/03/2020,Tamil Nadu,Hospitalized,"['New Zealand', 'Singapore', 'Chennai']",India
+303,35,Nawanshahr,P182,Shaheed Bhagat Singh Nagar,Shaheed Bhagat Singh Nagar,male,Son of P182,,304,"[{'link': 'Son', 'with': ['P182']}]",21/03/2020,Punjab,Hospitalized,[],India
+304,34,Nawanshahr,P182,Shaheed Bhagat Singh Nagar,Shaheed Bhagat Singh Nagar,male,Son of P182,,305,"[{'link': 'Son', 'with': ['P182']}]",21/03/2020,Punjab,Hospitalized,[],India
+305,45,Nawanshahr,P182,Shaheed Bhagat Singh Nagar,Shaheed Bhagat Singh Nagar,male,Son of P182,,306,"[{'link': 'Son', 'with': ['P182']}]",21/03/2020,Punjab,Hospitalized,[],India
+306,40,Nawanshahr,P182,Shaheed Bhagat Singh Nagar,Shaheed Bhagat Singh Nagar,female,Daughter in Law of P182,,307,"[{'link': 'Law', 'with': ['P182']}]",21/03/2020,Punjab,Hospitalized,[],India
+307,17,Nawanshahr,P182,Shaheed Bhagat Singh Nagar,Shaheed Bhagat Singh Nagar,male,Grand daughter of P182,,308,"[{'link': 'daughter', 'with': ['P182']}]",21/03/2020,Punjab,Hospitalized,[],India
+308,36,Nawanshahr,P182,Shaheed Bhagat Singh Nagar,Shaheed Bhagat Singh Nagar,female,Daughter of P182,,309,"[{'link': 'Daughter', 'with': ['P182']}]",21/03/2020,Punjab,Hospitalized,[],India
+309,,Yavatmal,,,Yavatmal,female,Travelled from Congo,,310,[],21/03/2020,Maharashtra,Hospitalized,['Congo'],India
+310,60,Garshankar,P182,Hoshiarpur,Hoshiarpur,male,In contact with P182,,311,[],21/03/2020,Punjab,Hospitalized,[],India
+311,,,,Kannur,Kannur,female,Travelled from Sharjah IX 746,,312,[],21/03/2020,Kerala,Hospitalized,[],India
+312,,,,Kannur,Kannur,female,"Travelled from Dubai, Air India Express IX 344",,313,[],21/03/2020,Kerala,Hospitalized,['Dubai'],India
+313,,,,Kannur,Kannur,female,"Travelled from Dubai, SG54",,314,[],21/03/2020,Kerala,Hospitalized,['Dubai'],India
+314,54,,,Kasaragod,Kasaragod,male,"Landed in Mangalore airport, had been to Kasturba Medical College Attavar",,315,[],21/03/2020,Kerala,Hospitalized,[],India
+315,,,,Kasaragod,Kasaragod,male,Travelled from Dubai,,316,[],21/03/2020,Kerala,Hospitalized,['Dubai'],India
+316,,,,Kasaragod,Kasaragod,male,Travelled from Dubai,,317,[],21/03/2020,Kerala,Hospitalized,['Dubai'],India
+317,,,,Kasaragod,Kasaragod,male,Travelled from Dubai,,318,[],21/03/2020,Kerala,Hospitalized,['Dubai'],India
+318,,,,Kasaragod,Kasaragod,male,Travelled from Dubai,,319,[],21/03/2020,Kerala,Hospitalized,['Dubai'],India
+319,,,,Kasaragod,Kasaragod,male,Travelled from Dubai,,320,[],21/03/2020,Kerala,Hospitalized,['Dubai'],India
+320,,,,Ernakulam,Ernakulam,female,Details awaited; Travelled from Middle East,,321,[],21/03/2020,Kerala,Hospitalized,[],India
+321,,,,Ernakulam,Ernakulam,female,Details awaited; Travelled from Middle East,,322,[],21/03/2020,Kerala,Hospitalized,[],India
+322,,,,Ernakulam,Ernakulam,female,Details awaited; Travelled from Middle East,,323,[],21/03/2020,Kerala,Hospitalized,[],India
+323,21,Bengaluru,,Bengaluru,Bengaluru,male,Travelled from UK,,324,[],21/03/2020,Karnataka,Hospitalized,['UK'],India
+324,35,Mysuru,,Mysuru,Mysuru,male,Travelled from Dubai via Bengaluru,,325,[],21/03/2020,Karnataka,Hospitalized,['Dubai'],India
+325,23,Sonipat,,Sonipat,Sonipat,female,Travelled from UK,,326,[],21/03/2020,Haryana,Hospitalized,['UK'],India
+326,57,Dum Dum,,North Kolkata,North Kolkata,male,"No international travel history, has travelled to  Bilaspur by train",,327,[],21/03/2020,West Bengal,Deceased,[],India
+327,,Jaipur,,Jaipur,Jaipur,female,Details awaited,,328,[],21/03/2020,Rajasthan,Hospitalized,[],India
+328,59,Lakhapt,,Kutch,Kutch,female,Travelled from Saudi Arabia,,329,[],21/03/2020,Gujarat,Hospitalized,['Saudi Arabia'],India
+329,22,Rajahmundry,,East Godavari,East Godavari,male,Travelled from UK,,330,[],21/03/2020,Andhra Pradesh,Hospitalized,['UK'],India
+330,24,Vijayawada,,Krishna,Krishna,male,Travelled from Paris,,331,[],21/03/2020,Andhra Pradesh,Hospitalized,['Paris'],India
+331,,,,,,female,Details awaited,,332,[],21/03/2020,Delhi,Hospitalized,[],India
+332,31,Greater Noida,,,Delhi,male,Travelled from Dubai,,333,[],21/03/2020,Uttar Pradesh,Hospitalized,['Dubai'],India
+333,30,Varanasi,,,Varanasi,male,Travelled from Dubai on March 17 and went to Varanasi on March 18 in train,,334,[],21/03/2020,Uttar Pradesh,Hospitalized,"['Dubai', 'Varanasi']",India
+334,,Chandigarh,P172,Chandigarh,Chandigarh,male,"Scondary contact of Chandigarh's first positive case, has tested positive",,335,"[{'link': 'contact', 'with': []}]",22/03/2020,Chandigarh,Hospitalized,['Chandigarh'],India
+335,33,Hosayellapur,,Dharwad,Dharwad,male,Travelled from Dubai via Goa,,336,[],22/03/2020,Karnataka,Hospitalized,['Dubai'],India
+336,32,Mumbai Suburb,,,Mumbai,male,"Travelled from USA, Admitted to Kasturba Hosp.",,337,[],22/03/2020,Maharashtra,Hospitalized,"['USA', 'Admitted']",India
+337,30,Mumbai Suburb,,,Mumbai,female,"Travelled from USA, Admitted to Kasturba Hosp.",,338,[],22/03/2020,Maharashtra,Hospitalized,"['USA', 'Admitted']",India
+338,21,Mumbai Suburb,,,Mumbai,male,"Travelled from Edenburg, South Africa, Admitted to Kasturba Hosp.",,339,[],22/03/2020,Maharashtra,Hospitalized,"['Edenburg', 'South Africa']",India
+339,60,Mumbai Suburb,,,Mumbai,female,"Travelled from Saudi Arabia, Admitted to Kasturba Hosp.",,340,[],22/03/2020,Maharashtra,Hospitalized,['Saudi Arabia'],India
+340,64,Mumbai city,,,Mumbai,female,Contact transmission,,341,[],22/03/2020,Maharashtra,Hospitalized,[],India
+341,35,Navi Mumbai,,,Mumbai,male,"Travelled from Istanbul, Turkey, Admitted to Kasturba Hosp.",,342,[],22/03/2020,Maharashtra,Hospitalized,"['Istanbul', 'Turkey', 'Admitted']",India
+342,,Pune,P272,,Pune,female,"Contact transmission, details awaited",,343,[],22/03/2020,Maharashtra,Hospitalized,[],India
+343,,Pune,P272,,Pune,female,"Contact transmission, details awaited",,344,[],22/03/2020,Maharashtra,Hospitalized,[],India
+344,,Pune,P272,,Pune,female,"Contact transmission, details awaited",,345,[],22/03/2020,Maharashtra,Hospitalized,[],India
+345,,Pune,P272,,Pune,female,"Contact transmission, details awaited",,346,[],22/03/2020,Maharashtra,Hospitalized,[],India
+346,25,Coimbatore,,Coimbatore,Coimbatore,female,"Travelled from Spain, Delhi, Bengaluru, Coimbatore on 15-03-2020",,347,[],22/03/2020,Tamil Nadu,Hospitalized,"['Spain', 'Delhi']",India
+347,38,Munger,,Munger,Munger,male,"Travelled from Qatar, Kolkata. He was from Munger. He died yesterday at AIIMS in Patna; had Travelled from Kolkata two days back.Foreign ",,348,[],22/03/2020,Bihar,Deceased,"['Qatar', 'Kolkata', 'Patna']",India
+348,,Patna,,Patna,Patna,female,Travelled from UK. Patient has recently,,349,[],22/03/2020,Bihar,Hospitalized,['UK'],India
+349,24,Hyderabad,,Hyderabad,Hyderabad,male,"Travelled from London via Dubai; Resident of Guntur, AP",,350,"[{'link': 'Resident', 'with': []}]",22/03/2020,Telangana,Hospitalized,"['London', 'Dubai']",India
+350,,,,Ahmedabad,Ahmedabad,female,Details awaited,,351,[],22/03/2020,Gujarat,Hospitalized,[],India
+351,,,,Ahmedabad,Ahmedabad,female,Details awaited,,352,[],22/03/2020,Gujarat,Hospitalized,[],India
+352,,,,Ahmedabad,Ahmedabad,female,Details awaited,,353,[],22/03/2020,Gujarat,Hospitalized,[],India
+353,,,,,,female,Details awaited,,354,[],22/03/2020,Gujarat,Hospitalized,[],India
+354,,,,Amritsar,Amritsar,female,Travelled from UK via Delhi,,355,[],22/03/2020,Punjab,Hospitalized,"['UK', 'Delhi']",India
+355,,,,Shaheed Bhagat Singh Nagar,Shaheed Bhagat Singh Nagar,female,Travelled from Germany via Italy,,356,[],22/03/2020,Punjab,Hospitalized,"['Germany', 'Italy']",India
+356,,,,Shaheed Bhagat Singh Nagar,Shaheed Bhagat Singh Nagar,female,Travelled from Germany via Italy,,357,[],22/03/2020,Punjab,Hospitalized,"['Germany', 'Italy']",India
+357,,,P182,Shaheed Bhagat Singh Nagar,Shaheed Bhagat Singh Nagar,female,"Close contact of Patient (Patient Unknown, likely P182)",,358,"[{'link': 'contact', 'with': ['P182']}]",22/03/2020,Punjab,Hospitalized,[],India
+358,,,P182,Shaheed Bhagat Singh Nagar,Shaheed Bhagat Singh Nagar,female,"Close contact of Patient (Patient Unknown, likely P182)",,359,"[{'link': 'contact', 'with': ['P182']}]",22/03/2020,Punjab,Hospitalized,[],India
+359,,,P182,Shaheed Bhagat Singh Nagar,Shaheed Bhagat Singh Nagar,female,"Close contact of Patient (Patient Unknown, likely P182)",,360,"[{'link': 'contact', 'with': ['P182']}]",22/03/2020,Punjab,Hospitalized,[],India
+360,,,P182,Shaheed Bhagat Singh Nagar,Shaheed Bhagat Singh Nagar,female,"Close contact of Patient (Patient Unknown, likely P182)",,361,"[{'link': 'contact', 'with': ['P182']}]",22/03/2020,Punjab,Hospitalized,[],India
+361,26,Bhopal,,Bhopal,Bhopal,female,Travelled from UK via Delhi (by train),,362,[],22/03/2020,Madhya Pradesh,Hospitalized,"['UK', 'Delhi']",India
+362,58,,,Kasaragod,Kasaragod,male,Travelled from Dubai AI 938 admitted in Kozhikode  Medical College,,363,[],22/03/2020,Kerala,Hospitalized,['Kozhikode'],India
+363,27,,,Kasaragod,Kasaragod,male,Travelled from Middle East,,364,[],22/03/2020,Kerala,Hospitalized,[],India
+364,32,,,Kasaragod,Kasaragod,male,Travelled from Middle East,,365,[],22/03/2020,Kerala,Hospitalized,[],India
+365,41,,,Kasaragod,Kasaragod,male,Travelled from Middle East,,366,[],22/03/2020,Kerala,Hospitalized,[],India
+366,33,,,Kasaragod,Kasaragod,male,Travelled from Middle East,,367,[],22/03/2020,Kerala,Hospitalized,[],India
+367,26,Hyderabad,,Hyderabad,Hyderabad,male,"Travelled from Sweden; Resident of Rajolu, AP",,368,"[{'link': 'Resident', 'with': []}]",22/03/2020,Telangana,Hospitalized,['Sweden'],India
+368,34,Hyderabad,,Hyderabad,Hyderabad,male,Travelled from Sweden,,369,[],22/03/2020,Telangana,Hospitalized,['Sweden'],India
+369,23,Kothagudem,,Bhadradri Kothagudem,Bhadradri Kothagudem,male,Travelled from London,,370,[],22/03/2020,Telangana,Hospitalized,['London'],India
+370,23,Kukatpally,,Hyderabad,Hyderabad,male,Travelled from London via Doha,,371,[],22/03/2020,Telangana,Hospitalized,"['London', 'Doha']",India
+371,50,Hyderabad,,Hyderabad,Hyderabad,female,Travelled from Dubai,,372,[],22/03/2020,Telangana,Hospitalized,['Dubai'],India
+372,22,Bhatkal,,Uttara Kannada,Uttara Kannada,male,Travelled from Dubai on Spicejet SG60 (21C),,373,[],22/03/2020,Karnataka,Hospitalized,['Dubai'],India
+373,,,,Kannur,Kannur,female,Details awaited,,374,[],22/03/2020,Kerala,Hospitalized,[],India
+374,,,,Kannur,Kannur,female,Details awaited,,375,[],22/03/2020,Kerala,Hospitalized,[],India
+375,32,Vengara,,Malappuram,Malappuram,male,Travelled from Abhudhabi via Air India  IX 348,,376,[],22/03/2020,Kerala,Hospitalized,[],India
+376,24,Kadalundi,,Malappuram,Malappuram,male,Travelled from Dubai via Air Arabia G9  425,,377,[],22/03/2020,Kerala,Hospitalized,"['Dubai', 'Air Arabia G9']",India
+377,41,,,Kozhikode,Kozhikode,female,"Travelled from Abu Dhabi, EY 250",,378,[],22/03/2020,Kerala,Hospitalized,[],India
+378,27,,,Kozhikode,Kozhikode,male,"Travelled from Dubai AI 938, Taken to hospital directly from the airport.",,379,[],22/03/2020,Kerala,Hospitalized,['Dubai'],India
+379,61,,,Ernakulam,Ernakulam,male,Travelled from Dubai,,380,[],22/03/2020,Kerala,Hospitalized,['Dubai'],India
+380,21,,,Ernakulam,Ernakulam,female,Travelled from United Kingdom,,381,[],22/03/2020,Kerala,Hospitalized,['United Kingdom'],India
+381,64,Gowribidanur,P285,Chikkaballapura,Chikkaballapura,female,"Travelled from Mecca, Saudi Arabia along with Son(P285), via Hyderabad to Hindupur by train and to Gowribidanur by bus",,382,[],22/03/2020,Karnataka,Hospitalized,"['Mecca', 'Saudi Arabia', 'Hyderabad', 'Hindupur', 'Gowribidanur']",India
+382,36,Bengaluru,,Bengaluru,Bengaluru,female,Travelled from Switzerland and France,,383,[],22/03/2020,Karnataka,Hospitalized,"['Switzerland', 'France']",India
+383,27,Bengaluru,,Bengaluru,Bengaluru,male,Travelled from Germany,,384,[],22/03/2020,Karnataka,Hospitalized,['Germany'],India
+384,51,Bengaluru,,Bengaluru,Bengaluru,male,Travelled from London,,385,[],22/03/2020,Karnataka,Hospitalized,['London'],India
+385,,,,Kannur,Kannur,female,Details awaited,,386,[],22/03/2020,Kerala,Hospitalized,[],India
+386,,,,Kannur,Kannur,female,Details awaited,,387,[],22/03/2020,Kerala,Hospitalized,[],India
+387,,,P182,Shaheed Bhagat Singh Nagar,Shaheed Bhagat Singh Nagar,female,"Close contact of Patient (Patient Unknown, likely P182)",,388,"[{'link': 'contact', 'with': ['P182']}]",22/03/2020,Punjab,Hospitalized,[],India
+388,37,Greater Noida (West),,Gautam Buddh Nagar,Gautam Buddh Nagar,male,Travelled from Denmark,,389,[],22/03/2020,Uttar Pradesh,Hospitalized,['Denmark'],India
+389,62,Greater Noida (West),P389,Gautam Buddh Nagar,Gautam Buddh Nagar,female,"Mother of P389, showed symptoms first -- tested on Mar 19",,390,"[{'link': 'Mother', 'with': ['P389']}]",22/03/2020,Uttar Pradesh,Hospitalized,[],India
+390,,Kolkata,P200,Kolkata,Kolkata,male,Father of P200,,391,"[{'link': 'Father', 'with': ['P200']}]",22/03/2020,West Bengal,Hospitalized,[],India
+391,,Kolkata,P200,Kolkata,Kolkata,female,Mother of P200,,392,"[{'link': 'Mother', 'with': ['P200']}]",22/03/2020,West Bengal,Hospitalized,[],India
+392,,Kolkata,P200,Kolkata,Kolkata,female,Domestic worker of P200,,393,"[{'link': 'worker', 'with': ['P200']}]",22/03/2020,West Bengal,Hospitalized,[],India
+393,53,Jabalpur,P248,Jabalpur,Jabalpur,male,Come in contact with previous case of couple and their teenage daughter,,394,"[{'link': 'case', 'with': []}]",22/03/2020,Madhya Pradesh,Hospitalized,[],India
+394,64,Chennai,,Chennai,Chennai,female,Travelled from California via Singapore to Chennai Airport on 20.03.2020,,395,[],22/03/2020,Tamil Nadu,Hospitalized,"['California', 'Singapore']",India
+395,43,Tirunelveli,,Tiruneveli,Tiruneveli,male,Travelled from Dubai to Madurai airport on 20.03.2020,,396,[],22/03/2020,Tamil Nadu,Hospitalized,['Dubai'],India
+396,49,Visakhapatnam,P196,Visakhapatnam,Visakhapatnam,female,Patient's husband tested positive,,397,[],22/03/2020,Andhra Pradesh,Hospitalized,[],India
+397,,,,Jodhpur,Jodhpur,female,Details awaited,,398,[],22/03/2020,Rajasthan,Hospitalized,[],India
+398,,,,,,female,Details awaited,,399,[],22/03/2020,Rajasthan,Hospitalized,[],India
+399,,,,,,female,Details awaited,,400,[],22/03/2020,Rajasthan,Hospitalized,[],India
+400,,Jhunjhunu,,Jhunjhunu,Jhunjhunu,male,Travelled from Dubai,,401,[],22/03/2020,Rajasthan,Hospitalized,['Dubai'],India
+401,36,Shashtri Nagar,,Jodhpur,Jodhpur,male,"Travelled from Turkey, between Mar 8th-17th",,402,[],22/03/2020,Rajasthan,Hospitalized,['Turkey'],India
+402,,Pune,,,Pune,female,Details awaited,,403,[],23/03/2020,Maharashtra,Hospitalized,[],India
+403,,Mumbai,,,Mumbai,female,Details awaited,,404,[],23/03/2020,Maharashtra,Hospitalized,[],India
+404,,Mumbai,,,Mumbai,female,Details awaited,,405,[],23/03/2020,Maharashtra,Hospitalized,[],India
+405,,Mumbai,,,Mumbai,female,Details awaited,,406,[],23/03/2020,Maharashtra,Hospitalized,[],India
+406,,Mumbai,,,Mumbai,female,Details awaited,,407,[],23/03/2020,Maharashtra,Hospitalized,[],India
+407,,Mumbai,,,Mumbai,female,Details awaited,,408,[],23/03/2020,Maharashtra,Hospitalized,[],India
+408,,Mumbai,,,Mumbai,female,Details awaited,,409,[],23/03/2020,Maharashtra,Hospitalized,[],India
+409,,Mumbai,,,Mumbai,female,Details awaited,,410,[],23/03/2020,Maharashtra,Hospitalized,[],India
+410,,Mumbai,,,Mumbai,female,Details awaited,,411,[],23/03/2020,Maharashtra,Hospitalized,[],India
+411,,Mumbai,,,Mumbai,female,Details awaited,,412,[],23/03/2020,Maharashtra,Hospitalized,[],India
+412,,Mumbai,,,Mumbai,female,Details awaited,,413,[],23/03/2020,Maharashtra,Hospitalized,[],India
+413,,Mumbai,,,Mumbai,female,Details awaited,,414,[],23/03/2020,Maharashtra,Hospitalized,[],India
+414,,Mumbai,,,Mumbai,female,Details awaited,,415,[],23/03/2020,Maharashtra,Hospitalized,[],India
+415,,Mumbai,,,Mumbai,female,Details awaited,,416,[],23/03/2020,Maharashtra,Hospitalized,[],India
+416,,Mumbai,,,Mumbai,female,Details awaited,,417,[],23/03/2020,Maharashtra,Hospitalized,[],India
+417,46,Mysuru,,Mysuru,Mysuru,male,"Travelled from Dubai via Bengaluru, Resident of Kerala, ",,418,"[{'link': 'Resident', 'with': []}]",23/03/2020,Karnataka,Hospitalized,"['Dubai', 'Kerala']",India
+418,,Palwal,,Palwal,Palwal,male,Travelled from Dubai,,419,[],23/03/2020,Haryana,Hospitalized,['Dubai'],India
+419,45,,,Surat,Surat,male,Local transmission,,420,[],23/03/2020,Gujarat,Hospitalized,[],India
+420,58,,,Ahmedabad,Ahmedabad,male,Travelled from Saudi Arabia,,421,[],23/03/2020,Gujarat,Hospitalized,['Saudi Arabia'],India
+421,57,,,Ahmedabad,Ahmedabad,female,Travelled from Saudi Arabia,,422,[],23/03/2020,Gujarat,Hospitalized,['Saudi Arabia'],India
+422,27,,,Vadodara,Vadodara,female,Local transmission,,423,[],23/03/2020,Gujarat,Hospitalized,[],India
+423,29,,,Vadodara,Vadodara,female,Local transmission,,424,[],23/03/2020,Gujarat,Hospitalized,[],India
+424,24,,,Ahmedabad,Ahmedabad,female,Travelled from Paris,,425,[],23/03/2020,Gujarat,Hospitalized,['Paris'],India
+425,33,,,Ahmedabad,Ahmedabad,male,Local transmission,,426,[],23/03/2020,Gujarat,Hospitalized,[],India
+426,49,,,Gandhinagar,Gandhinagar,male,Local transmission,,427,[],23/03/2020,Gujarat,Hospitalized,[],India
+427,46,,,Vadodara,Vadodara,female,Travelled from Sri Lanka,,428,[],23/03/2020,Gujarat,Hospitalized,['Sri Lanka'],India
+428,61,,,Ahmedabad,Ahmedabad,male,Travelled from UK,,429,[],23/03/2020,Gujarat,Hospitalized,['UK'],India
+429,85,,,Ahmedabad,Ahmedabad,female,Travelled from Saudi Arabia,,430,[],23/03/2020,Gujarat,Hospitalized,['Saudi Arabia'],India
+430,,Delhi,P171,,Delhi,female,Doctor who has treated P171,,431,[],22/03/2020,Delhi,Hospitalized,[],India
+431,,Delhi,P171,,Delhi,female,Details awaited,,432,[],23/03/2020,Delhi,Hospitalized,[],India
+432,,Delhi,P171,,Delhi,female,Details awaited,,433,[],23/03/2020,Delhi,Hospitalized,[],India
+433,21,Balkampet,,Hyderabad,Hyderabad,male,Travelled from France,,434,[],23/03/2020,Telangana,Hospitalized,['France'],India
+434,30,Saidabad,,Hyderabad,Hyderabad,male,Travelled from London,,435,[],23/03/2020,Telangana,Hospitalized,['London'],India
+435,23,Karimnagar,P141,Karimnagar,Karimnagar,male,"No Travel History, Contact with Indonesian Group",,436,[],23/03/2020,Telangana,Hospitalized,[],India
+436,21,Chandigarh,P225,Chandigarh,Chandigarh,male,Came in contact with brother of P172,,437,"[{'link': 'brother', 'with': ['P172']}]",23/03/2020,Chandigarh,Hospitalized,[],India
+437,20,Somajiguda,,Hyderabad,Hyderabad,male,Travelled from New York,,438,[],23/03/2020,Telangana,Hospitalized,['New York'],India
+438,25,Gachibowli,,Hyderabad,Hyderabad,male,Tavelled from London,,439,[],23/03/2020,Telangana,Hospitalized,['London'],India
+439,56,Kukatpally,,Hyderabad,Hyderabad,male,Travelled from Sri Lanka,,440,[],23/03/2020,Telangana,Hospitalized,['Sri Lanka'],India
+440,,,,,,female,Details awaited,,441,[],23/03/2020,Gujarat,Hospitalized,[],India
+441,,,,,,female,"One more person, who is under observation at Dehradun's Doon Hospita",,442,[],23/03/2020,Uttarakhand,Hospitalized,[],India
+442,24,Kasaragod,,Kasaragod,Kasaragod,male,"Travelled from Dubai, UAE",,443,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+443,30,Kasaragod,,Kasaragod,Kasaragod,male,"Travelled from Dubai, UAE",,444,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+444,31,Kasaragod,,Kasaragod,Kasaragod,male,"Travelled from Dubai, UAE",,445,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+445,41,Kasaragod,,Kasaragod,Kasaragod,male,"Travelled from Dubai, UAE",,446,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+446,34,Kasaragod,,Kasaragod,Kasaragod,male,"Travelled from Dubai, UAE",,447,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+447,40,Kasaragod,,Kasaragod,Kasaragod,male,"Travelled from Dubai, UAE",,448,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+448,37,Kasaragod,,Kasaragod,Kasaragod,male,"Travelled from Dubai, UAE",,449,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+449,47,Kasaragod,,Kasaragod,Kasaragod,female,"Travelled from Dubai, UAE",,450,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+450,34,Kasaragod,,Kasaragod,Kasaragod,female,"Travelled from Dubai, UAE",,451,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+451,21,Kasaragod,,Kasaragod,Kasaragod,female,"Travelled from Dubai, UAE",,452,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+452,50,Kasaragod,,Kasaragod,Kasaragod,female,"Travelled from Dubai, UAE",,453,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+453,32,Kasaragod,,Kasaragod,Kasaragod,female,"Travelled from Dubai, UAE",,454,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+454,27,Kasaragod,,Kasaragod,Kasaragod,female,"Travelled from Dubai, UAE",,455,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+455,33,Kasaragod,,Kasaragod,Kasaragod,female,"Travelled from Dubai, UAE",,456,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+456,32,Kasaragod,,Kasaragod,Kasaragod,female,"Travelled from Dubai, UAE",,457,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+457,27,Kasaragod,,Kasaragod,Kasaragod,female,"Travelled from Dubai, UAE",,458,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+458,34,Kasaragod,,Kasaragod,Kasaragod,female,"Travelled from Dubai, UAE",,459,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+459,52,Kasaragod,,Kasaragod,Kasaragod,female,"Travelled from Dubai, UAE",,460,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+460,26,Kasaragod,,Kasaragod,Kasaragod,female,"Travelled from Dubai, UAE",,461,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+461,,,,Kannur,Kannur,female,"Travelled from Dubai, UAE",,462,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+462,,,,Kannur,Kannur,female,"Travelled from Dubai, UAE",,463,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+463,,,,Kannur,Kannur,female,"Travelled from Dubai, UAE",,464,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+464,,,,Kannur,Kannur,female,"Travelled from Dubai, UAE",,465,[],23/03/2020,Kerala,Hospitalized,['Dubai'],India
+465,,,,Kannur,Kannur,female,Details awaited,,466,[],23/03/2020,Kerala,Hospitalized,[],India
+466,61,,P108,Ernakulam,Ernakulam,female,"Travelled from UK, British tourist among those who visited Munnar, Wife of P229",,467,"[{'link': 'Wife', 'with': ['P229']}]",23/03/2020,Kerala,Hospitalized,['UK'],India
+467,56,Kochi,,Ernakulam,Ernakulam,female,"Travelled from Dubai, Emirates flight, been in isolation since landed yesterday at Kochi airport",,468,[],23/03/2020,Kerala,Hospitalized,"['Dubai', 'Emirates', 'Kochi']",India
+468,,,,Thrissur,Thrissur,female,Details awaited,,469,[],23/03/2020,Kerala,Hospitalized,[],India
+469,,,,Pathanamthitta,Pathanamthitta,female,Details awaited,,470,[],23/03/2020,Kerala,Hospitalized,[],India
+470,38,Bengaluru,,Bengaluru,Bengaluru,male,Travelled from Dubai,,471,[],23/03/2020,Karnataka,Hospitalized,['Dubai'],India
+471,41,Bengaluru,,Bengaluru,Bengaluru,male,Travelled from London,,472,[],23/03/2020,Karnataka,Hospitalized,['London'],India
+472,30,Bengaluru,P297,Bengaluru,Bengaluru,female,"Wife of P297, KA-P17",,473,"[{'link': 'Wife', 'with': ['P297', 'P17']}]",23/03/2020,Karnataka,Hospitalized,[],India
+473,24,Bengaluru,,Bengaluru,Bengaluru,male,Travelled from UK and Dubai,,474,[],23/03/2020,Karnataka,Hospitalized,"['UK', 'Dubai']",India
+474,60,Bengaluru,,Bengaluru,Bengaluru,male,Travelled from Germany,,475,[],23/03/2020,Karnataka,Hospitalized,['Germany'],India
+475,22,Bengaluru,,Bengaluru,Bengaluru,male,"Travelled from Dubai, resident of Kannur, Kerala",,476,"[{'link': 'resident', 'with': []}]",23/03/2020,Karnataka,Hospitalized,"['Dubai', 'Kannur', 'Kerala']",India
+476,38,Mumbai,,,Mumbai,female,Travelled from Abu Dhabi,,477,[],23/03/2020,Maharashtra,Hospitalized,[],India
+477,,Mumbai,,,Mumbai,female,Details awaited,,478,[],23/03/2020,Maharashtra,Hospitalized,[],India
+478,,Thane,,Thane,Thane,female,"Contact with P 80, Details awaited",,479,[],23/03/2020,Maharashtra,Hospitalized,[],India
+479,,Sangli,,,Sangli,male,"Travelled from Saudi Arabia, Details awaited",,480,[],23/03/2020,Maharashtra,Hospitalized,['Saudi Arabia'],India
+480,,Sangli,,,Sangli,female,"Travelled from Saudi Arabia, Details awaited",,481,[],23/03/2020,Maharashtra,Hospitalized,['Saudi Arabia'],India
+481,,Sangli,,,Sangli,female,"Travelled from Saudi Arabia, Details awaited",,482,[],23/03/2020,Maharashtra,Hospitalized,['Saudi Arabia'],India
+482,,Sangli,,,Sangli,female,"Travelled from Saudi Arabia, Details awaited",,483,[],23/03/2020,Maharashtra,Hospitalized,['Saudi Arabia'],India
+483,45,Khandala,,Satara,Satara,female,"Travelled from Dubai, UAE",,484,[],23/03/2020,Maharashtra,Hospitalized,['Dubai'],India
+484,,Nawabganj,,Kanpur,Kanpur,female,Travelled from USA,,485,[],23/03/2020,Uttar Pradesh,Hospitalized,[],India
+485,45,Pilibhit,,Pilibhit,Pilibhit,female,Travelled from Saudi Arabia,,486,[],23/03/2020,Uttar Pradesh,Hospitalized,['Saudi Arabia'],India
+486,69,Kangra,,Kangra,Kangra,male,"Tibetan refugee,died at a hospital in Tanda. Travelled from the US on 15.03.2020",,487,[],23/03/2020,Himachal Pradesh,Deceased,"['Tanda', 'US']",India
+487,2,,P182,Shaheed Bhagat Singh Nagar,Shaheed Bhagat Singh Nagar,male,Grand son of P182,,488,"[{'link': 'son', 'with': ['P182']}]",23/03/2020,Punjab,Hospitalized,[],India
+488,,Mohali,,Sahibzada Ajit Singh Nagar,Sahibzada Ajit Singh Nagar,female,"Close contact of Patient (Patient Unknown, likely P 201, 266, 267 or 268)",,489,"[{'link': 'contact', 'with': []}]",23/03/2020,Punjab,Hospitalized,[],India
+489,,,,Jodhpur,Jodhpur,female,Details awaited,,490,[],23/03/2020,Rajasthan,Hospitalized,[],India
+490,,,,Pratapgarh,Pratapgarh,female,Details awaited,,491,[],23/03/2020,Rajasthan,Hospitalized,[],India
+491,,,,Pratapgarh,Pratapgarh,female,Details awaited,,492,[],23/03/2020,Rajasthan,Hospitalized,[],India
+492,25,Vishakhapatnam,,Vishakhapatnam,Vishakhapatnam,male,"Travelled from Birmingham,UK",,493,[],23/03/2020,Andhra Pradesh,Hospitalized,"['Birmingham', 'UK']",India
+493,,,,,,female,Gurugram,,494,[],23/03/2020,Haryana,Hospitalized,[],India
+494,,,,,,female,Gurugram,,495,[],23/03/2020,Haryana,Hospitalized,[],India
+495,,,,,,female,Gurugram,,496,[],23/03/2020,Haryana,Hospitalized,[],India
+496,,,,,,female,Gurugram,,497,[],23/03/2020,Haryana,Hospitalized,[],India
+497,,,,,,female,Gurugram,,498,[],23/03/2020,Haryana,Hospitalized,[],India
+498,,,,,,female,Sonipat,,499,[],23/03/2020,Haryana,Hospitalized,[],India
+499,25,Chennai,,Chennai,Chennai,male,Travelled from London via Bangaloe then to Chennai by Car on 14th March,,500,[],23/03/2020,Tamil Nadu,Hospitalized,['London'],India
+500,48,Tiruppur,,Tiruppur,Tiruppur,male,Travelled from London via Coimbatore on 15th March,,501,[],23/03/2020,Tamil Nadu,Hospitalized,['London'],India
+501,54,Madurai,,Madurai,Madurai,male,Annanagar at Rajaji Hosp. No mention of travel history.,,502,"[{'link': 'mention', 'with': []}]",23/03/2020,Tamil Nadu,Hospitalized,[],India
+502,24,,,Patna,Patna,male,Travelled from Scotland,,503,[],23/03/2020,Bihar,Hospitalized,['Scotland'],India
+503,35,Jaunpur,,Jaunpur,Jaunpur,male,Travelled from Saudi Arabia on 15th Mar; Symptons on 21st Mar,,504,[],23/03/2020,Uttar Pradesh,Hospitalized,['Saudi Arabia'],India
+504,41,Kaushambi,,Ghaziabad,Ghaziabad,male,"Doctor, Travelled from France on 13th Mar",,505,[],23/03/2020,Uttar Pradesh,Hospitalized,['France'],India
+505,23,Imphal,,Imphal West,Imphal West,female,Travelled from London,,506,[],24/03/2020,Manipur,Hospitalized,['London'],India
+506,,,,Pune,Pune,female,Details awaited,,507,[],24/03/2020,Maharashtra,Hospitalized,[],India
+507,,,,Pune,Pune,female,Details awaited,,508,[],24/03/2020,Maharashtra,Hospitalized,[],India
+508,,,,Pune,Pune,female,Details awaited,,509,[],24/03/2020,Maharashtra,Hospitalized,[],India
+509,,,,Satara,Satara,female,Details awaited,,510,[],24/03/2020,Maharashtra,Hospitalized,[],India
+510,,,,,,female,"Details awaited, To match MoHFW 33",,511,[],24/03/2020,Rajasthan,Hospitalized,[],India
+511,,Jabalpur,,,Jabalpur,female,"Contact Transmission,Details awaited",,512,[],24/03/2020,Madhya Pradesh,Hospitalized,[],India
+512,32,Mangaluru,,Dakshina Kannada,Dakshina Kannada,male,"Kasargod Resident; Travelled from Dubai, landed in Mangaluru  Airport on 20th Mar",,513,[],24/03/2020,Karnataka,Hospitalized,"['Dubai', 'Mangaluru']",India
+513,40,,,Uttara Kannada,Uttara Kannada,male,"Travelled from Dubai, landed in Mangaluru  Airport on 21st Mar",,514,[],24/03/2020,Karnataka,Hospitalized,"['Dubai', 'Mangaluru']",India
+514,65,,,Uttara Kannada,Uttara Kannada,male,"Travelled from Dubai, Landed in Mumbai (18th Mar)  and Travelled by train to Uttara Kannada",,515,[],24/03/2020,Karnataka,Hospitalized,"['Dubai', 'Mumbai']",India
+515,56,,P285,Chikkaballapura,Chikkaballapura,female,"Travelled from Mecca, Saudi Arabia along with P285 and P382, via Hyderabad (14th Mar) to Hindupur by train and to Gowribidanur by bus",,516,[],24/03/2020,Karnataka,Hospitalized,"['Mecca', 'Saudi Arabia', 'Hyderabad']",India
+516,,,,,,female,"Details awaited, To match MoHFW 31",,517,[],24/03/2020,Delhi,Hospitalized,[],India
+517,,,,Kozhikode,Kozhikode,female,"Travelled from Dubai, Indigo  6E: 89",,518,[],24/03/2020,Kerala,Hospitalized,"['Dubai', 'Indigo']",India
+518,,,,Kozhikode,Kozhikode,female,"Travelled from Dubai, Air India AI 906 landed at Chennai ",,519,[],24/03/2020,Kerala,Hospitalized,['Dubai'],India
+519,,,,Surat,Surat,female,"Travelled from Saudi Arabia, More details awaited",,520,[],24/03/2020,Gujarat,Hospitalized,['Saudi Arabia'],India
+520,,,,Gandhinagar,Gandhinagar,female,"Local Transmission, Details awaited",,521,[],24/03/2020,Gujarat,Hospitalized,[],India
+521,,,,Gandhinagar,Gandhinagar,female,"Local Transmission, Details awaited",,522,[],24/03/2020,Gujarat,Hospitalized,[],India
+522,,,,,,female,"Travelled from Egypt, Details awaited",,523,[],24/03/2020,West Bengal,Hospitalized,['Egypt'],India
+523,74,Porur,,Chennai,Chennai,male,Travelled from USA via Singapore on 12th March,,524,[],24/03/2020,Tamil Nadu,Hospitalized,"['USA', 'Singapore']",India
+524,52,Purasaivakkam,,Chennai,Chennai,female,Travelled from USA via London on 17 March,,525,[],24/03/2020,Tamil Nadu,Hospitalized,"['USA', 'London']",India
+525,25,Keelkattalai,,Chennai,Chennai,female,Travelled from Switzerland via Delhi on 15th March,,526,[],24/03/2020,Tamil Nadu,Hospitalized,"['Switzerland', 'Delhi']",India
+526,49,Kokapet,,Ranga Reddy,Ranga Reddy,male,Travelled from London,,527,[],24/03/2020,Telangana,Hospitalized,['London'],India
+527,39,,,,,female,Travelled from Germany,,528,[],24/03/2020,Telangana,Hospitalized,['Germany'],India
+528,61,,,,,female,Travelled from Saudi Arabia,,529,[],24/03/2020,Telangana,Hospitalized,['Saudi Arabia'],India
+529,56,Bengaluru,P150,Bengaluru,Bengaluru,female,"Contact of P150, KA-P13",,530,"[{'link': 'Contact', 'with': ['P150', 'P13']}]",24/03/2020,Karnataka,Hospitalized,[],India
+530,,Singasandra,,Bengaluru,Bengaluru,female,Details awaited,,531,[],24/03/2020,Karnataka,Hospitalized,[],India
+531,,,,,,female,"Travelled from UK, Details Awaited",,532,[],24/03/2020,West Bengal,Hospitalized,['UK'],India
+532,,,,Srinagar,Srinagar,female,Details awaited,,533,[],24/03/2020,Jammu and Kashmir,Hospitalized,[],India
+533,,,,Srinagar,Srinagar,female,Details awaited,,534,[],24/03/2020,Jammu and Kashmir,Hospitalized,[],India
+534,,Phillaur,P182,Jalandhar,Jalandhar,female,Details awaited,,535,[],24/03/2020,Punjab,Hospitalized,[],India
+535,,Phillaur,P182,Jalandhar,Jalandhar,female,Details awaited,,536,[],24/03/2020,Punjab,Hospitalized,[],India
+536,,Phillaur,P182,Jalandhar,Jalandhar,female,Details awaited,,537,[],24/03/2020,Punjab,Hospitalized,[],India
+537,,Mumbai,,,Mumbai,female,Details awaited,,538,[],24/03/2020,Maharashtra,Hospitalized,[],India
+538,,Mumbai,,,Mumbai,female,Details awaited,,539,[],24/03/2020,Maharashtra,Hospitalized,[],India
+539,,Mumbai,,,Mumbai,female,Details awaited,,540,[],24/03/2020,Maharashtra,Hospitalized,[],India
+540,,Mumbai,,,Mumbai,female,Details awaited,,541,[],24/03/2020,Maharashtra,Hospitalized,[],India
+541,,Mumbai,,,Mumbai,female,Details awaited,,542,[],24/03/2020,Maharashtra,Hospitalized,[],India
+542,,Ahmednagar,,,Ahmednagar,female,Details awaited,,543,[],24/03/2020,Maharashtra,Hospitalized,[],India
+543,47,Noida,,Gautam Buddh Nagar,Gautam Buddh Nagar,female,"No travel history, husband has had contact with a colleague from London",,544,[],24/03/2020,Uttar Pradesh,Hospitalized,['London'],India
+544,,,,,,female,Details awaited,,545,[],24/03/2020,Punjab,Hospitalized,[],India
+545,,,,,,female,Details awaited,,546,[],24/03/2020,Punjab,Hospitalized,[],India
+546,,,,,,female,Details awaited,,547,[],24/03/2020,Punjab,Hospitalized,[],India
+547,,,,,,female,Travelled from United Kingdom,,548,[],24/03/2020,Kerala,Hospitalized,['United Kingdom'],India
+548,,,,,,female,Travelled from Dubai,,549,[],24/03/2020,Kerala,Hospitalized,['Dubai'],India
+549,,,,,,female,Travelled from Dubai,,550,[],24/03/2020,Kerala,Hospitalized,['Dubai'],India
+550,,,,,,female,Travelled from Dubai,,551,[],24/03/2020,Kerala,Hospitalized,['Dubai'],India
+551,,,,,,female,Travelled from Dubai,,552,[],24/03/2020,Kerala,Hospitalized,['Dubai'],India
+552,,,,,,female,Travelled from Dubai,,553,[],24/03/2020,Kerala,Hospitalized,['Dubai'],India
+553,,,,,,female,Travelled from Dubai,,554,[],24/03/2020,Kerala,Hospitalized,['Dubai'],India
+554,,,,,,female,Travelled from Qatar,,555,[],24/03/2020,Kerala,Hospitalized,['Qatar'],India
+555,57,,P380,Ernakulam,Ernakulam,female,Close relative of  P380,,556,"[{'link': 'relative', 'with': ['P380']}]",24/03/2020,Kerala,Hospitalized,[],India
+556,,,,,,female,"Contact Transmission,Details awaited",,557,[],24/03/2020,Kerala,Hospitalized,[],India
+557,,,,,,female,"Contact Transmission,Details awaited",,558,[],24/03/2020,Kerala,Hospitalized,[],India
+558,,,,,,female,Details awaited,,559,[],24/03/2020,Kerala,Hospitalized,[],India
+559,,,,,,female,"Details awaited, Matched to 40th case",,560,[],24/03/2020,Karnataka,Hospitalized,[],India
+560,,,,,,female,"Details awaited, Matched to 41st case",,561,[],24/03/2020,Karnataka,Hospitalized,[],India
+561,,,,,,female,"Details awaited, Matched to MOHFW for 8th case",,562,[],24/03/2020,Andhra Pradesh,Hospitalized,[],India
+562,65,Chennai,,Chennai,Chennai,male,Travelled from New Zealand,,563,[],24/03/2020,Tamil Nadu,Hospitalized,['New Zealand'],India
+563,55,Saidapet,,Chennai,Chennai,female,No travel history,,564,[],24/03/2020,Tamil Nadu,Hospitalized,[],India
+564,25,Chennai,,Chennai,Chennai,male,Travelled from London,,565,[],24/03/2020,Tamil Nadu,Hospitalized,['London'],India
