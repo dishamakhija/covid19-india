@@ -1,7 +1,7 @@
 from matplotlib import pyplot as plt
 from kneed import DataGenerator, KneeLocator
 
-from src.utils.metrics_util import evaluate
+from utils.metrics_util import evaluate
 import pandas as pd
 
 
