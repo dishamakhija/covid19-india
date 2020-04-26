@@ -12,23 +12,22 @@
   },
   "loss_functions": [
     {
-      "function_name": "rmse",
-      "variables": [
-        "infectious"
+      "metric_name": "mape",
+      "variable_weights": [
+        {
+          "variable": "active",
+          "weight": 1
+        }
       ],
-      "weights": [
-        1
-      ]
+      "optimize": true
     },
     {
-      "function_name": "mape",
-      "variables": [
-        "infectious",
-        "recovered"
-      ],
-      "weights": [
-        0.8,
-        0.2
+      "metric_name": "rmse",
+      "variable_weights": [
+        {
+          "variable": "active",
+          "weight": 1
+        }
       ]
     }
   ],

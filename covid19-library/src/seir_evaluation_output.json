@@ -1,1 +1,1 @@
-[{"function_name": "rmse", "variables": ["infectious"], "weights": [1], "value": 562.4819914721432}, {"function_name": "mape", "variables": ["infectious", "recovered"], "weights": [0.8, 0.2], "value": 692.1310317230816}]
+[{"metric_name": "mape", "variable_weights": [{"variable": "active", "weight": 1.0}], "optimize": true, "value": 496.1415945224266}, {"metric_name": "rmse", "variable_weights": [{"variable": "active", "weight": 1.0}], "optimize": false, "value": 503.52513401106}]

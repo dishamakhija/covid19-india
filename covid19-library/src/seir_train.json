@@ -1,0 +1,55 @@
+{
+  "best_params": {
+    "EbyIRation": 1.6606582578109026,
+    "r0": 1.782825642895919
+  },
+  "best_loss": 9.6117373260748,
+  "train_metric_results": [
+    {
+      "metric_name": "mape",
+      "variable_weights": [
+        {
+          "variable": "active",
+          "weight": 1.0
+        }
+      ],
+      "optimize": true,
+      "value": 9.6117373260748
+    },
+    {
+      "metric_name": "rmse",
+      "variable_weights": [
+        {
+          "variable": "active",
+          "weight": 1.0
+        }
+      ],
+      "optimize": false,
+      "value": 3.8931264601966946
+    }
+  ],
+  "test_metric_results": [
+    {
+      "metric_name": "mape",
+      "variable_weights": [
+        {
+          "variable": "active",
+          "weight": 1.0
+        }
+      ],
+      "optimize": true,
+      "value": 46.543307772227166
+    },
+    {
+      "metric_name": "rmse",
+      "variable_weights": [
+        {
+          "variable": "active",
+          "weight": 1.0
+        }
+      ],
+      "optimize": false,
+      "value": 28.450049362426984
+    }
+  ]
+}

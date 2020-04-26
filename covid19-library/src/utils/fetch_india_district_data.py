@@ -36,7 +36,7 @@ def get_india_district_data_from_url(region_name, data_type="confirmed"):
     if data_type == "confirmed":
         records_df = records_df[["detecteddistrict", "dateannounced"]]
     elif data_type in ["Hospitalized", "Recovered", "Deceased"]:
-        records_df = records_df[records_df.currentstatus == "Recovered"]
+        records_df = records_df[records_df.currentstatus == data_type]
         records_df = records_df[["detecteddistrict", "statuschangedate"]]
     else:
         raise BaseException("data type is not supported")
@@ -44,6 +44,7 @@ def get_india_district_data_from_url(region_name, data_type="confirmed"):
     records_df.columns = [REGION, 'date']
     nhu_df = convert_to_jhu_format(records_df, REGION)
     return nhu_df[nhu_df[REGION] == region_name].iloc[0]
+
 
 # def get_india_district_data_all(region_name):
 
@@ -58,4 +59,3 @@ if __name__ == "__main__":
     recovered_data = get_india_district_data_from_url("Bengaluru", "Recovered")
     print(confirmed_data)
     print(recovered_data)
-

@@ -21,11 +21,6 @@ class ModelWrapperBase(ABC):
     def fit(self):
         pass
 
-
-    # def run(self, dataset: pd.DataFrame, run_day, n_days):
-    #     pass
-
-
     @abc.abstractmethod
     def is_black_box(self):
         pass

@@ -10,10 +10,10 @@
     "r0": 2.4091,
     "incubation_period": 6
   },
-  "forecasting_variables": [
-    "infections",
+  "forecast_variables": [
+    "active",
     "recovered",
-    "fatalities"
+    "deceased"
   ],
   "output_filepath": "seir_forecast2.csv"
 }

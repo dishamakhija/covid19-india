@@ -9,6 +9,9 @@ from seirsplus.models import *
 
 class SEIR(ModelWrapperBase):
 
+    def fit(self):
+        pass
+
     def __init__(self, model_parameters: dict):
         self.model_parameters = model_parameters
         self.F_hospitalization = self.model_parameters.get("F_hospitalization", 0.26)
@@ -17,17 +20,15 @@ class SEIR(ModelWrapperBase):
         self.F_fatalities = self.model_parameters.get("F_fatalities", 0.026)
 
     def supported_forecast_variables(self):
-        return [ForecastVariable.total, ForecastVariable.recovered, ForecastVariable.infectious]
-
-    def fit(self):
-        raise Exception("This model doesn't support fit method")
+        return [ForecastVariable.total, ForecastVariable.recovered, ForecastVariable.active]
 
     def transform_dataset(self, confirmed_data: pd.Series, recovered_data: pd.Series, run_day: str):
         confirmed_data['recovered_count'] = recovered_data[run_day]
         return confirmed_data
 
     def predict(self, confirmed_data: pd.Series, recovered_data: pd.Series, run_day: str, start_date: str,
-                end_date: str):
+                end_date: str, search_space: dict = {}):
+        self.model_parameters.update(search_space)
         dataset = self.transform_dataset(confirmed_data, recovered_data, run_day)
         n_days = (datetime.strptime(end_date, "%m/%d/%y") - datetime.strptime(run_day, "%m/%d/%y")).days + 1
         prediction_dataset = self.run(dataset, run_day, n_days)
@@ -61,8 +62,8 @@ class SEIR(ModelWrapperBase):
         recovered_ts = self.alignTimeSeries(estimator.numR * (1 - self.F_fatalities), estimator.tseries, run_day,
                                             n_days, ForecastVariable.recovered.name)
         fatalities_ts = self.alignTimeSeries(estimator.numR * self.F_fatalities, estimator.tseries, run_day, n_days,
-                                             ForecastVariable.fatalities.name)
-        region_row = self.convert_dataframe(dataset, run_day, n_days, "actual" + "_" + ForecastVariable.infectious.name)
+                                             ForecastVariable.deceased.name)
+        region_row = self.convert_dataframe(dataset, run_day, n_days, "actual" + "_" + ForecastVariable.active.name)
         data_frames = [region_row, predicted_ts, recovered_ts, fatalities_ts]
         result = reduce(lambda left, right: pd.merge(left, right, on=['date'], how='inner'), data_frames)
         result = result.dropna()
@@ -83,7 +84,7 @@ class SEIR(ModelWrapperBase):
     ### modelI - Time Series Prediction output by model (model.numI)
     ### modelT - Time Series of the model (model.tseries)
     ### dates  - dates in the true file that we have from CSSEGISandData - datetime object
-    def alignTimeSeries(self, modelI, modelT, run_day, n_days, column_name=ForecastVariable.infectious.name):
+    def alignTimeSeries(self, modelI, modelT, run_day, n_days, column_name=ForecastVariable.active.name):
         dates = [datetime.strptime(run_day, "%m/%d/%y") + timedelta(days=x) for x in range(n_days)]
         model_predictions = []
         count = 0
