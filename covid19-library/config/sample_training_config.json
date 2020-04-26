@@ -1,0 +1,26 @@
+{
+    "region_name": "Bengaluru",
+    "train_start_date": "3/22/20",
+    "train_end_date": "4/1/20",
+    "model_class": "SEIR",
+    "model_parameters": {
+        "infectious_period": 9.5412,
+        "incubation_period": 6
+    },
+    "search_space": {
+
+        "r0": [0.8, 6],
+        "EbyIRation": [1, 70]
+    },
+    "search_parameters": {
+        "max_evals": 100
+    },
+    "loss_function": {
+        "function_name": "mape",
+        "variables": [
+            "infectious"
+        ],
+        "weights": [1]
+    },
+    "output_filepath": "seir_forecast.csv"
+}

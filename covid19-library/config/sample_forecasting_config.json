@@ -1,0 +1,19 @@
+{
+  "region_name": "Bengaluru",
+  "run_day": "3/22/20",
+  "forecast_start_date": "4/1/20",
+  "forecast_end_date": "4/20/20",
+  "model_class": "SEIR",
+  "model_parameters": {
+    "EbyIRation": 3.07,
+    "infectious_period": 9.5412,
+    "r0": 2.4091,
+    "incubation_period": 6
+  },
+  "forecasting_variables": [
+    "infections",
+    "recovered",
+    "fatalities"
+  ],
+  "output_filepath": "seir_forecast2.csv"
+}
