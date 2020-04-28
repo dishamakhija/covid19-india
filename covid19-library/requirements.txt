@@ -1,0 +1,9 @@
+seirsplus==0.1.1
+pydantic==1.2
+pandas==0.24.2
+numpy==1.16.2
+kneed==0.6.0
+requests==2.21.0
+scikit-learn==0.21.3
+simplejson==3.16.0
+hyperopt==0.2.3
