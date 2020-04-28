@@ -1,9 +1,9 @@
-from src.configs.base_config import ForecastingModuleConfig
-from src.entities.model_class import ModelClass
-from src.model_wrappers.model_factory import ModelFactory
-from src.modules.data_fetcher_module import DataFetcherModule
-from src.utils.config_util import read_config_file
-from src.utils.fetch_india_district_data import get_india_district_data_from_url, get_population_value
+from configs.base_config import ForecastingModuleConfig
+from entities.model_class import ModelClass
+from model_wrappers.model_factory import ModelFactory
+from modules.data_fetcher_module import DataFetcherModule
+from utils.config_util import read_config_file
+from utils.fetch_india_district_data import get_india_district_data_from_url, get_population_value
 import pandas as pd
 
 

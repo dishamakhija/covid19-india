@@ -2,7 +2,7 @@ from matplotlib import pyplot as plt
 from kneed import DataGenerator, KneeLocator
 import pandas as pd
 
-from src.utils.metrics_util import evaluate
+from utils.metrics_util import evaluate
 
 
 def plot(summary_df, r0):

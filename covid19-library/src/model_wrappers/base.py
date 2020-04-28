@@ -2,7 +2,7 @@ import pandas as pd
 
 import abc
 
-from src.entities.forecast_variables import ForecastVariable
+from entities.forecast_variables import ForecastVariable
 
 ABC = abc.ABCMeta('ABC', (object,), {'__slots__': ()})
 

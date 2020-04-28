@@ -1,9 +1,9 @@
 from pydantic import BaseModel
 from typing import List, Optional
 
-from src.entities.forecast_variables import ForecastVariable
-from src.entities.model_class import ModelClass
-from src.entities.loss_function import LossFunction
+from entities.forecast_variables import ForecastVariable
+from entities.model_class import ModelClass
+from entities.loss_function import LossFunction
 
 
 class BaseConfig(BaseModel):

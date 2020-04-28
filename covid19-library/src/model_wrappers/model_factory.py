@@ -1,6 +1,6 @@
-from src.entities.model_class import ModelClass
-from src.model_wrappers.base import ModelWrapperBase
-from src.model_wrappers.seir import SEIR
+from entities.model_class import ModelClass
+from model_wrappers.base import ModelWrapperBase
+from model_wrappers.seir import SEIR
 
 
 class ModelFactory:

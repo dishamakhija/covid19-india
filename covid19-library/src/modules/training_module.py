@@ -3,12 +3,12 @@ from functools import partial
 import json
 from typing import List
 from hyperopt import hp
-from src.configs.base_config import TrainingModuleConfig
-from src.model_wrappers.model_factory import ModelFactory
-from src.modules.data_fetcher_module import DataFetcherModule
-from src.modules.model_evaluator import ModelEvaluator
-from src.utils.config_util import read_config_file
-from src.utils.hyperparam_util import hyperparam_tuning
+from configs.base_config import TrainingModuleConfig
+from model_wrappers.model_factory import ModelFactory
+from modules.data_fetcher_module import DataFetcherModule
+from modules.model_evaluator import ModelEvaluator
+from utils.config_util import read_config_file
+from utils.hyperparam_util import hyperparam_tuning
 
 
 class TrainingModule(object):
@@ -34,7 +34,7 @@ class TrainingModule(object):
                 "%-m/%-d/%y")
             latent_params = self._model.get_latent_params(region_metadata, region_observations, run_day,
                                                           train_end_date, result["best_params"])
-            result.update({"latent_params": latent_params})
+            result.update(latent_params)
         return result
 
     def optimize(self, search_space, region_metadata, region_observations, train_start_date, train_end_date,
@@ -64,6 +64,8 @@ class TrainingModule(object):
                                                    config.search_parameters, config.training_loss_function)
         config.model_parameters.update(
             results["best_params"])  # updating model parameters with best params found above
+        config.model_parameters.update(
+            results["latent_params"])
         model_evaluator = ModelEvaluator(config.model_class, config.model_parameters)
         ##TODO harsh to check this
         run_day = (datetime.strptime(config.train_start_date, "%m/%d/%y") - timedelta(days=1)).strftime("%-m/%-d/%y")
