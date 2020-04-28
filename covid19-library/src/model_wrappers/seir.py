@@ -73,9 +73,12 @@ class SEIR(ModelWrapperBase):
             initI = confirmed_dataset[run_day] * self.model_parameters.get('IbyCRatio')
             initR = confirmed_dataset[run_day] * (1 - self.model_parameters.get('IbyCRatio'))
         else:
-            initE = confirmed_dataset[run_day] * self.model_parameters.get('LatentEbyCRatio').get(run_day)
-            initI = confirmed_dataset[run_day] * self.model_parameters.get('LatentIbyCRatio').get(run_day)
-            initR = confirmed_dataset[run_day] * (1 - self.model_parameters.get('LatentIbyCRatio').get(run_day))
+            pick_day = run_day
+            while(not pick_day in self.model_parameters.get('LatentEbyCRatio')):
+                pick_day = (datetime.strptime(pick_day, "%m/%d/%y") - timedelta(days=1)).strftime("%-m/%-d/%y")
+            initE = confirmed_dataset[run_day] * self.model_parameters.get('LatentEbyCRatio').get(pick_day)
+            initI = confirmed_dataset[run_day] * self.model_parameters.get('LatentIbyCRatio').get(pick_day)
+            initR = confirmed_dataset[run_day] * (1 - self.model_parameters.get('LatentIbyCRatio').get(pick_day))
 
         estimator = SEIRSModel(beta=init_beta, sigma=init_sigma, gamma=init_gamma, initN=initN, initI=initI,
                                initE=initE, initR=initR)
