@@ -8,7 +8,7 @@ from src.entities.loss_function import LossFunction
 
 class BaseConfig(BaseModel):
     region_name: str
-    region_type: str = "district"
+    region_type: str
     model_class: ModelClass
     model_parameters: dict
     output_filepath: str = None
@@ -19,9 +19,8 @@ class TrainingModuleConfig(BaseConfig):
     train_end_date: str
     search_space: dict
     search_parameters: dict
+    training_loss_function: LossFunction
     loss_functions: List[LossFunction]
-    test_start_date: Optional[str] = None
-    test_end_date: Optional[str] = None
 
 
 class ModelEvaluatorConfig(BaseConfig):

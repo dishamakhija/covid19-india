@@ -1,17 +1,23 @@
 {
-  "region_name": "Bengaluru",
+  "region_name": "bengaluru",
+  "region_type": "district",
   "run_day": "3/22/20",
   "forecast_start_date": "4/1/20",
   "forecast_end_date": "4/20/20",
   "model_class": "SEIR",
   "model_parameters": {
-    "EbyIRation": 3.07,
     "infectious_period": 9.5412,
+    "incubation_period": 6,
+    "IbyCRatio": 0.59,
+    "RbyCRatio": 0.41,
     "r0": 2.4091,
-    "incubation_period": 6
+    "LatentEByCRatio": {
+      "3/22/20": 19.692374309340906,
+      "4/1/20": 0.5781344247805147
+    }
   },
   "forecast_variables": [
-    "active",
+    "confirmed",
     "recovered",
     "deceased"
   ],

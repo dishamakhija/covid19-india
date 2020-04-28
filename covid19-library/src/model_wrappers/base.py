@@ -14,7 +14,7 @@ class ModelWrapperBase(ABC):
         pass
 
     @abc.abstractmethod
-    def predict(self, confirmed_data: pd.Series, recovered_data: pd.Series, run_day, start_date, end_date):
+    def predict(self, confirmed_data: pd.Series, recovered_data: pd.Series, run_day, start_date, end_date, **kwargs):
         pass
 
     @abc.abstractmethod

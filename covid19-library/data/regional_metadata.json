@@ -1,0 +1,61 @@
+{
+    "regional_metadata":[
+        {
+            "region_type":"district",        
+            "region_name":"mumbai",
+            "metadata":{
+                "population":24500000
+                
+            }
+        },
+        {
+            "region_type":"district",
+            "region_name":"pune",
+            "metadata":{
+                "population":7120000
+            }
+        },
+        {
+            "region_type":"district",        
+            "region_name":"bengaluru",
+            "metadata":{
+                "population":12951200
+            }
+        },
+        {
+            "region_type":"district",
+            "region_name":"bengaluru rural",
+            "metadata":{
+                "population":1066332
+            }
+        },
+        {
+            "region_type":"state",
+            "region_name":"delhi",
+            "metadata":{
+                "population":19025023
+            }
+        },
+        {
+            "region_type":"state",
+            "region_name":"karnataka",
+            "metadata":{
+                "population":67600000
+            }
+        },
+        {
+            "region_type":"state",
+            "region_name":"maharashtra",
+            "metadata":{
+                "population":	123522214
+            }
+        },
+        {
+            "region_type":"state",
+            "region_name":"west bengal",
+            "metadata":{
+                "population":	99840346
+            }
+        }                                                       
+    ]
+}

@@ -1,15 +1,13 @@
+from datetime import datetime, timedelta
 from functools import partial
 import json
 from typing import List
-
 from hyperopt import hp
-
 from src.configs.base_config import TrainingModuleConfig
-from src.entities.loss_function import LossFunction
 from src.model_wrappers.model_factory import ModelFactory
+from src.modules.data_fetcher_module import DataFetcherModule
 from src.modules.model_evaluator import ModelEvaluator
 from src.utils.config_util import read_config_file
-from src.utils.fetch_india_district_data import get_india_district_data_from_url, get_population_value
 from src.utils.hyperparam_util import hyperparam_tuning
 
 
@@ -20,57 +18,60 @@ class TrainingModule(object):
         self._model_class = model_class
         self._model_parameters = model_parameters
 
-    def train(self, train_start_date, train_end_date,
-              region_name, search_space, search_parameters, train_loss_function):
-        confirmed_data = get_india_district_data_from_url(region_name, "confirmed")
-        recovered_data = get_india_district_data_from_url(region_name, "Recovered")
-        population = get_population_value(region_name)
-        confirmed_data["population"] = population
+    def train(self, region_metadata, region_observations, train_start_date, train_end_date, search_space,
+              search_parameters, train_loss_function):
         result = {}
         if self._model.is_black_box():
-            objective = partial(self.optimize, confirmed_data=confirmed_data, recovered_data=recovered_data,
+            objective = partial(self.optimize, region_metadata=region_metadata, region_observations=region_observations,
                                 train_start_date=train_start_date,
                                 train_end_date=train_end_date, loss_function=train_loss_function)
             for k, v in search_space.items():
                 search_space[k] = hp.uniform(k, v[0], v[1])
             result = hyperparam_tuning(objective, search_space,
                                        search_parameters.get("max_evals", 100))
+            ##TODO: harsh to check this
+            run_day = (datetime.strptime(train_start_date, "%m/%d/%y") - timedelta(days=1)).strftime(
+                "%-m/%-d/%y")
+            latent_params = self._model.get_latent_params(region_metadata, region_observations, run_day,
+                                                          train_end_date, result["best_params"])
+            result.update({"latent_params": latent_params})
         return result
 
-    def optimize(self, search_space, confirmed_data, recovered_data, train_start_date, train_end_date,
+    def optimize(self, search_space, region_metadata, region_observations, train_start_date, train_end_date,
                  loss_function):
-        predict_df = self._model.predict(confirmed_data, recovered_data, train_start_date, train_start_date,
+        ##TODO harsh to check this
+        run_day = (datetime.strptime(train_start_date, "%m/%d/%y") - timedelta(days=1)).strftime("%-m/%-d/%y")
+        predict_df = self._model.predict(region_metadata, region_observations, run_day, train_start_date,
                                          train_end_date,
-                                         search_space)
+                                         search_space=search_space, is_tuning=True)
         metrics_result = ModelEvaluator.evaluate_for_forecast(predict_df, [loss_function])
         return metrics_result[0]["value"]
 
-    @staticmethod
-    def get_train_loss_function(loss_functions: List[LossFunction]):
-        result = list(filter(lambda x: x.optimize == True, loss_functions))
-        if len(result) == 0:
-            raise Exception("No loss function declared with optimize as true ")
-        return result[0]  # if multiple functions are declared as optimize true, taking first one
+    def train_for_region(self, region_type, region_name, train_start_date, train_end_date,
+                         search_space, search_parameters, train_loss_function):
+        observations = DataFetcherModule.get_observations_for_region(region_type, region_name)
+        region_metadata = DataFetcherModule.get_regional_metadata(region_type, region_name)
+        return self.train(region_metadata, observations, train_start_date, train_end_date,
+                          search_space, search_parameters, train_loss_function)
 
     @staticmethod
     def from_config(config: TrainingModuleConfig):
         training_module = TrainingModule(config.model_class, config.model_parameters)
-        train_loss_func = TrainingModule.get_train_loss_function(config.loss_functions)
-        results = {}
-        training_results = training_module.train(config.train_start_date, config.train_end_date, config.region_name,
-                                                 config.search_space,
-                                                 config.search_parameters, train_loss_func)
-        results.update(training_results)
+        results = training_module.train_for_region(config.region_type, config.region_name,
+                                                   config.train_start_date,
+                                                   config.train_end_date,
+                                                   config.search_space,
+                                                   config.search_parameters, config.training_loss_function)
         config.model_parameters.update(
-            training_results["best_params"])  # updating model parameters with best params found above
+            results["best_params"])  # updating model parameters with best params found above
         model_evaluator = ModelEvaluator(config.model_class, config.model_parameters)
-        results["train_metric_results"] = model_evaluator.evaluate(config.region_name, config.train_start_date,
-                                                                   config.train_start_date, config.train_end_date,
-                                                                   config.loss_functions)
-        if config.test_start_date is not None:
-            results["test_metric_results"] = model_evaluator.evaluate(config.region_name, config.train_start_date,
-                                                                      config.test_start_date, config.test_end_date,
-                                                                      config.loss_functions)
+        ##TODO harsh to check this
+        run_day = (datetime.strptime(config.train_start_date, "%m/%d/%y") - timedelta(days=1)).strftime("%-m/%-d/%y")
+        results["train_metric_results"] = model_evaluator.evaluate_for_region(config.region_type, config.region_name,
+                                                                              run_day,
+                                                                              config.train_start_date,
+                                                                              config.train_end_date,
+                                                                              config.loss_functions)
         if config.output_filepath is not None:
             with open(config.output_filepath, 'w') as outfile:
                 json.dump(results, outfile)

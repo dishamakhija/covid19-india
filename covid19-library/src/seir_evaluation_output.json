@@ -1,1 +1,22 @@
-[{"metric_name": "mape", "variable_weights": [{"variable": "active", "weight": 1.0}], "optimize": true, "value": 496.1415945224266}, {"metric_name": "rmse", "variable_weights": [{"variable": "active", "weight": 1.0}], "optimize": false, "value": 503.52513401106}]
+[
+  {
+    "metric_name": "mape",
+    "variable_weights": [
+      {
+        "variable": "active",
+        "weight": 1.0
+      }
+    ],
+    "value": 2551.79810807698
+  },
+  {
+    "metric_name": "rmse",
+    "variable_weights": [
+      {
+        "variable": "active",
+        "weight": 1.0
+      }
+    ],
+    "value": 2455.7281136366814
+  }
+]

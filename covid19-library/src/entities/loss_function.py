@@ -14,5 +14,4 @@ class VariableWeight(BaseModel):
 class LossFunction(BaseModel):
     metric_name: MetricName
     variable_weights: List[VariableWeight]
-    optimize: bool = False
     value: float = 0.0

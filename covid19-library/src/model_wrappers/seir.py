@@ -20,19 +20,18 @@ class SEIR(ModelWrapperBase):
         self.F_fatalities = self.model_parameters.get("F_fatalities", 0.026)
 
     def supported_forecast_variables(self):
-        return [ForecastVariable.total, ForecastVariable.recovered, ForecastVariable.active]
+        return [ForecastVariable.confirmed, ForecastVariable.recovered, ForecastVariable.active]
 
-    def transform_dataset(self, confirmed_data: pd.Series, recovered_data: pd.Series, run_day: str):
-        confirmed_data['recovered_count'] = recovered_data[run_day]
-        return confirmed_data
 
-    def predict(self, confirmed_data: pd.Series, recovered_data: pd.Series, run_day: str, start_date: str,
-                end_date: str, search_space: dict = {}):
+    def predict(self, region_metadata: dict, region_observations: pd.DataFrame, run_day: str, start_date: str,
+                end_date: str, **kwargs):
+        search_space = kwargs.get("search_space", {})
+        self._is_tuning = kwargs.get("is_tuning", False)
         self.model_parameters.update(search_space)
-        dataset = self.transform_dataset(confirmed_data, recovered_data, run_day)
         n_days = (datetime.strptime(end_date, "%m/%d/%y") - datetime.strptime(run_day, "%m/%d/%y")).days + 1
-        prediction_dataset = self.run(dataset, run_day, n_days)
+        prediction_dataset = self.run(region_observations, region_metadata, run_day, n_days)
         date_list = list(pd.date_range(start=start_date, end=end_date).strftime("%-m/%-d/%y"))
+        recovered_data = region_observations[region_observations.observation == ForecastVariable.recovered.name].iloc[0]
         recovered_dataset = self.convert_dataframe(recovered_data, run_day, n_days,
                                                    "actual_" + ForecastVariable.recovered)
         prediction_dataset = prediction_dataset[prediction_dataset.date.isin(date_list)]
@@ -42,29 +41,52 @@ class SEIR(ModelWrapperBase):
     def is_black_box(self):
         return True
 
-    ##run_day => initialization_day
-    def run(self, dataset: pd.Series, run_day: str, n_days: int):
+    def get_latent_params(self, region_metadata: dict, region_observations: pd.DataFrame, run_day: str, end_date: str,
+                          search_space: dict = {}):
+        self.model_parameters.update(search_space)
+        n_days = (datetime.strptime(end_date, "%m/%d/%y") - datetime.strptime(run_day, "%m/%d/%y")).days + 1
+        prediction_dataset = self.run(region_observations, region_metadata, run_day, n_days)
+        params = dict()
+        params['LatentEByCRatio'] = dict()
+        params['LatentEByCRatio'][run_day] = self.model_parameters.get("EbyCRatio")
+        ed = prediction_dataset[prediction_dataset['date'] == end_date]
+        params['LatentEByCRatio'][end_date] = float(ed[ForecastVariable.exposed.name]) / float(
+            ed[ForecastVariable.confirmed.name])
+        return params
+
+    def run(self, region_observations: pd.DataFrame, region_metadata, run_day: str, n_days: int):
         r0 = self.model_parameters['r0']
         init_sigma = 1. / self.model_parameters['incubation_period']
         init_beta = r0 * init_sigma
         init_gamma = 1. / self.model_parameters['infectious_period']
-        initN = dataset['population']
-        initI = dataset[run_day]
-        initE = self.model_parameters.get('initE')
-        if initE is None:
-            initE = initI * self.model_parameters.get('EbyIRation')
-        initR = dataset['recovered_count']
+        confirmed_dataset = region_observations[region_observations.observation == ForecastVariable.confirmed.name].iloc[0]
+        initN = region_metadata.get("population")
+        initI = confirmed_dataset[run_day] * self.model_parameters.get('IbyCRatio')  ##TODO: this goes into if loop when we start with seed
+        initR = confirmed_dataset[run_day] * self.model_parameters.get('RbyCRatio')
+        if self._is_tuning:
+            initE = confirmed_dataset[run_day] * self.model_parameters.get('EbyCRatio')
+        else:
+            initE = confirmed_dataset[run_day] * self.model_parameters.get('LatentEByCRatio').get(run_day)
+
         estimator = SEIRSModel(beta=init_beta, sigma=init_sigma, gamma=init_gamma, initN=initN, initI=initI,
                                initE=initE, initR=initR)
         estimator.run(T=n_days, verbose=False)
 
-        predicted_ts = self.alignTimeSeries(estimator.numI, estimator.tseries, run_day, n_days)
+        predicted_ts = self.alignTimeSeries(estimator.numI, estimator.tseries, run_day, n_days, ForecastVariable.active.name)
         recovered_ts = self.alignTimeSeries(estimator.numR * (1 - self.F_fatalities), estimator.tseries, run_day,
                                             n_days, ForecastVariable.recovered.name)
         fatalities_ts = self.alignTimeSeries(estimator.numR * self.F_fatalities, estimator.tseries, run_day, n_days,
                                              ForecastVariable.deceased.name)
-        region_row = self.convert_dataframe(dataset, run_day, n_days, "actual" + "_" + ForecastVariable.active.name)
-        data_frames = [region_row, predicted_ts, recovered_ts, fatalities_ts]
+        hospitalized_ts = self.alignTimeSeries(estimator.numI * self.F_hospitalization, estimator.tseries, run_day,
+                                               n_days,
+                                               ForecastVariable.hospitalized.name)
+        exposed_ts = self.alignTimeSeries(estimator.numE, estimator.tseries, run_day, n_days,
+                                          ForecastVariable.exposed.name)
+        num_confirmed = [estimator.numI[i] + estimator.numR[i] for i in range(len(estimator.numI))]
+        confirmed_ts = self.alignTimeSeries(num_confirmed, estimator.tseries, run_day, n_days,
+                                            ForecastVariable.confirmed.name)
+        region_row = self.convert_dataframe(confirmed_dataset, run_day, n_days, "actual" + "_" + ForecastVariable.confirmed.name)
+        data_frames = [region_row, exposed_ts, predicted_ts, recovered_ts, fatalities_ts, confirmed_ts, hospitalized_ts]
         result = reduce(lambda left, right: pd.merge(left, right, on=['date'], how='inner'), data_frames)
         result = result.dropna()
         return result

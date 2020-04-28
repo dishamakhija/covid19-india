@@ -1,0 +1,17 @@
+Input Data:
+Format => sharath has shared
+invoke_seir => data format
+for a particular region, give all variables of that region
+
+#train, forecast => data will be pushed externally...don't need to fetch from API...
+
+##translation logic in data-fetcher, hospitalized => hospitalized, active => hospitalized
+
+## output format => Sharath to confirm on this
+
+
+## train part => run_day should be start_date -1
+
+
+
+##error handling

@@ -1,14 +1,20 @@
 {
-  "region_name": "Bengaluru",
+  "region_name": "bengaluru",
+  "region_type": "district",
   "run_day": "3/22/20",
   "test_start_date": "4/1/20",
   "test_end_date": "4/22/20",
   "model_class": "SEIR",
   "model_parameters": {
     "EbyIRation": 3.07,
+    "IbyCRatio": 1,
     "infectious_period": 9.5412,
     "r0": 2.4091,
-    "incubation_period": 6
+    "incubation_period": 6,
+    "LatentEByCRatio": {
+      "3/22/20": 19.692374309340906,
+      "4/1/20": 0.5781344247805147
+    }
   },
   "loss_functions": [
     {
@@ -18,8 +24,7 @@
           "variable": "active",
           "weight": 1
         }
-      ],
-      "optimize": true
+      ]
     },
     {
       "metric_name": "rmse",
