@@ -5,12 +5,12 @@
   "test_start_date": "4/1/20",
   "test_end_date": "4/22/20",
   "model_class": "SEIR",
-  "model_parameters": {
-    "EbyIRation": 3.07,
-    "IbyCRatio": 1,
+"model_parameters": {
     "infectious_period": 9.5412,
-    "r0": 2.4091,
     "incubation_period": 6,
+    "IbyCRatio": 0.59,
+    "RbyCRatio": 0.41,
+    "r0": 2.4091,
     "LatentEByCRatio": {
       "3/22/20": 19.692374309340906,
       "4/1/20": 0.5781344247805147
@@ -21,7 +21,7 @@
       "metric_name": "mape",
       "variable_weights": [
         {
-          "variable": "active",
+          "variable": "confirmed",
           "weight": 1
         }
       ]
@@ -30,7 +30,7 @@
       "metric_name": "rmse",
       "variable_weights": [
         {
-          "variable": "active",
+          "variable": "confirmed",
           "weight": 1
         }
       ]
