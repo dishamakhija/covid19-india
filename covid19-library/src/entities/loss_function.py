@@ -2,8 +2,8 @@ from typing import List
 
 from pydantic import BaseModel
 
-from src.entities.forecast_variables import ForecastVariable
-from src.entities.metric_name import MetricName
+from entities.forecast_variables import ForecastVariable
+from entities.metric_name import MetricName
 
 
 class VariableWeight(BaseModel):

@@ -9,6 +9,15 @@
             }
         },
         {
+            "region_type":"district",        
+            "region_name":"ahmadabad",
+            "metadata":{
+                "population":7868633
+                
+            }
+        },
+        
+        {
             "region_type":"district",
             "region_name":"pune",
             "metadata":{

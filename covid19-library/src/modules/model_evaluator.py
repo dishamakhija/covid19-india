@@ -1,13 +1,13 @@
 from typing import List
 
-from src.configs.base_config import ModelEvaluatorConfig
-from src.entities.loss_function import LossFunction
-from src.entities.model_class import ModelClass
-from src.model_wrappers.model_factory import ModelFactory
-from src.modules.data_fetcher_module import DataFetcherModule
-from src.utils import metrics_util
+from configs.base_config import ModelEvaluatorConfig
+from entities.loss_function import LossFunction
+from entities.model_class import ModelClass
+from model_wrappers.model_factory import ModelFactory
+from modules.data_fetcher_module import DataFetcherModule
+from utils import metrics_util
 import json
-from src.utils.config_util import read_config_file
+from utils.config_util import read_config_file
 
 
 class ModelEvaluator(object):

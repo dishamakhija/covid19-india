@@ -1,8 +1,8 @@
 from datetime import timedelta, datetime
 from functools import reduce
 
-from src.entities.forecast_variables import ForecastVariable
-from src.model_wrappers.base import ModelWrapperBase
+from entities.forecast_variables import ForecastVariable
+from model_wrappers.base import ModelWrapperBase
 import pandas as pd
 from seirsplus.models import *
 
@@ -47,10 +47,16 @@ class SEIR(ModelWrapperBase):
         n_days = (datetime.strptime(end_date, "%m/%d/%y") - datetime.strptime(run_day, "%m/%d/%y")).days + 1
         prediction_dataset = self.run(region_observations, region_metadata, run_day, n_days)
         params = dict()
-        params['LatentEByCRatio'] = dict()
-        params['LatentEByCRatio'][run_day] = self.model_parameters.get("EbyCRatio")
+        params['latent_params'] = dict()
+        params['latent_params']['LatentEbyCRatio'] = dict()
+        params['latent_params']['LatentEbyCRatio'][run_day] = self.model_parameters.get("EbyCRatio")
         ed = prediction_dataset[prediction_dataset['date'] == end_date]
-        params['LatentEByCRatio'][end_date] = float(ed[ForecastVariable.exposed.name]) / float(
+        params['latent_params']['LatentEbyCRatio'][end_date] = float(ed[ForecastVariable.exposed.name]) / float(
+            ed[ForecastVariable.confirmed.name])
+        params['latent_params']['LatentIbyCRatio'] = dict()
+        params['latent_params']['LatentIbyCRatio'][run_day] = self.model_parameters.get("IbyCRatio")
+        ed = prediction_dataset[prediction_dataset['date'] == end_date]
+        params['latent_params']['LatentIbyCRatio'][end_date] = float(ed[ForecastVariable.active.name]) / float(
             ed[ForecastVariable.confirmed.name])
         return params
 
@@ -61,12 +67,14 @@ class SEIR(ModelWrapperBase):
         init_gamma = 1. / self.model_parameters['infectious_period']
         confirmed_dataset = region_observations[region_observations.observation == ForecastVariable.confirmed.name].iloc[0]
         initN = region_metadata.get("population")
-        initI = confirmed_dataset[run_day] * self.model_parameters.get('IbyCRatio')  ##TODO: this goes into if loop when we start with seed
-        initR = confirmed_dataset[run_day] * self.model_parameters.get('RbyCRatio')
         if self._is_tuning:
             initE = confirmed_dataset[run_day] * self.model_parameters.get('EbyCRatio')
+            initI = confirmed_dataset[run_day] * self.model_parameters.get('IbyCRatio')
+            initR = confirmed_dataset[run_day] * (1 - self.model_parameters.get('IbyCRatio'))
         else:
-            initE = confirmed_dataset[run_day] * self.model_parameters.get('LatentEByCRatio').get(run_day)
+            initE = confirmed_dataset[run_day] * self.model_parameters.get('LatentEbyCRatio').get(run_day)
+            initI = confirmed_dataset[run_day] * self.model_parameters.get('LatentIbyCRatio').get(run_day)
+            initR = confirmed_dataset[run_day] * (1 - self.model_parameters.get('LatentIbyCRatio').get(run_day))
 
         estimator = SEIRSModel(beta=init_beta, sigma=init_sigma, gamma=init_gamma, initN=initN, initI=initI,
                                initE=initE, initR=initR)
