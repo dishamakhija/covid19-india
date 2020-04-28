@@ -23,7 +23,7 @@ class ForecastingModule(object):
                            forecast_end_date, model_parameters):
         observations = DataFetcherModule.get_observations_for_region(region_type, region_name)
         region_metadata = DataFetcherModule.get_regional_metadata(region_type, region_name)
-        prediction_df = self.predict(region_type, region_name, region_metadata, observations, run_day, forecast_start_date,
+        predictions_df = self.predict(region_type, region_name, region_metadata, observations, run_day, forecast_start_date,
                             forecast_end_date)
         dates = predictions_df['date']
         preddf = predictions_df.set_index('date')
