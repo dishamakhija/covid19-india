@@ -1,0 +1,129 @@
+{
+	"regional_model_params": [{
+			"region_name": "bengaluru",
+			"region_type": "district",
+			"model_name": "SEIR",
+			"model_parameters": {
+				"EbyCRatio": 0.518754725345212,
+				"IbyCRatio": 0.9253497785591837,
+				"infectious_period": 1.17922843495018,
+				"incubation_period": 5,
+				"r0": 0.5970526229197348,
+				"LatentEbyCRatio": {
+					"4/15/20": 0.518754725345212,
+					"4/27/20": 0.07717399825771437
+				},
+				"LatentIbyCRatio": {
+					"4/15/20": 0.9253497785591837,
+					"4/27/20": 0.02268673204433395
+				},
+				"MAPE": 12.963666426755314
+			}
+		},
+		{
+			"region_name": "pune",
+			"region_type": "district",
+			"model_name": "SEIR",
+			"model_parameters": {
+				"EbyCRatio": 0.8391673955347325,
+				"IbyCRatio": 0.8627192416226671,
+				"infectious_period": 3.0075510221474486,
+				"incubation_period": 5,
+				"r0": 1.3014787171539706,
+				"LatentEbyCRatio": {
+					"4/12/20": 0.8391673955347325,
+					"4/27/20": 0.28141266638187024
+				},
+				"LatentIbyCRatio": {
+					"4/12/20": 0.8627192416226671,
+					"4/27/20": 0.18610391380056782
+				},
+				"MAPE": 9.546180761187406
+			}
+		},
+		{
+			"region_name": "delhi",
+			"region_type": "state",
+			"model_name": "SEIR",
+			"model_parameters": {
+				"EbyCRatio": 0.5205647205832143,
+				"IbyCRatio": 0.8001501389207597,
+				"infectious_period": 4.2137672215046384,
+				"incubation_period": 5,
+				"r0": 0.5063559840693393,
+				"LatentEbyCRatio": {
+					"4/16/20": 0.5205647205832143,
+					"4/27/20": 0.15181337911660184
+				},
+				"LatentIbyCRatio": {
+					"4/16/20": 0.8001501389207597,
+					"4/27/20": 0.1897704481253732
+				},
+				"MAPE": 4.033282577933056
+			}
+		},
+		{
+			"region_name": "ahmadabad",
+			"region_type": "district",
+			"model_name": "SEIR",
+			"model_parameters": {
+				"EbyCRatio": 1.6165877116005674,
+				"IbyCRatio": 0.8201289241010219,
+				"infectious_period": 4.076799289914066,
+				"incubation_period": 5,
+				"r0": 1.349171506829014,
+				"LatentEbyCRatio": {
+					"4/16/20": 1.6165877116005674,
+					"4/27/20": 0.38098831704806096
+				},
+				"LatentIbyCRatio": {
+					"4/16/20": 0.8201289241010219,
+					"4/27/20": 0.29642658474819833
+				},
+				"MAPE": 28.04766431808713
+			}
+		},
+		{
+			"region_name": "jaipur",
+			"region_type": "district",
+			"model_type": "SEIR",
+			"model_parameters": {
+				"EbyCRatio": 0.5126643424904549,
+				"IbyCRatio": 0.9638377463258209,
+				"infectious_period": 1.2516589369245767,
+				"incubation_period": 5,
+				"r0": 0.7338964672430808,
+				"LatentEbyCRatio": {
+					"4/16/20": 0.5126643424904549,
+					"4/27/20": 0.08816336796197033
+				},
+				"LatentIbyCRatio": {
+					"4/16/20": 0.9638377463258209,
+					"4/27/20": 0.027481957361153317
+				},
+				"MAPE": 8.118534476068776
+			}
+		},
+		{
+			"region_name": "mumbai",
+			"region_type": "district",
+			"model_type": "SEIR",
+			"model_parameters": {
+				"EbyCRatio": 0.6796029970321685,
+				"IbyCRatio": 0.9013094698383735,
+				"infectious_period": 2.315362931328839,
+				"incubation_period": 5,
+				"r0": 0.8910841312479598,
+				"LatentEbyCRatio": {
+					"4/12/20": 0.6796029970321685,
+					"4/27/20": 0.16539212042674484
+				},
+				"LatentIbyCRatio": {
+					"4/12/20": 0.9013094698383735,
+					"4/27/20": 0.09915634691289747
+				},
+				"MAPE": 11.216738759382539
+			}
+		}
+	]
+}

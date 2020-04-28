@@ -60,6 +60,13 @@
             }
         },
         {
+            "region_type":"district",
+            "region_name":"jaipur",
+            "metadata":{
+                "population":	3046189
+            }
+        },
+        {
             "region_type":"state",
             "region_name":"west bengal",
             "metadata":{
