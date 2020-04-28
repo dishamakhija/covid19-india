@@ -39,7 +39,7 @@ class ForecastingModule(object):
             newSeries = series.multiply((1+error))
             newSeries['prediction_type'] = col+'_max'
             preddf = preddf.append(newSeries, ignore_index = True)
-            preddf.rename(columns = {col: col+'_mean'})
+            preddf = preddf.rename(columns = {col: col+'_mean'})
         preddf.insert(0, 'Province/State', region_name)
         preddf.insert(1, 'Country/Region', 'India')
         preddf.insert(2, 'Lat', 20)
