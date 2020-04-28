@@ -27,11 +27,16 @@ class ForecastingModule(object):
                             forecast_end_date)
         dates = predictions_df['date']
         preddf = predictions_df.set_index('date')
+        columns = [ForecastVariable.active.name, ForecastVariable.hospitalized.name, ForecastVariable.icu.name,
+            ForecastVariable.recovered.name, ForecastVariable.deceased.name, ForecastVariable.confirmed.name]
+        for col in columns:
+            preddf = preddf.rename(columns = {col: col+'_mean'})
         preddf = preddf.transpose().reset_index()
         preddf = preddf.rename(columns = {"index": "prediction_type", })
         error = float(model_parameters['MAPE'])/100
         for col in [ForecastVariable.active.name, ForecastVariable.hospitalized.name, ForecastVariable.icu.name,
-            ForecastVariable.recovered.name, ForecastVariable.deceased.name, ForecastVariable.confirmed.name]:    
+            ForecastVariable.recovered.name, ForecastVariable.deceased.name, ForecastVariable.confirmed.name]:
+            col = col+'_mean'
             series = preddf[preddf['prediction_type'] == col][dates]
             newSeries = series.multiply((1-error))
             newSeries['prediction_type'] = col+'_min'
