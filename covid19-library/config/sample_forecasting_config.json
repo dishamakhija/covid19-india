@@ -8,12 +8,16 @@
   "model_parameters": {
     "infectious_period": 9.5412,
     "incubation_period": 6,
-    "IbyCRatio": 0.59,
-    "RbyCRatio": 0.41,
+    "EbyCRatio": 0.69906,
+     "IbyCRatio": 0.78, 
     "r0": 2.4091,
-    "LatentEByCRatio": {
-      "3/22/20": 19.692374309340906,
+    "LatentEbyCRatio": {
+      "3/22/20": 0.69906,
       "4/1/20": 0.5781344247805147
+    },
+    "LatentIbyCRatio": {
+      "3/22/20": 0.78,
+      "4/1/20": 0.7781344247805147
     }
   },
   "forecast_variables": [
