@@ -32,8 +32,8 @@ class ModelEvaluator(object):
             for variable_weight in loss_function.variable_weights:
                 variable_name = variable_weight.variable.name
                 value += variable_weight.weight * (
-                    getattr(metrics_util, loss_function.metric_name.name)(forecast_df["actual_" + variable_name],
-                                                                          forecast_df[variable_name]))
+                    getattr(metrics_util, loss_function.metric_name.name)(forecast_df["actual_" + variable_name].values,
+                                                                          forecast_df[variable_name].values))
             loss_function.value = value
             metrics_results.append(loss_function.dict())
         return metrics_results

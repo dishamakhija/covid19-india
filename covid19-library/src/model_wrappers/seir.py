@@ -31,11 +31,12 @@ class SEIR(ModelWrapperBase):
         n_days = (datetime.strptime(end_date, "%m/%d/%y") - datetime.strptime(run_day, "%m/%d/%y")).days + 1
         prediction_dataset = self.run(region_observations, region_metadata, run_day, n_days)
         date_list = list(pd.date_range(start=start_date, end=end_date).strftime("%-m/%-d/%y"))
-        recovered_data = region_observations[region_observations.observation == ForecastVariable.recovered.name].iloc[0]
-        recovered_dataset = self.convert_dataframe(recovered_data, run_day, n_days,
-                                                   "actual_" + ForecastVariable.recovered)
         prediction_dataset = prediction_dataset[prediction_dataset.date.isin(date_list)]
-        prediction_dataset = pd.merge(prediction_dataset, recovered_dataset, left_on="date", right_on="date")
+        recovered_data = region_observations[region_observations.observation == ForecastVariable.recovered.name]
+        if recovered_data.shape[0] > 0:
+            recovered_dataset = self.convert_dataframe(recovered_data.iloc[0], run_day, n_days,
+                                                   "actual_" + ForecastVariable.recovered)
+            prediction_dataset = pd.merge(prediction_dataset, recovered_dataset, left_on="date", right_on="date")
         return prediction_dataset
 
     def is_black_box(self):
