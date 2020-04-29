@@ -1,1 +1,39 @@
-{"best_params": {"EbyCRatio": 1.796719883665716, "r0": 3.3578723602305725}, "best_loss": 13.16494564397441, "latent_params": {"LatentEbyCRatio": {"3/21/20": 1.796719883665716, "4/1/20": 1.0498273926834085}, "LatentIbyCRatio": {"3/21/20": 0.59, "4/1/20": 0.633372545986624}}, "train_metric_results": [{"metric_name": "mape", "variable_weights": [{"variable": "confirmed", "weight": 1.0}], "value": 13.16494564397441}, {"metric_name": "rmse", "variable_weights": [{"variable": "confirmed", "weight": 1.0}], "value": 12.099559374871095}]}
+{
+    "best_params": {
+        "EbyCRatio": 1.796719883665716,
+        "r0": 3.3578723602305725
+    },
+    "best_loss": 13.16494564397441,
+    "latent_params": {
+        "LatentEbyCRatio": {
+            "3/21/20": 1.796719883665716,
+            "4/1/20": 1.0498273926834085
+        },
+        "LatentIbyCRatio": {
+            "3/21/20": 0.59,
+            "4/1/20": 0.633372545986624
+        }
+    },
+    "train_metric_results": [
+        {
+            "metric_name": "mape",
+            "variable_weights": [
+                {
+                    "variable": "confirmed",
+                    "weight": 1.0
+                }
+            ],
+            "value": 13.16494564397441
+        },
+        {
+            "metric_name": "rmse",
+            "variable_weights": [
+                {
+                    "variable": "confirmed",
+                    "weight": 1.0
+                }
+            ],
+            "value": 12.099559374871095
+        }
+    ]
+}
