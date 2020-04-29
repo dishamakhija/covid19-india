@@ -1,10 +1,11 @@
+import pandas as pd
 from model_wrappers.base import ModelWrapperBase
 
 
 class SEIR_Testing(ModelWrapperBase):
 
-	def __init__(self):
-		pass
+    def __init__(self):
+        pass
 
     def supported_forecast_variables(self):
         pass
