@@ -22,7 +22,6 @@ class SEIR(ModelWrapperBase):
     def supported_forecast_variables(self):
         return [ForecastVariable.confirmed, ForecastVariable.recovered, ForecastVariable.active]
 
-
     def predict(self, region_metadata: dict, region_observations: pd.DataFrame, run_day: str, start_date: str,
                 end_date: str, **kwargs):
         search_space = kwargs.get("search_space", {})
@@ -32,11 +31,6 @@ class SEIR(ModelWrapperBase):
         prediction_dataset = self.run(region_observations, region_metadata, run_day, n_days)
         date_list = list(pd.date_range(start=start_date, end=end_date).strftime("%-m/%-d/%y"))
         prediction_dataset = prediction_dataset[prediction_dataset.date.isin(date_list)]
-        recovered_data = region_observations[region_observations.observation == ForecastVariable.recovered.name]
-        if recovered_data.shape[0] > 0:
-            recovered_dataset = self.convert_dataframe(recovered_data.iloc[0], run_day, n_days,
-                                                   "actual_" + ForecastVariable.recovered)
-            prediction_dataset = pd.merge(prediction_dataset, recovered_dataset, left_on="date", right_on="date")
         return prediction_dataset
 
     def is_black_box(self):
@@ -66,7 +60,8 @@ class SEIR(ModelWrapperBase):
         init_sigma = 1. / self.model_parameters['incubation_period']
         init_beta = r0 * init_sigma
         init_gamma = 1. / self.model_parameters['infectious_period']
-        confirmed_dataset = region_observations[region_observations.observation == ForecastVariable.confirmed.name].iloc[0]
+        confirmed_dataset = \
+            region_observations[region_observations.observation == ForecastVariable.confirmed.name].iloc[0]
         initN = region_metadata.get("population")
         if self._is_tuning:
             initE = confirmed_dataset[run_day] * self.model_parameters.get('EbyCRatio')
@@ -74,7 +69,7 @@ class SEIR(ModelWrapperBase):
             initR = confirmed_dataset[run_day] * (1 - self.model_parameters.get('IbyCRatio'))
         else:
             pick_day = run_day
-            while(not pick_day in self.model_parameters.get('LatentEbyCRatio')):
+            while (not pick_day in self.model_parameters.get('LatentEbyCRatio')):
                 pick_day = (datetime.strptime(pick_day, "%m/%d/%y") - timedelta(days=1)).strftime("%-m/%-d/%y")
             initE = confirmed_dataset[run_day] * self.model_parameters.get('LatentEbyCRatio').get(pick_day)
             initI = confirmed_dataset[run_day] * self.model_parameters.get('LatentIbyCRatio').get(pick_day)
@@ -84,7 +79,8 @@ class SEIR(ModelWrapperBase):
                                initE=initE, initR=initR)
         estimator.run(T=n_days, verbose=False)
 
-        predicted_ts = self.alignTimeSeries(estimator.numI, estimator.tseries, run_day, n_days, ForecastVariable.active.name)
+        predicted_ts = self.alignTimeSeries(estimator.numI, estimator.tseries, run_day, n_days,
+                                            ForecastVariable.active.name)
         recovered_ts = self.alignTimeSeries(estimator.numR * (1 - self.F_fatalities), estimator.tseries, run_day,
                                             n_days, ForecastVariable.recovered.name)
         fatalities_ts = self.alignTimeSeries(estimator.numR * self.F_fatalities, estimator.tseries, run_day, n_days,
@@ -97,27 +93,11 @@ class SEIR(ModelWrapperBase):
         num_confirmed = [estimator.numI[i] + estimator.numR[i] for i in range(len(estimator.numI))]
         confirmed_ts = self.alignTimeSeries(num_confirmed, estimator.tseries, run_day, n_days,
                                             ForecastVariable.confirmed.name)
-        region_row = self.convert_dataframe(confirmed_dataset, run_day, n_days, "actual" + "_" + ForecastVariable.confirmed.name)
-        data_frames = [region_row, exposed_ts, predicted_ts, recovered_ts, fatalities_ts, confirmed_ts, hospitalized_ts]
+        data_frames = [exposed_ts, predicted_ts, recovered_ts, fatalities_ts, confirmed_ts, hospitalized_ts]
         result = reduce(lambda left, right: pd.merge(left, right, on=['date'], how='inner'), data_frames)
         result = result.dropna()
         return result
 
-    def convert_dataframe(self, region_timeseries_df, run_day, n_days, column_name):
-        dates_str = [(datetime.strptime(run_day, "%m/%d/%y") + timedelta(days=x)).strftime(format="%-m/%-d/%y").strip()
-                     for x in range(n_days)]
-        df = pd.DataFrame(region_timeseries_df[dates_str])
-        df.columns = [column_name]
-        df = df.reset_index()
-        df = df.rename(columns={'index': 'date'})
-        return df
-
-    ##TODO: need to check this with harsh
-    #### Since the model outputs a different format than the CSSEGISandData, we need to align them
-    #### which means - finding the appropriate prediction for the model for a particular date
-    ### modelI - Time Series Prediction output by model (model.numI)
-    ### modelT - Time Series of the model (model.tseries)
-    ### dates  - dates in the true file that we have from CSSEGISandData - datetime object
     def alignTimeSeries(self, modelI, modelT, run_day, n_days, column_name=ForecastVariable.active.name):
         dates = [datetime.strptime(run_day, "%m/%d/%y") + timedelta(days=x) for x in range(n_days)]
         model_predictions = []

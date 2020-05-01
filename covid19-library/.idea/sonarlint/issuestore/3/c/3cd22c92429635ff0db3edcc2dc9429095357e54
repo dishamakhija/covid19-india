@@ -1,3 +1,6 @@
 
-†python:S1542¸"hRename function "_load_regional_metadata_from_S3" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(Çğ†Íıÿÿÿÿ
+Qpython:S1481"1Remove the unused local variable "region_params".(ñ¤Š”8Õø¨àœ.
+Wpython:S1481‡"7Remove the unused local variable "region_observations".(³˜‹Ñ8Õø¨àœ.
 spython:S117f"]Rename this local variable "regionParams" to match the regular expression ^[_a-z][a-z0-9_]*$.(¼Ğï0
+†python:S1542¼"hRename function "_load_regional_metadata_from_S3" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(Çğ†Íıÿÿÿÿ
+Qpython:S1481ˆ",Remove the unused local variable "switcher".(çƒÖËøÿÿÿÿ8Õø¨àœ.

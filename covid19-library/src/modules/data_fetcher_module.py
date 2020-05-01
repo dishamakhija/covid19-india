@@ -36,15 +36,16 @@ HOSPITALIZED = "hospitalized"
 ACTIVE = "active"
 
 
+# if variable == ACTIVE:
+#     df = _get_covid_ts(raw_data, region[0], region[1], HOSPITALIZED)  ## we are adding row for active as hospitalized
+# else:
+
 def load_observations_data():
     raw_data = get_raw_data_dict(raw_data_url)["raw_data"]
     df_list = []
     for region in [(INPUT_DISTRICT_FIELD, DISTRICT), (INPUT_CITY_FIELD, CITY), (INPUT_STATE_FIELD, STATE)]:
-        for variable in [CONFIRMED, HOSPITALIZED, RECOVERED, DECEASED, ACTIVE]:
-            if variable == ACTIVE:
-                df = _get_covid_ts(raw_data, region[0], region[1], HOSPITALIZED)  ## we are adding row for active as hospitalized
-            else:
-                df = _get_covid_ts(raw_data, region[0], region[1], variable)
+        for variable in [CONFIRMED, HOSPITALIZED, RECOVERED, DECEASED]:
+            df = _get_covid_ts(raw_data, region[0], region[1], variable)
             df_list.append(df)
     merged_df = pd.concat(df_list)
     merged_df.reset_index(inplace=True)
