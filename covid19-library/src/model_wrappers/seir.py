@@ -76,7 +76,7 @@ class SEIR(ModelWrapperBase):
                     return
                 else:
                     self.model_parameters['key'] = 
-                                            self.model_parameters['key']*fraction*(1+intervention['effects']['params'][key])
+                                            self.model_parameters['key'](1+fraction*intervention['effects']['params'][key])
                     
                     
                     
