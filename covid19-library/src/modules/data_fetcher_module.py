@@ -16,11 +16,14 @@ logger.setLevel(logging.INFO)
 
 # raw input data from cocvid19india.org
 raw_data_url = "https://api.covid19india.org/raw_data.json"
+raw_data_urls = ["https://api.covid19india.org/raw_data1.json", "https://api.covid19india.org/raw_data2.json"]
+post_april27_url = "https://api.covid19india.org/raw_data3.json"
 INPUT_STATE_FIELD = "detectedstate"
 INPUT_DISTRICT_FIELD = "detecteddistrict"
 INPUT_CITY_FIELD = "detectedcity"
 INPUT_DATE_ANNOUNCED_FIELD = "dateannounced"
 INPUT_STATUS_CHANGE_DATE_FIELD = "statuschangedate"
+NUM_CASES = 'numcases'
 
 # column headers and static strings used in output CSV
 REGION_TYPE = "region_type"
@@ -36,19 +39,19 @@ HOSPITALIZED = "hospitalized"
 ACTIVE = "active"
 
 
-# if variable == ACTIVE:
-#     df = _get_covid_ts(raw_data, region[0], region[1], HOSPITALIZED)  ## we are adding row for active as hospitalized
-# else:
-
 def load_observations_data():
-    raw_data = get_raw_data_dict(raw_data_url)["raw_data"]
+    raw_data = []
+    for url in raw_data_urls:
+        raw_data.extend(get_raw_data_dict(url)["raw_data"])
+    raw_data_post_april27 = get_raw_data_dict(post_april27_url)["raw_data"]
     df_list = []
     for region in [(INPUT_DISTRICT_FIELD, DISTRICT), (INPUT_CITY_FIELD, CITY), (INPUT_STATE_FIELD, STATE)]:
         for variable in [CONFIRMED, HOSPITALIZED, RECOVERED, DECEASED]:
-            df = _get_covid_ts(raw_data, region[0], region[1], variable)
+            df = _get_covid_ts(raw_data, raw_data_post_april27, region[0], region[1], variable)
             df_list.append(df)
     merged_df = pd.concat(df_list)
     merged_df.reset_index(inplace=True)
+    merged_df.to_csv("observations_latest.csv", index=False)
     return merged_df
 
 
@@ -63,18 +66,28 @@ def get_raw_data_dict(input_url):
         return data_dict
 
 
-def _get_covid_ts(stats, input_region_field, output_region_type_field, variable):
+def _get_covid_ts(stats, stats_post27_april, input_region_field, output_region_type_field, variable):
     if variable == CONFIRMED:
         df = pd.DataFrame \
-            ([(i[input_region_field].lower().replace(',', ''), i[INPUT_DATE_ANNOUNCED_FIELD]) for i in stats])
+            ([(i[input_region_field].lower().replace(',', ''), i[INPUT_DATE_ANNOUNCED_FIELD], 1) for i in stats])
+        district_df_agg = pd.DataFrame(
+            [(i[input_region_field].lower().replace(',', ''), i[INPUT_DATE_ANNOUNCED_FIELD], int(i[NUM_CASES]))
+             for i in stats_post27_april
+             if i['currentstatus'].lower() == HOSPITALIZED and NUM_CASES in i and i[NUM_CASES] != ''])
+        df = df.append(district_df_agg)
     else:
         df = pd.DataFrame(
-            [(i[input_region_field].lower().replace(',', ''), i[INPUT_STATUS_CHANGE_DATE_FIELD]) for i in stats if
+            [(i[input_region_field].lower().replace(',', ''), i[INPUT_STATUS_CHANGE_DATE_FIELD], 1) for i in stats if
              i['currentstatus'].lower() == variable])
-    df.columns = [REGION_NAME, 'date']
+        district_df_agg = pd.DataFrame(
+            [(i[input_region_field].lower().replace(',', ''), i[INPUT_DATE_ANNOUNCED_FIELD], int(i[NUM_CASES]))
+             for i in stats_post27_april
+             if i['currentstatus'].lower() == variable and NUM_CASES in i and i[NUM_CASES] != ''])
+        df = df.append(district_df_agg)
+    df.columns = [REGION_NAME, 'date', 'counts']
     date_list = pd.date_range(start="2020-01-22", end=datetime.today()).strftime("%d/%m/%Y")
-    df_pivot = pd.pivot_table(df, values=REGION_NAME, index=[REGION_NAME], columns=['date']
-                              , aggfunc={REGION_NAME: np.count_nonzero}, fill_value=0)
+    df_pivot = pd.pivot_table(df, values='counts', index=[REGION_NAME], columns=['date']
+                              , aggfunc={'counts': np.sum}, fill_value=0)
     df_pivot_dated = df_pivot.reindex(date_list, axis=1).fillna(0)
     df_final = df_pivot_dated.cumsum(axis=1)
     df_final.insert(0, REGION_TYPE, output_region_type_field)
@@ -101,3 +114,7 @@ class DataFetcherModule(object):
         for params in metadata["regional_metadata"]:
             if params["region_type"] == region_type and params["region_name"] == region_name:
                 return params["metadata"]
+
+
+if __name__ == "__main__":
+    DataFetcherModule.get_observations_for_region("district", "bengaluru")
