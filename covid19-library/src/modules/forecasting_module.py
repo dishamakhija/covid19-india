@@ -19,7 +19,7 @@ class ForecastingModule(object):
         predictions_df = self._model.predict(region_metadata, region_observations, run_day, forecast_start_date,
                                              forecast_end_date)
         predictions_df = self.convert_to_required_format(predictions_df, region_type, region_name)
-        return predictions_df
+        return predictions_df.to_json()
 
     def convert_to_required_format(self, predictions_df, region_type, region_name):
         dates = predictions_df['date']
@@ -52,10 +52,9 @@ class ForecastingModule(object):
                            forecast_end_date):
         observations = DataFetcherModule.get_observations_for_region(region_type, region_name)
         region_metadata = DataFetcherModule.get_regional_metadata(region_type, region_name)
-        predictions_df = self.predict(region_type, region_name, region_metadata, observations, run_day,
-                                      forecast_start_date,
-                                      forecast_end_date)
-        return predictions_df
+        return self.predict(region_type, region_name, region_metadata, observations, run_day,
+                            forecast_start_date,
+                            forecast_end_date)
 
     @staticmethod
     def from_config_file(config_file_path):
