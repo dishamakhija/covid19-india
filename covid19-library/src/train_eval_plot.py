@@ -268,7 +268,6 @@ def main(region=None, region_type=None, forecast_end_date=None):
 
     forecast_run_day = (t - timedelta(1)).strftime("%-m/%-d/%y")
     forecast_start_date = t.strftime("%-m/%-d/%y")
-    forecast_end_date = '6/21/20'
 
     name_prefix = "{}_{}".format(region, region_type)
 
