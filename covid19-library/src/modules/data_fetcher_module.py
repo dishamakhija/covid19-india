@@ -17,7 +17,7 @@ logger.setLevel(logging.INFO)
 # raw input data from cocvid19india.org
 raw_data_url = "https://api.covid19india.org/raw_data.json"
 raw_data_urls = ["https://api.covid19india.org/raw_data1.json", "https://api.covid19india.org/raw_data2.json"]
-post_april27_url = "https://api.covid19india.org/raw_data3.json"
+post_april27_urls = ["https://api.covid19india.org/raw_data3.json","https://api.covid19india.org/raw_data4.json"]
 INPUT_STATE_FIELD = "detectedstate"
 INPUT_DISTRICT_FIELD = "detecteddistrict"
 INPUT_CITY_FIELD = "detectedcity"
@@ -43,7 +43,9 @@ def load_observations_data():
     raw_data = []
     for url in raw_data_urls:
         raw_data.extend(get_raw_data_dict(url)["raw_data"])
-    raw_data_post_april27 = get_raw_data_dict(post_april27_url)["raw_data"]
+    raw_data_post_april27 = []
+    for url in post_april27_urls:
+        raw_data_post_april27.extend(get_raw_data_dict(url)["raw_data"])
     df_list = []
     for region in [(INPUT_DISTRICT_FIELD, DISTRICT), (INPUT_CITY_FIELD, CITY), (INPUT_STATE_FIELD, STATE)]:
         for variable in [CONFIRMED, HOSPITALIZED, RECOVERED, DECEASED]:
