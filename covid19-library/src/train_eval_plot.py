@@ -251,6 +251,7 @@ def train_eval_plot(configs, region, region_type,
                                                test_run_day, test_start_date, test_end_date, 
                                                max_evals, data_source, 
                                                mlflow_log, name_prefix)
+    # pdb.set_trace()
     model_params['model_parameters']['incubation_period'] = 5
     plot(configs, model_params, forecast_run_day, forecast_start_date, 
          forecast_end_date, actual_start_date=train1_start_date, plot_name=plot_name)
@@ -261,16 +262,7 @@ def dates_to_str(dates):
         str_dates[date] = dates[date].strftime("%-m/%-d/%y")
     return str_dates
 
-def main(region=None, region_type=None, train2_end_date=None, forecast_end_date=None):
-    raw_data_to_csv(region, region_type)
-    print("forecasting for {}, {} till {}.".format(region, region_type, forecast_end_date))
-
-    configs = dict()
-    with open('train_config.json') as f_train, open('test_config.json') as f_test, open('forecast_config.json') as f_forecast:
-        configs['train'] = json.load(f_train)
-        configs['test'] = json.load(f_test)
-        configs['forecast'] = json.load(f_forecast)
-
+def set_dates(train2_end_date, forecast_end_date):
     t = datetime.now().date()
 
     dates = defaultdict()
@@ -291,9 +283,24 @@ def main(region=None, region_type=None, train2_end_date=None, forecast_end_date=
 
     dates["forecast_start_date"] = dates["test_start_date"]
     dates["forecast_run_day"] = dates["forecast_start_date"] - timedelta(1)
+    dates["forecast_end_date"] = datetime.strptime(forecast_end_date, "%m/%d/%y")
 
     dates = dates_to_str(dates)
     print(dates)
+
+    return dates
+
+def main(region=None, region_type=None, train2_end_date=None, forecast_end_date=None):
+    raw_data_to_csv(region, region_type)
+    print("forecasting for {}, {} till {}.".format(region, region_type, forecast_end_date))
+
+    configs = dict()
+    with open('train_config.json') as f_train, open('test_config.json') as f_test, open('forecast_config.json') as f_forecast:
+        configs['train'] = json.load(f_train)
+        configs['test'] = json.load(f_test)
+        configs['forecast'] = json.load(f_forecast)
+
+    dates = set_dates(train2_end_date, forecast_end_date)
 
     name_prefix = "{}_{}".format(region, region_type)
 
@@ -301,7 +308,7 @@ def main(region=None, region_type=None, train2_end_date=None, forecast_end_date=
                     dates['train1_start_date'], dates['train1_end_date'], 
                     dates['train2_start_date'], dates['train2_end_date'],
                     dates['test_run_day'], dates['test_start_date'], dates['test_end_date'], 
-                    dates['forecast_run_day'], dates['forecast_start_date'], forecast_end_date,
+                    dates['forecast_run_day'], dates['forecast_start_date'], dates["forecast_end_date"],
                     max_evals = 1000, 
                     mlflow_log = False, name_prefix = name_prefix,
                     plot_name = '{}_{}.png'.format(region, forecast_end_date.replace('/', '-')))
