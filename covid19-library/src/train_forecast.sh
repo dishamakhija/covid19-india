@@ -1,7 +1,7 @@
 #!/bin/bash
 ##usage: ./train_forecast.sh <forecast_end_date(m/d/y)>
 
-regions=("pune" "jaipur" "delhi" "mumbai" "bengaluru urban" "ahmedabad")
+regions=("bengaluru urban" "jaipur" "delhi" "mumbai" "pune" "ahmedabad")
 region_types=("district" "district" "state" "district" "district" "district")
 
 rlen=${#regions[@]}

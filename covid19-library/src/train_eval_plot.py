@@ -252,7 +252,9 @@ def train_eval_plot(configs, region, region_type,
                                                test_run_day, test_start_date, test_end_date, 
                                                max_evals, data_source, 
                                                mlflow_log, name_prefix)
-    # pdb.set_trace()
+    metrics_df = pd.DataFrame.from_dict(metrics, orient='index')
+    metrics_df.to_csv("./results/{}_{}_{}_{}_metrics.csv".format(region, region_type, forecast_start_date.replace('/','-'), forecast_end_date.replace('/','-')))
+
     model_params['model_parameters']['incubation_period'] = 5
     plot(configs, model_params, forecast_run_day, forecast_start_date, 
          forecast_end_date, actual_start_date=train1_start_date, plot_name=plot_name)
