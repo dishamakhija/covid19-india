@@ -4,6 +4,7 @@ import json
 import argparse
 import pandas as pd
 import matplotlib.pyplot as plt
+from collections import defaultdict
 
 from copy import deepcopy
 from datetime import datetime, timedelta
@@ -184,13 +185,20 @@ def train_eval(configs,
     
     return params, metrics, model_params
 
-def write_to_csv(predictions, csv_fname):
-    predictions.set_index('index')
-    predictions.to_csv(csv_fname)
-    print("predictions saved to {}".format(csv_fname))
+def write_to_csv(dataframe, csv_fname):
+    dataframe = dataframe.set_index('index')
+    dataframe.to_csv(csv_fname)
+    print("csv saved to {}".format(csv_fname))
+
+def raw_data_to_csv(region, region_type):
+    data = DataFetcherModule.get_observations_for_region(region_type, region)
+    data = data.set_index('observation')
+    data = data.transpose()
+    data = data.reset_index()
+    write_to_csv(data, csv_fname="raw_data_{}_{}.csv".format(region, region_type))
 
 def plot(configs, model_params, run_day, forecast_start_date, forecast_end_date, 
-         test_start_date, plot_name = 'default.png'):
+         actual_start_date, plot_name = 'default.png'):
     evalConfig = ForecastingModuleConfig.parse_obj(configs['forecast'])
     evalConfig.region_name = model_params['region']
     evalConfig.region_type = model_params['region_type']
@@ -205,7 +213,7 @@ def plot(configs, model_params, run_day, forecast_start_date, forecast_end_date,
     pdjson = pdjson.transpose()
     pdjson = pdjson.reset_index()
     pdjson = pdjson[5:]
-    write_to_csv(pdjson, csv_fname="{}_{}_{}.csv".format(model_params['region'], 
+    write_to_csv(pdjson, csv_fname="forecast_{}_{}_{}.csv".format(model_params['region'], 
                                                         forecast_start_date.replace('/','-'), 
                                                         forecast_end_date.replace('/','-')))
 
@@ -213,13 +221,13 @@ def plot(configs, model_params, run_day, forecast_start_date, forecast_end_date,
     actual = actual.set_index('observation')
     actual = actual.transpose()
     actual = actual.reset_index()
-    start = actual.index[actual['index'] == test_start_date].tolist()[0]
+    start = actual.index[actual['index'] == actual_start_date].tolist()[0]
     actual = actual[start : ]
     
     fig, ax = plt.subplots(figsize=(15, 5))
     plt.title(model_params['region'])
-    ax.plot(actual['index'], actual['confirmed'], color='green', label="observation")
-    ax.plot(pdjson['index'], pdjson['confirmed_mean'], color='orange', label="forecast")
+    ax.plot(actual['index'], actual['confirmed'], color='green', label="observed")
+    ax.plot(pdjson['index'], pdjson['confirmed_mean'], color='orange', label="predicted")
     plt.xticks(rotation=90)
     ax.set_ylim(ymin=0)
     ax.legend()
@@ -244,11 +252,18 @@ def train_eval_plot(configs, region, region_type,
                                                mlflow_log, name_prefix)
     model_params['model_parameters']['incubation_period'] = 5
     plot(configs, model_params, forecast_run_day, forecast_start_date, 
-         forecast_end_date, test_start_date, plot_name=plot_name)
+         forecast_end_date, actual_start_date=train1_start_date, plot_name=plot_name)
 
+def dates_to_str(dates):
+    str_dates = dict()
+    for date in dates:
+        str_dates[date] = dates[date].strftime("%-m/%-d/%y")
+    return str_dates
 
-def main(region=None, region_type=None, forecast_end_date=None):
+def main(region=None, region_type=None, train2_end_date=None, forecast_end_date=None):
+    raw_data_to_csv(region, region_type)
     print("forecasting for {}, {} till {}.".format(region, region_type, forecast_end_date))
+
     configs = dict()
     with open('train_config.json') as f_train, open('test_config.json') as f_test, open('forecast_config.json') as f_forecast:
         configs['train'] = json.load(f_train)
@@ -257,26 +272,35 @@ def main(region=None, region_type=None, forecast_end_date=None):
 
     t = datetime.now().date()
 
-    train1_start_date = (t - timedelta(14)).strftime("%-m/%-d/%y")
-    train1_end_date = (t - timedelta(8)).strftime("%-m/%-d/%y")
+    dates = defaultdict()
 
-    train2_start_date = (t - timedelta(7)).strftime("%-m/%-d/%y")
-    train2_end_date = (t - timedelta(1)).strftime("%-m/%-d/%y")
+    dates["train1_start_date"] = (t - timedelta(14))
+    dates["train1_end_date"] = (t - timedelta(8))
 
-    test_start_date = train2_start_date
-    test_end_date = train2_end_date
-    test_run_day = (t - timedelta(8)).strftime("%-m/%-d/%y")
+    if train2_end_date is None:
+        dates["train2_start_date"] = (t - timedelta(7))
+        dates["train2_end_date"] = (t - timedelta(1))
+    else:
+        dates["train2_end_date"] = datetime.strptime(train2_end_date, "%m/%d/%y")
+        dates["train2_start_date"] = dates["train2_end_date"] - timedelta(6)
 
-    forecast_run_day = (t - timedelta(1)).strftime("%-m/%-d/%y")
-    forecast_start_date = t.strftime("%-m/%-d/%y")
+    dates["test_start_date"] = dates['train2_start_date']
+    dates["test_end_date"] = dates['train2_end_date']
+    dates["test_run_day"] = dates["test_start_date"] - timedelta(1)
+
+    dates["forecast_start_date"] = dates["test_start_date"]
+    dates["forecast_run_day"] = dates["forecast_start_date"] - timedelta(1)
+
+    dates = dates_to_str(dates)
+    print(dates)
 
     name_prefix = "{}_{}".format(region, region_type)
 
     train_eval_plot(configs, region, region_type, 
-                    train1_start_date, train1_end_date, 
-                    train2_start_date, train2_end_date,
-                    test_run_day, test_start_date, test_end_date, 
-                    forecast_run_day, forecast_start_date, forecast_end_date,
+                    dates['train1_start_date'], dates['train1_end_date'], 
+                    dates['train2_start_date'], dates['train2_end_date'],
+                    dates['test_run_day'], dates['test_start_date'], dates['test_end_date'], 
+                    dates['forecast_run_day'], dates['forecast_start_date'], forecast_end_date,
                     max_evals = 1000, 
                     mlflow_log = False, name_prefix = name_prefix,
                     plot_name = '{}_{}.png'.format(region, forecast_end_date.replace('/', '-')))
@@ -286,5 +310,7 @@ if __name__ == "__main__":
     parser.add_argument('--region', type=str, required=True, help = 'name of the region for which to get forecasts.')
     parser.add_argument('--region_type', type=str, required=True)
     parser.add_argument('--forecast_end_date', type=str, required=True, help = 'date till which forecast is required (mm-dd-yy)')
+    parser.add_argument('--train2_end_date', type=str, default=None, help = '(optional) date till which train2 will run (mm-dd-yy)')
     (args, _) = parser.parse_known_args()
-    main(args.region, args.region_type, args.forecast_end_date)
+
+    main(region=args.region, region_type=args.region_type, forecast_end_date=args.forecast_end_date, train2_end_date=args.train2_end_date)
