@@ -209,11 +209,12 @@ def plot(configs, model_params, run_day, forecast_start_date, forecast_end_date,
     evalConfig.forecast_end_date = forecast_end_date
     
     pdjson = ForecastingModule.from_config(evalConfig)
-    pdjson = pdjson.set_index('prediction_type')
-    pdjson = pdjson.transpose()
-    pdjson = pdjson.reset_index()
-    pdjson = pdjson[5:]
-    write_to_csv(pdjson, csv_fname="forecast_{}_{}_{}.csv".format(model_params['region'], 
+    pd_df = pd.read_json(pdjson)
+    pd_df = pd_df.set_index('prediction_type')
+    pd_df = pd_df.transpose()
+    pd_df = pd_df.reset_index()
+    pd_df = pd_df[5:]
+    write_to_csv(pd_df, csv_fname="forecast_{}_{}_{}.csv".format(model_params['region'], 
                                                         forecast_start_date.replace('/','-'), 
                                                         forecast_end_date.replace('/','-')))
 
@@ -227,7 +228,7 @@ def plot(configs, model_params, run_day, forecast_start_date, forecast_end_date,
     fig, ax = plt.subplots(figsize=(15, 5))
     plt.title(model_params['region'])
     ax.plot(actual['index'], actual['confirmed'], color='green', label="observed")
-    ax.plot(pdjson['index'], pdjson['confirmed_mean'], color='orange', label="predicted")
+    ax.plot(pd_df['index'], pd_df['confirmed_mean'], color='orange', label="predicted")
     plt.xticks(rotation=90)
     ax.set_ylim(ymin=0)
     ax.legend()
