@@ -314,7 +314,7 @@ def main(region=None, region_type=None, train2_end_date=None, forecast_end_date=
                     dates['forecast_run_day'], dates['forecast_start_date'], dates["forecast_end_date"],
                     max_evals = 1000, 
                     mlflow_log = False, name_prefix = name_prefix,
-                    plot_name = '{}_{}.png'.format(region, forecast_end_date.replace('/', '-')))
+                    plot_name = './results/{}_{}.png'.format(region, forecast_end_date.replace('/', '-')))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = 'Covid forecast', allow_abbrev=False)
