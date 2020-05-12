@@ -248,6 +248,7 @@ def train_eval_plot(configs, region, region_type,
 
 
 def main(region=None, region_type=None, forecast_end_date=None):
+    print("forecasting for {}, {} till {}.".format(region, region_type, forecast_end_date))
     configs = dict()
     with open('train_config.json') as f_train, open('test_config.json') as f_test, open('forecast_config.json') as f_forecast:
         configs['train'] = json.load(f_train)
