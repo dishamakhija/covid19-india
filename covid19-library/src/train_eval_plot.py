@@ -1,3 +1,4 @@
+import os
 import pdb
 import sys
 import json
@@ -195,7 +196,7 @@ def raw_data_to_csv(region, region_type):
     data = data.set_index('observation')
     data = data.transpose()
     data = data.reset_index()
-    write_to_csv(data, csv_fname="raw_data_{}_{}.csv".format(region, region_type))
+    write_to_csv(data, csv_fname="results/raw_data_{}_{}.csv".format(region, region_type))
 
 def plot(configs, model_params, run_day, forecast_start_date, forecast_end_date, 
          actual_start_date, plot_name = 'default.png'):
@@ -214,7 +215,7 @@ def plot(configs, model_params, run_day, forecast_start_date, forecast_end_date,
     pd_df = pd_df.transpose()
     pd_df = pd_df.reset_index()
     pd_df = pd_df[5:]
-    write_to_csv(pd_df, csv_fname="forecast_{}_{}_{}.csv".format(model_params['region'], 
+    write_to_csv(pd_df, csv_fname="results/forecast_{}_{}_{}.csv".format(model_params['region'], 
                                                         forecast_start_date.replace('/','-'), 
                                                         forecast_end_date.replace('/','-')))
 
@@ -243,7 +244,7 @@ def train_eval_plot(configs, region, region_type,
                     forecast_run_day, forecast_start_date, forecast_end_date,
                     max_evals = 1000, 
                     data_source = None, mlflow_log = True, name_prefix = None,
-                    plot_name = 'default.png'):
+                    plot_name = 'results/default.png'):
     params, metrics, model_params = train_eval(configs, 
                                                region, region_type, 
                                                train1_start_date, train1_end_date, 
@@ -291,6 +292,8 @@ def set_dates(train2_end_date, forecast_end_date):
     return dates
 
 def main(region=None, region_type=None, train2_end_date=None, forecast_end_date=None):
+    if not os.path.exists("./results"):
+        os.makedirs("./results")
     raw_data_to_csv(region, region_type)
     print("forecasting for {}, {} till {}.".format(region, region_type, forecast_end_date))
 
@@ -302,7 +305,7 @@ def main(region=None, region_type=None, train2_end_date=None, forecast_end_date=
 
     dates = set_dates(train2_end_date, forecast_end_date)
 
-    name_prefix = "{}_{}".format(region, region_type)
+    name_prefix = "./results/{}_{}".format(region, region_type)
 
     train_eval_plot(configs, region, region_type, 
                     dates['train1_start_date'], dates['train1_end_date'], 
