@@ -1,1 +1,39 @@
-{"best_params": {"EbyCRatio": 2.6050913824330415, "IbyCRatio": 0.8683258097798365, "infectious_period": 5.96080281619445, "r0": 3.811944577091423}, "best_loss": 387.674148988957, "latent_params": {"LatentEbyCRatio": {"4/10/20": 2.6050913824330415, "4/20/20": 1.0928330109024162}, "LatentIbyCRatio": {"4/10/20": 0.8683258097798365, "4/20/20": 0.5831815850833979}}, "train_metric_results": [{"metric_name": "mape", "variable_weights": [{"variable": "confirmed", "weight": 1.0}], "value": 387.674148988957}, {"metric_name": "rmsle", "variable_weights": [{"variable": "confirmed", "weight": 1.0}], "value": 1.530343123604972}]}
+{
+  "best_params": {
+    "EbyCRatio": 1.9964762805719332,
+    "r0": 0.8688694546119198
+  },
+  "best_loss": 6.8171151654390485,
+  "latent_params": {
+    "LatentEbyCRatio": {
+      "3/21/20": 1.9964762805719332,
+      "4/1/20": 0.38234160724097066
+    },
+    "LatentIbyCRatio": {
+      "3/21/20": 0.59,
+      "4/1/20": 0.478282759581743
+    }
+  },
+  "train_metric_results": [
+    {
+      "metric_name": "mape",
+      "variable_weights": [
+        {
+          "variable": "confirmed",
+          "weight": 1.0
+        }
+      ],
+      "value": 6.8171151654390485
+    },
+    {
+      "metric_name": "rmse",
+      "variable_weights": [
+        {
+          "variable": "confirmed",
+          "weight": 1.0
+        }
+      ],
+      "value": 2.826933086202972
+    }
+  ]
+}

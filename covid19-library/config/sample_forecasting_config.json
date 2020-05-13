@@ -1,24 +1,25 @@
 {
-  "region_name": "bengaluru",
+  "region_name": "bengaluru urban",
   "region_type": "district",
   "run_day": "3/22/20",
   "forecast_start_date": "4/1/20",
-  "forecast_end_date": "4/20/20",
+  "forecast_end_date": "5/30/20",
   "model_class": "SEIR",
   "model_parameters": {
-    "infectious_period": 9.5412,
-    "incubation_period": 6,
-    "EbyCRatio": 0.69906,
-     "IbyCRatio": 0.78, 
-    "r0": 2.4091,
+    "EbyCRatio": 0.518754725345212,
+    "IbyCRatio": 0.9253497785591837,
+    "infectious_period": 1.17922843495018,
+    "incubation_period": 5,
+    "r0": 0.5970526229197348,
     "LatentEbyCRatio": {
-      "3/22/20": 0.69906,
-      "4/1/20": 0.5781344247805147
+      "4/15/20": 0.518754725345212,
+      "4/27/20": 0.07717399825771437
     },
     "LatentIbyCRatio": {
-      "3/22/20": 0.78,
-      "4/1/20": 0.7781344247805147
-    }
+      "4/15/20": 0.9253497785591837,
+      "4/27/20": 0.02268673204433395
+    },
+    "MAPE": 12.963666426755314
   },
   "forecast_variables": [
     "confirmed",

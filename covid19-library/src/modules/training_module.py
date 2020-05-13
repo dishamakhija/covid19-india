@@ -39,12 +39,11 @@ class TrainingModule(object):
 
     def optimize(self, search_space, region_metadata, region_observations, train_start_date, train_end_date,
                  loss_function):
-        ##TODO harsh to check this
         run_day = (datetime.strptime(train_start_date, "%m/%d/%y") - timedelta(days=1)).strftime("%-m/%-d/%y")
         predict_df = self._model.predict(region_metadata, region_observations, run_day, train_start_date,
                                          train_end_date,
                                          search_space=search_space, is_tuning=True)
-        metrics_result = ModelEvaluator.evaluate_for_forecast(predict_df, [loss_function])
+        metrics_result = ModelEvaluator.evaluate_for_forecast(region_observations, predict_df, [loss_function])
         return metrics_result[0]["value"]
 
     def train_for_region(self, region_type, region_name, train_start_date, train_end_date,

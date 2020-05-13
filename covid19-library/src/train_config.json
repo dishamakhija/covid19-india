@@ -1,0 +1,40 @@
+{
+	"region_name": "",
+	"region_type": "",
+	"train_start_date": "",
+	"train_end_date": "",
+	"model_class": "SEIR",
+	"model_parameters": {
+		"incubation_period": 5
+	},
+	"search_space": {
+		"r0": [0.5, 6],
+		"EbyCRatio": [0.5, 70],
+		"IbyCRatio": [0.8, 1],
+		"infectious_period": [1, 10]
+	},
+	"search_parameters": {
+		"max_evals": 10
+	},
+	"training_loss_function": {
+		"metric_name": "mape",
+		"variable_weights": [{
+			"variable": "confirmed",
+			"weight": 1
+		}]
+	},
+	"loss_functions": [{
+		"metric_name": "mape",
+		"variable_weights": [{
+			"variable": "confirmed",
+			"weight": 1
+		}]
+	}, {
+		"metric_name": "rmsle",
+		"variable_weights": [{
+			"variable": "confirmed",
+			"weight": 1
+		}]
+	}],
+	"output_filepath": ""
+}
