@@ -215,9 +215,10 @@ def plot(configs, model_params, run_day, forecast_start_date, forecast_end_date,
     pd_df = pd_df.transpose()
     pd_df = pd_df.reset_index()
     pd_df = pd_df[5:]
-    write_to_csv(pd_df, csv_fname="results/forecast_{}_{}_{}.csv".format(model_params['region'], 
+    write_to_csv(pd_df, csv_fname="results/forecast_{}_{}_{}_{}.csv".format(model_params['region'], 
                                                         forecast_start_date.replace('/','-'), 
-                                                        forecast_end_date.replace('/','-')))
+                                                        forecast_end_date.replace('/','-'),
+                                                        datetime.now()))
 
     actual = DataFetcherModule.get_observations_for_region(model_params['region_type'], model_params['region'])
     actual = actual.set_index('observation')
@@ -253,7 +254,10 @@ def train_eval_plot(configs, region, region_type,
                                                max_evals, data_source, 
                                                mlflow_log, name_prefix)
     metrics_df = pd.DataFrame.from_dict(metrics, orient='index')
-    metrics_df.to_csv("./results/{}_{}_{}_{}_metrics.csv".format(region, region_type, forecast_start_date.replace('/','-'), forecast_end_date.replace('/','-')))
+    metrics_df.to_csv("./results/{}_{}_{}_{}_metrics_{}.csv".format(region, region_type, 
+                                                                    forecast_start_date.replace('/','-'), 
+                                                                    forecast_end_date.replace('/','-'),
+                                                                    datetime.now()))
 
     model_params['model_parameters']['incubation_period'] = 5
     plot(configs, model_params, forecast_run_day, forecast_start_date, 
@@ -307,7 +311,7 @@ def main(region=None, region_type=None, train2_end_date=None, forecast_end_date=
 
     dates = set_dates(train2_end_date, forecast_end_date)
 
-    name_prefix = "./results/{}_{}".format(region, region_type)
+    name_prefix = "./results/{}_{}_{}".format(region, region_type, datetime.now())
 
     train_eval_plot(configs, region, region_type, 
                     dates['train1_start_date'], dates['train1_end_date'], 
@@ -316,7 +320,7 @@ def main(region=None, region_type=None, train2_end_date=None, forecast_end_date=
                     dates['forecast_run_day'], dates['forecast_start_date'], dates["forecast_end_date"],
                     max_evals = 1000, 
                     mlflow_log = False, name_prefix = name_prefix,
-                    plot_name = './results/{}_{}.png'.format(region, forecast_end_date.replace('/', '-')))
+                    plot_name = './results/{}_{}_{}.png'.format(region, forecast_end_date.replace('/', '-'), datetime.now()))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = 'Covid forecast', allow_abbrev=False)
