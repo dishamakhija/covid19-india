@@ -1,0 +1,1 @@
+[{"metric_name": "mape", "variable_weights": [{"variable": "confirmed", "weight": 1.0}], "value": 1.9731123608687775}, {"metric_name": "rmsle", "variable_weights": [{"variable": "confirmed", "weight": 1.0}], "value": 0.021603258134699183}]

@@ -1,5 +1,2 @@
 *.pyc
-*.json
-*.csv
-*.png
 sftp-config.json
