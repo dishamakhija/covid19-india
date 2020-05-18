@@ -16,3 +16,5 @@ class ForecastVariable(str, enum.Enum):
     isolated = "isolated"
     unknown = "unknown"
     exposed = "exposed"
+    infected = "infected"
+    final = "final"
