@@ -3,9 +3,12 @@
 	"region_type": "",
 	"train_start_date": "",
 	"train_end_date": "",
-	"model_class": "SEIR",
+	"model_class": "SEIHRD",
 	"model_parameters": {
-		"incubation_period": 5
+		"incubation_period": 5,
+        "F_hospitalization" : 0.04,
+        "F_icu" : 0.05,
+        "F_fatalities" : 0.08 
 	},
 	"search_space": {
 		"r0": [0.5, 6],
