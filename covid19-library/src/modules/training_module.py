@@ -35,6 +35,12 @@ class TrainingModule(object):
             latent_params = self._model.get_latent_params(region_metadata, region_observations, run_day,
                                                           train_end_date, result["best_params"])
             result.update(latent_params)
+
+        model_params = self._model_parameters
+        model_params.update(latent_params["latent_params"])
+        model_params.update(result["best_params"])
+        model_params["MAPE"] = result["best_loss"]
+        result["model_parameters"]= model_params
         return result
 
     def optimize(self, search_space, region_metadata, region_observations, train_start_date, train_end_date,

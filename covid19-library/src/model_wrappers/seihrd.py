@@ -3,11 +3,14 @@ from functools import reduce
 
 from entities.forecast_variables import ForecastVariable
 from model_wrappers.base import ModelWrapperBase
+
+import numpy as np
 import pandas as pd
+
 from seirsplus.models import *
 
 
-class SEIR(ModelWrapperBase):
+class SEIHRD(ModelWrapperBase):
 
     def fit(self):
         pass
@@ -91,23 +94,24 @@ class SEIR(ModelWrapperBase):
                                initE=initE, initR=initR)
         estimator.run(T=n_days, verbose=False)
 
-        numF = [initF]
-        numH = [initH]
-        for i in range(1, len(estimator.numI)):
-            numF.append(numF[i-1] + self.F_hospitalization * numH[i-1])
-            numH.append(estimator.numR[i] - numF[i])
+        num_steps = len(estimator.numI)
 
-        recovered = [f * (1 - self.F_fatalities) for f in numF]
-        fatalities = [f * self.F_fatalities for f in numF]
-        icu = [h * self.F_icu for h in numH]
-        confirmed = [h + f for (h,f) in zip(numH, numF)]
+        numF = np.zeros(num_steps)
+        numF[0] = initF
 
-        recovered_ts = self.alignTimeSeries(recovered, estimator.tseries, run_day, n_days, ForecastVariable.recovered.name)
-        fatalities_ts = self.alignTimeSeries(fatalities, estimator.tseries, run_day, n_days, ForecastVariable.deceased.name)
+        numH = np.zeros(num_steps)
+        numH[0] = initH
+
+        for i in range(1, num_steps):
+            numF[i] = numF[i-1] + self.F_hospitalization * numH[i-1]
+            numH[i] = estimator.numR[i] - numF[i]
+
+        recovered_ts = self.alignTimeSeries(numF*(1 - self.F_fatalities), estimator.tseries, run_day, n_days, ForecastVariable.recovered.name)
+        fatalities_ts = self.alignTimeSeries(numF*self.F_fatalities, estimator.tseries, run_day, n_days, ForecastVariable.deceased.name)
         hospitalized_ts = self.alignTimeSeries(numH, estimator.tseries, run_day, n_days, ForecastVariable.hospitalized.name)
-        icu_ts = self.alignTimeSeries(icu, estimator.tseries, run_day, n_days, ForecastVariable.icu.name)
+        icu_ts = self.alignTimeSeries(numH*self.F_icu, estimator.tseries, run_day, n_days, ForecastVariable.icu.name)
         active_ts = self.alignTimeSeries(numH, estimator.tseries, run_day, n_days, ForecastVariable.active.name)
-        confirmed_ts = self.alignTimeSeries(confirmed, estimator.tseries, run_day, n_days, ForecastVariable.confirmed.name)
+        confirmed_ts = self.alignTimeSeries(numH + numF, estimator.tseries, run_day, n_days, ForecastVariable.confirmed.name)
         exposed_ts = self.alignTimeSeries(estimator.numE, estimator.tseries, run_day, n_days, ForecastVariable.exposed.name)
         infected_ts = self.alignTimeSeries(estimator.numI, estimator.tseries, run_day, n_days, ForecastVariable.infected.name)
         final_ts = self.alignTimeSeries(numF, estimator.tseries, run_day, n_days, ForecastVariable.final.name)
