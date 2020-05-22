@@ -14,10 +14,11 @@ from io import StringIO  ## for Python 3
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-# raw input data from cocvid19india.org
+# raw input data from covid19india.org
 raw_data_url = "https://api.covid19india.org/raw_data.json"
 raw_data_urls = ["https://api.covid19india.org/raw_data1.json", "https://api.covid19india.org/raw_data2.json"]
 post_april27_url = "https://api.covid19india.org/raw_data3.json"
+district_daily_url = 'https://api.covid19india.org/districts_daily.json'
 INPUT_STATE_FIELD = "detectedstate"
 INPUT_DISTRICT_FIELD = "detecteddistrict"
 INPUT_CITY_FIELD = "detectedcity"
@@ -39,21 +40,68 @@ HOSPITALIZED = "hospitalized"
 ACTIVE = "active"
 
 
-def load_observations_data():
+def load_observations_data(data_source = 'tracker_district_daily'):
     raw_data = []
-    for url in raw_data_urls:
-        raw_data.extend(get_raw_data_dict(url)["raw_data"])
-    raw_data_post_april27 = get_raw_data_dict(post_april27_url)["raw_data"]
-    df_list = []
-    for region in [(INPUT_DISTRICT_FIELD, DISTRICT), (INPUT_CITY_FIELD, CITY), (INPUT_STATE_FIELD, STATE)]:
-        for variable in [CONFIRMED, HOSPITALIZED, RECOVERED, DECEASED]:
-            df = _get_covid_ts(raw_data, raw_data_post_april27, region[0], region[1], variable)
-            df_list.append(df)
-    merged_df = pd.concat(df_list)
-    merged_df.reset_index(inplace=True)
-    merged_df.to_csv("observations_latest.csv", index=False)
-    return merged_df
 
+    if data_source == 'tracker_raw_data':
+        for url in raw_data_urls:
+            raw_data.extend(get_raw_data_dict(url)["raw_data"])
+        raw_data_post_april27 = get_raw_data_dict(post_april27_url)["raw_data"]
+        df_list = []
+        for region in [(INPUT_DISTRICT_FIELD, DISTRICT), (INPUT_CITY_FIELD, CITY), (INPUT_STATE_FIELD, STATE)]:
+            for variable in [CONFIRMED, HOSPITALIZED, RECOVERED, DECEASED]:
+                df = _get_covid_ts(raw_data, raw_data_post_april27, region[0], region[1], variable)
+                df_list.append(df)
+        merged_df = pd.concat(df_list)
+        merged_df.reset_index(inplace=True)
+        print(merged_df.head())
+        merged_df.to_csv("observations_latest.csv", index=False)
+        return merged_df
+    elif data_source == 'direct_csv':
+        pass
+    else:
+        raw_data = get_raw_data_dict(district_daily_url)["districtsDaily"]
+        dates = pd.date_range(start="2020-04-21",end=datetime.today()).strftime("%Y-%m-%d")
+        columns = ['region_name', 'region_type','observation'].extend(dates)
+        df = pd.DataFrame(columns=columns)
+        for state_ut in raw_data:
+            for district in raw_data[state_ut]:
+                temp = pd.DataFrame(raw_data[state_ut][district])
+                temp = temp.drop('notes', axis = 1)
+                temp = temp.set_index('date').transpose().reset_index().rename(columns={'index':'observation'}).rename_axis(None) # check index
+                temp.insert(0, column='region_name', value=district)
+                df = pd.concat([df, temp], axis = 0, ignore_index = True, sort = False)
+        df.insert(1, column = 'region_type', value = 'district')
+        # df = df.sort_values(by=['observation'])
+        df = df.fillna(0) # check
+        df.to_csv("../district_daily_observations.csv", index=False)
+        return df
+
+
+def load_daily_district_data(data_source = 'tracker_district_daily'):
+
+    data = []
+    if data_source == 'tracker_district_daily':
+        data = get_raw_data_dict(district_daily_url)["districtsDaily"]
+    
+    dates = pd.date_range(start="2020-04-21",end=datetime.today()).strftime("%Y-%m-%d")
+    columns = ['region_name', 'region_type','observation'].extend(dates)
+    df = pd.DataFrame(columns=columns)
+
+    for state_ut in data:
+        for district in data[state_ut]:
+            temp = pd.DataFrame(data[state_ut][district])
+            temp = temp.drop('notes', axis = 1)
+            temp = temp.set_index('date').transpose().reset_index().rename(columns={'index':'observation'}).rename_axis(None)
+            temp.insert(loc=0, column='region_type', value='district')
+            temp.insert(loc=0, column='region_name', value=district)
+            df = pd.concat([df, temp], axis = 0, ignore_index = True, sort = False)
+
+    df = df.sort_values(by=['observation'])
+    df = df.fillna(0)
+    df.to_csv("district_daily_observations.csv", index=False)
+
+    return df
 
 def load_regional_metadata(filepath):
     with open(filepath, 'r') as fp:
