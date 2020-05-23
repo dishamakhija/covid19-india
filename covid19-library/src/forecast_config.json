@@ -4,7 +4,7 @@
 	"run_day": "",
 	"forecast_start_date": "",
 	"forecast_end_date": "",
-	"model_class": "SEIR",
+	"model_class": "SEIHRD",
 	"model_parameters": "",
 	"forecast_variables": ["confirmed", "recovered", "deceased"]
 }

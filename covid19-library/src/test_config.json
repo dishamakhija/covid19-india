@@ -4,7 +4,7 @@
 	"run_day": "",
 	"test_start_date": "",
 	"test_end_date": "",
-	"model_class": "SEIR",
+	"model_class": "SEIHRD",
 	"model_parameters": {"incubation_period" : 5},
 	"loss_functions": [{
 		"metric_name": "mape",
