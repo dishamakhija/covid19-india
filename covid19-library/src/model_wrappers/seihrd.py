@@ -17,9 +17,6 @@ class SEIHRD(ModelWrapperBase):
 
     def __init__(self, model_parameters: dict):
         self.model_parameters = model_parameters
-        self.F_hospitalization = self.model_parameters.get("F_hospitalization", 0.04)
-        self.F_icu = self.model_parameters.get("F_icu", 0.05)
-        self.F_fatalities = self.model_parameters.get("F_fatalities", 0.08)
 
     def supported_forecast_variables(self):
         return [ForecastVariable.confirmed, ForecastVariable.recovered, ForecastVariable.active]
@@ -103,13 +100,13 @@ class SEIHRD(ModelWrapperBase):
         numH[0] = initH
 
         for i in range(1, num_steps):
-            numF[i] = numF[i-1] + self.F_hospitalization * numH[i-1]
+            numF[i] = numF[i-1] + self.model_parameters["F_hospitalization"] * numH[i-1]
             numH[i] = estimator.numR[i] - numF[i]
 
-        recovered_ts = self.alignTimeSeries(numF*(1 - self.F_fatalities), estimator.tseries, run_day, n_days, ForecastVariable.recovered.name)
-        fatalities_ts = self.alignTimeSeries(numF*self.F_fatalities, estimator.tseries, run_day, n_days, ForecastVariable.deceased.name)
+        recovered_ts = self.alignTimeSeries(numF*(1 - self.model_parameters["F_fatalities"]), estimator.tseries, run_day, n_days, ForecastVariable.recovered.name)
+        fatalities_ts = self.alignTimeSeries(numF*self.model_parameters["F_fatalities"], estimator.tseries, run_day, n_days, ForecastVariable.deceased.name)
         hospitalized_ts = self.alignTimeSeries(numH, estimator.tseries, run_day, n_days, ForecastVariable.hospitalized.name)
-        icu_ts = self.alignTimeSeries(numH*self.F_icu, estimator.tseries, run_day, n_days, ForecastVariable.icu.name)
+        icu_ts = self.alignTimeSeries(numH*self.model_parameters["F_icu"], estimator.tseries, run_day, n_days, ForecastVariable.icu.name)
         active_ts = self.alignTimeSeries(numH, estimator.tseries, run_day, n_days, ForecastVariable.active.name)
         confirmed_ts = self.alignTimeSeries(numH + numF, estimator.tseries, run_day, n_days, ForecastVariable.confirmed.name)
         exposed_ts = self.alignTimeSeries(estimator.numE, estimator.tseries, run_day, n_days, ForecastVariable.exposed.name)

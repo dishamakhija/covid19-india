@@ -14,6 +14,8 @@ from configs.base_config import ForecastingModuleConfig
 from modules.model_evaluator import ModelEvaluator
 from modules.training_module import TrainingModule
 
+import matplotlib.dates as mdates
+
 
 def parse_params(parameters, interval='Train1'):
     """
@@ -123,6 +125,9 @@ def train_eval(region, region_type,
     model_params['region'] = region
     model_params['region_type'] = region_type
     model_params['model_type'] = train_config['model_class']
+    
+    train1_model_params = deepcopy(model_params)
+    train2_model_params = deepcopy(model_params)
        
     if mlflow_log:
         train_config['output_filepath'] = 'train1_output.json'
@@ -133,11 +138,20 @@ def train_eval(region, region_type,
     train_module_config = TrainingModuleConfig.parse_obj(train_config)
     trainResults = TrainingModule.from_config(train_module_config)
     
-    metrics['Train1MAPE'] = trainResults['train_metric_results'][0]['value']
-    metrics['Train1RMLSE'] = trainResults['train_metric_results'][1]['value']
+    train1MAPE = 0
+    train1RMSLE = 0
+    for metric in trainResults['train_metric_results']:
+        if metric['metric_name'] == 'mape':
+            train1MAPE += metric['value']
+        if metric['metric_name'] == 'rmsle':
+            train1RMSLE += metric['value']
+
+    metrics['Train1RMLSE'] = train1RMSLE
+    metrics['Train1MAPE'] = train1MAPE
     metrics['Train1All'] = trainResults['train_metric_results']
     metrics.update(parse_params(trainResults['best_params'], 'Train1'))
     metrics.update(parse_params(trainResults['latent_params'], 'Train1')) 
+    train1_model_params['model_parameters'] = trainResults['model_parameters']
     
     test_config = deepcopy(default_test_config)
     test_config['region_name'] = region
@@ -156,8 +170,16 @@ def train_eval(region, region_type,
     test_module_config = ModelEvaluatorConfig.parse_obj(test_config) 
     evalResults = ModelEvaluator.from_config(test_module_config)
     
-    metrics['TestMAPE'] = evalResults[0]['value']
-    metrics['TestRMLSE'] = evalResults[1]['value']
+    testMAPE = 0
+    testRMSLE = 0
+    for metric in evalResults:
+        if metric['metric_name'] == 'mape':
+            testMAPE += metric['value']
+        if metric['metric_name'] == 'rmsle':
+            testRMSLE += metric['value']
+
+    metrics['TestMAPE'] = testMAPE
+    metrics['TestRMLSE'] = testRMSLE
     metrics['TestAll'] = evalResults
     
     finalTrain_config = deepcopy(default_train_config)
@@ -175,15 +197,25 @@ def train_eval(region, region_type,
     finalTrain_module_config = TrainingModuleConfig.parse_obj(finalTrain_config)
     finalResults = TrainingModule.from_config(finalTrain_module_config)
     
-    metrics['Train2MAPE'] = finalResults['train_metric_results'][0]['value']
-    metrics['Train2RMLSE'] = finalResults['train_metric_results'][1]['value']
+
+    train2MAPE = 0
+    train2RMSLE = 0
+    for metric in finalResults['train_metric_results']:
+        if metric['metric_name'] == 'mape':
+            train2MAPE += metric['value']
+        if metric['metric_name'] == 'rmsle':
+            train2RMSLE += metric['value']
+
+    metrics['Train2MAPE'] = train2MAPE
+    metrics['Train2RMLSE'] = train2RMSLE
     metrics['Train2All'] = finalResults['train_metric_results']
     metrics.update(parse_params(finalResults['best_params'], 'Train2'))
     metrics.update(parse_params(finalResults['latent_params'], 'Train2'))
         
     model_params['model_parameters'] = finalResults['model_parameters']
+    train2_model_params['model_parameters'] = finalResults['model_parameters']
     
-    return params, metrics, model_params
+    return params, metrics, train1_model_params, train2_model_params
 
 
 def forecast(model_params, run_day, forecast_start_date, forecast_end_date,
@@ -313,3 +345,267 @@ def train_eval_forecast(region, region_type,
          forecast_end_date, plot_name=plot_name)
 
     return forecast_df, params, metrics, model_params
+
+
+def plot_m1(train1_model_params, train1_start_date, train1_end_date, 
+            test_run_day, test_start_date, test_end_date, 
+            rolling_average = False, uncertainty = False, 
+            forecast_config = 'forecast_config.json',
+            plot_config = 'plot_config.json', plot_name = 'default.png'):
+    
+    ## TODO: Log scale
+    with open(plot_config) as fin:
+        default_plot_config = json.load(fin)
+    
+    plot_config = deepcopy(default_plot_config)
+    plot_config['uncertainty'] = uncertainty
+    plot_config['rolling_average'] = rolling_average
+    
+    actual_start_date = (datetime.strptime(train1_start_date, "%m/%d/%y") - timedelta(days=7)).strftime("%-m/%-d/%y")    
+    train_run_day = (datetime.strptime(train1_start_date, "%m/%d/%y") - timedelta(days=1)).strftime("%-m/%-d/%y")
+
+    with open(forecast_config) as fin:
+        default_forecast_config = json.load(fin)
+
+    
+    # Get predictions
+    train1_run_day = test_run_day
+    pd_df_train = forecast(train1_model_params, train1_run_day, train1_start_date, test_end_date, default_forecast_config)
+    #pd_df_test = forecast(train1_model_params, test_run_day, test_start_date, test_end_date)
+    
+    pd_df_train['index'] = pd.to_datetime(pd_df_train['index'])
+    #pd_df_test['index'] = pd.to_datetime(pd_df_test['index']) 
+    #pd_df = pd.concat([pd_df_train, pd_df_test])
+    pd_df = pd_df_train.sort_values(by=['index'])
+
+    # Get observed data
+    actual = DataFetcherModule.get_observations_for_region(train1_model_params['region_type'], train1_model_params['region'])
+    actual = actual.set_index('observation')
+    actual = actual.transpose()
+    actual = actual.reset_index()
+    start = actual.index[actual['index'] == actual_start_date].tolist()[0]
+    end = actual.index[actual['index'] == test_end_date].tolist()[0]
+    actual = actual[start : end+1]
+    actual['index'] = pd.to_datetime(actual['index'])
+    
+    plot_markers = plot_config['markers']
+    plot_colors = plot_config['colors']
+    plot_labels = plot_config['labels']
+    plot_variables = plot_config['variables']
+    
+    fig, ax = plt.subplots(figsize=(16, 12))
+    
+    for variable in plot_variables:
+        
+        # Plot observed values
+        ax.plot(actual['index'], actual[variable], plot_markers['observed'], 
+                color = plot_colors[variable], label = plot_labels[variable]+': Observed')
+        
+        # Plot mean predictions
+        if variable+'_mean' in pd_df:
+            ax.plot(pd_df['index'], pd_df[variable+'_mean'], plot_markers['predicted']['mean'], 
+                    color = plot_colors[variable], label = plot_labels[variable]+': Predicted')
+        
+        # Plot uncertainty in predictions
+        if plot_config['uncertainty'] == True:
+            
+            if variable+'_min' in pd_df:
+                ax.plot(pd_df['index'], pd_df[variable+'_min'], plot_markers['predicted']['min'], 
+                    color = plot_colors[variable], label = plot_labels[variable]+': Predicted (Min)')
+                
+            if variable+'_max' in pd_df:
+                ax.plot(pd_df['index'], pd_df[variable+'_max'], plot_markers['predicted']['max'], 
+                    color = plot_colors[variable], label = plot_labels[variable]+': Predicted (Max)')
+        
+        # Plot rolling average
+        if plot_config['rolling_average'] == True and variable+'_ra' in pd_df: 
+            ax.plot(pd_df['index'], pd_df[variable+'_ra'], plot_markers['rolling_average'], 
+                color = plot_colors[variable], label = plot_labels[variable]+': Predicted (RA)')
+    
+    train_start = pd.to_datetime(train1_start_date)
+    test_start = pd.to_datetime(test_start_date)
+    
+    line_height = plt.ylim()[1]
+    ax.plot([train_start, train_start], [0,line_height], '--', color='brown', label='Train starts')
+    ax.plot([test_start, test_start], [0,line_height], '--', color='black', label='Test starts')
+    
+    ax.xaxis.set_major_locator(mdates.DayLocator(interval=5))
+    ax.xaxis.set_minor_locator(mdates.DayLocator(interval=1))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+    
+    plt.ylabel('No of People')
+    plt.xlabel('Time')
+    plt.legend()
+    plt.grid()
+    
+    plt.savefig(plot_name)
+
+    
+def plot_m2(train2_model_params, train_start_date, train_end_date, 
+            test_run_day, test_start_date, test_end_date, 
+            rolling_average = False, uncertainty = False, 
+            forecast_config = 'forecast_config.json',
+            plot_config = 'plot_config.json', plot_name = 'default.png'):
+    
+    ## TODO: Log scale
+    with open(plot_config) as fplot, \
+        open(forecast_config) as fcast:
+        default_plot_config = json.load(fplot)
+        default_forecast_config = json.load(fcast)
+    
+    plot_config = deepcopy(default_plot_config)
+    plot_config['uncertainty'] = uncertainty
+    plot_config['rolling_average'] = rolling_average
+    
+    actual_start_date = (datetime.strptime(test_start_date, "%m/%d/%y") - timedelta(days=14)).strftime("%-m/%-d/%y")    
+    test_run_day = (datetime.strptime(test_start_date, "%m/%d/%y") - timedelta(days=1)).strftime("%-m/%-d/%y")
+    
+    # Get predictions
+    pd_df_test = forecast(train2_model_params, test_run_day, test_start_date, test_end_date, default_forecast_config)
+    
+    pd_df_test['index'] = pd.to_datetime(pd_df_test['index']) 
+    pd_df = pd_df_test.sort_values(by=['index'])
+
+    # Get observed data
+    actual = DataFetcherModule.get_observations_for_region(train2_model_params['region_type'], train2_model_params['region'])
+    actual = actual.set_index('observation')
+    actual = actual.transpose()
+    actual = actual.reset_index()
+    start = actual.index[actual['index'] == actual_start_date].tolist()[0]
+    end = actual.index[actual['index'] == test_end_date].tolist()[0]
+    actual = actual[start : end+1]
+    actual['index'] = pd.to_datetime(actual['index'])
+    
+    plot_markers = plot_config['markers']
+    plot_colors = plot_config['colors']
+    plot_labels = plot_config['labels']
+    plot_variables = plot_config['variables']
+    
+    fig, ax = plt.subplots(figsize=(16, 12))
+    
+    for variable in plot_variables:
+        
+        # Plot observed values
+        ax.plot(actual['index'], actual[variable], plot_markers['observed'], 
+                color = plot_colors[variable], label = plot_labels[variable]+': Observed')
+        
+        # Plot mean predictions
+        if variable+'_mean' in pd_df:
+            ax.plot(pd_df['index'], pd_df[variable+'_mean'], plot_markers['predicted']['mean'], 
+                    color = plot_colors[variable], label = plot_labels[variable]+': Predicted')
+        
+        # Plot uncertainty in predictions
+        if plot_config['uncertainty'] == True:
+            
+            if variable+'_min' in pd_df:
+                ax.plot(pd_df['index'], pd_df[variable+'_min'], plot_markers['predicted']['min'], 
+                    color = plot_colors[variable], label = plot_labels[variable]+': Predicted (Min)')
+                
+            if variable+'_max' in pd_df:
+                ax.plot(pd_df['index'], pd_df[variable+'_max'], plot_markers['predicted']['max'], 
+                    color = plot_colors[variable], label = plot_labels[variable]+': Predicted (Max)')
+        
+        # Plot rolling average
+        if plot_config['rolling_average'] == True and variable+'_ra' in pd_df: 
+            ax.plot(pd_df['index'], pd_df[variable+'_ra'], plot_markers['rolling_average'], 
+                color = plot_colors[variable], label = plot_labels[variable]+': Predicted (RA)')
+    
+    test_start = pd.to_datetime(test_start_date)
+    
+    line_height = plt.ylim()[1]
+    ax.plot([test_start, test_start], [0,line_height], '--', color='black', label='Test starts')
+    
+    ax.xaxis.set_major_locator(mdates.DayLocator(interval=5))
+    ax.xaxis.set_minor_locator(mdates.DayLocator(interval=1))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+    
+    plt.ylabel('No of People')
+    plt.xlabel('Time')
+    plt.legend()
+    plt.grid()
+    
+    plt.savefig(plot_name)
+
+    
+def plot_m3(train2_model_params, train1_start_date, 
+            forecast_start_date, forecast_length, 
+            rolling_average = False, uncertainty = False,
+            forecast_config = 'forecast_config.json',
+            plot_config = 'plot_config.json', plot_name = 'default.png'):
+    
+    ## TODO: Log scale
+    with open(plot_config) as fplot, \
+        open(forecast_config) as fcast:
+        default_plot_config = json.load(fplot)
+        default_forecast_config = json.load(fcast)
+    
+    
+    plot_config = deepcopy(default_plot_config)
+    plot_config['uncertainty'] = uncertainty
+    plot_config['rolling_average'] = rolling_average
+    
+    actual_start_date = (datetime.strptime(train1_start_date, "%m/%d/%y") - timedelta(days=14)).strftime("%-m/%-d/%y")    
+    forecast_run_day = (datetime.strptime(forecast_start_date, "%m/%d/%y") - timedelta(days=1)).strftime("%-m/%-d/%y")
+    forecast_end_date = (datetime.strptime(forecast_start_date, "%m/%d/%y") + timedelta(days=forecast_length)).strftime("%-m/%-d/%y")
+    
+    # Get predictions
+    pd_df_forecast = forecast(train2_model_params, forecast_run_day, forecast_start_date, forecast_end_date, default_forecast_config)
+    
+    pd_df_forecast['index'] = pd.to_datetime(pd_df_forecast['index']) 
+    pd_df = pd_df_forecast.sort_values(by=['index'])
+
+    # Get observed data
+    actual = DataFetcherModule.get_observations_for_region(train2_model_params['region_type'], train2_model_params['region'])
+    actual = actual.set_index('observation')
+    actual = actual.transpose()
+    actual = actual.reset_index()
+    start = actual.index[actual['index'] == actual_start_date].tolist()[0]
+    end = actual.index[actual['index'] == forecast_run_day].tolist()[0]
+    actual = actual[start : end+1]
+    actual['index'] = pd.to_datetime(actual['index'])
+    
+    plot_markers = plot_config['markers']
+    plot_colors = plot_config['colors']
+    plot_labels = plot_config['labels']
+    plot_variables = plot_config['variables']
+    
+    fig, ax = plt.subplots(figsize=(16, 12))
+    
+    for variable in plot_variables:
+        
+        # Plot observed values
+        ax.plot(actual['index'], actual[variable], plot_markers['observed'], 
+                color = plot_colors[variable], label = plot_labels[variable]+': Observed')
+        
+        # Plot mean predictions
+        if variable+'_mean' in pd_df:
+            ax.plot(pd_df['index'], pd_df[variable+'_mean'], plot_markers['predicted']['mean'], 
+                    color = plot_colors[variable], label = plot_labels[variable]+': Predicted')
+        
+        # Plot uncertainty in predictions
+        if plot_config['uncertainty'] == True:
+            
+            if variable+'_min' in pd_df:
+                ax.plot(pd_df['index'], pd_df[variable+'_min'], plot_markers['predicted']['min'], 
+                    color = plot_colors[variable], label = plot_labels[variable]+': Predicted (Min)')
+                
+            if variable+'_max' in pd_df:
+                ax.plot(pd_df['index'], pd_df[variable+'_max'], plot_markers['predicted']['max'], 
+                    color = plot_colors[variable], label = plot_labels[variable]+': Predicted (Max)')
+        
+        # Plot rolling average
+        if plot_config['rolling_average'] == True and variable+'_ra' in pd_df: 
+            ax.plot(pd_df['index'], pd_df[variable+'_ra'], plot_markers['rolling_average'], 
+                color = plot_colors[variable], label = plot_labels[variable]+': Predicted (RA)')
+    
+    
+    ax.xaxis.set_major_locator(mdates.DayLocator(interval=5))
+    ax.xaxis.set_minor_locator(mdates.DayLocator(interval=1))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+    
+    plt.ylabel('No of People')
+    plt.xlabel('Time')
+    plt.legend()
+    plt.grid()
+    
+    plt.savefig(plot_name)

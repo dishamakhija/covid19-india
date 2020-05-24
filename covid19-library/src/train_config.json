@@ -40,6 +40,21 @@
 		"variable_weights": [{
 			"variable": "confirmed",
 			"weight": 1
+		}, {
+			"variable": "recovered",
+			"weight": 1
+		}, {
+			"variable": "deceased",
+			"weight": 1
+		}, {
+			"variable": "hospitalized",
+			"weight": 1
+		}]
+	},{
+		"metric_name": "mape",
+		"variable_weights": [{
+			"variable": "confirmed",
+			"weight": 1
 		}]
 	},{
 		"metric_name": "mape",
@@ -47,10 +62,16 @@
 			"variable": "hospitalized",
 			"weight": 1
 		}]
-	}, {
-		"metric_name": "rmsle",
+	},{
+		"metric_name": "mape",
 		"variable_weights": [{
-			"variable": "confirmed",
+			"variable": "recovered",
+			"weight": 1
+		}]
+	},{
+		"metric_name": "mape",
+		"variable_weights": [{
+			"variable": "deceased",
 			"weight": 1
 		}]
 	}],
