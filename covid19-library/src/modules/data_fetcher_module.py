@@ -11,6 +11,8 @@ import urllib.request
 from datetime import datetime
 from io import StringIO  ## for Python 3
 
+from functools import lru_cache
+
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
@@ -38,7 +40,7 @@ RECOVERED = "recovered"
 HOSPITALIZED = "hospitalized"
 ACTIVE = "active"
 
-
+@lru_cache(maxsize=3)
 def load_observations_data():
     raw_data = []
     for url in raw_data_urls:
