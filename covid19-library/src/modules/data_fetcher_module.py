@@ -11,6 +11,10 @@ import urllib.request
 from datetime import datetime
 from io import StringIO  ## for Python 3
 
+import sys
+sys.path.append('/Users/nayana/projects/covid/covid19-india/covid19-library/src')
+from entities.forecast_variables import ForecastVariable
+
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
@@ -41,8 +45,8 @@ ACTIVE = "active"
 
 
 def load_observations_data(data_source = 'tracker_district_daily'):
-    raw_data = []
 
+    raw_data = []
     if data_source == 'tracker_raw_data':
         for url in raw_data_urls:
             raw_data.extend(get_raw_data_dict(url)["raw_data"])
@@ -60,19 +64,26 @@ def load_observations_data(data_source = 'tracker_district_daily'):
         pass
     else:
         raw_data = get_raw_data_dict(district_daily_url)["districtsDaily"]
-        dates = pd.date_range(start="2020-04-21",end=datetime.today()).strftime("%Y-%m-%d")
-        columns = ['region_name', 'region_type','observation'].extend(dates)
+        dates = pd.date_range(start="2020-04-01",end=datetime.today()).strftime("%Y-%m-%d")
+        columns =[REGION_NAME, OBSERVATION]
+        columns.extend(dates)
         df = pd.DataFrame(columns=columns)
         for state_ut in raw_data:
             for district in raw_data[state_ut]:
                 temp = pd.DataFrame(raw_data[state_ut][district])
                 temp = temp.drop('notes', axis = 1) 
-                temp = temp.set_index('date').transpose().reset_index().rename(columns={'index':'observation'}).rename_axis(None)
-                temp.insert(0, column='region_name', value=district)
+                temp = temp.set_index('date').transpose().reset_index().rename(columns={'index':OBSERVATION}).rename_axis(None)
+                temp.insert(0, column=REGION_NAME, value=district.lower().replace(',', ''))
                 df = pd.concat([df, temp], axis = 0, ignore_index = True, sort = False)
-        df.insert(1, column = 'region_type', value = 'district')
+        df.insert(1, column = REGION_TYPE, value = DISTRICT)
+        df = df.replace(ACTIVE, HOSPITALIZED)
+        df = df.sort_values(by=[OBSERVATION])
         df = df.fillna(0)
-        df.to_csv("../district_daily_observations.csv", index=False)
+        dates = pd.date_range(start="4/1/20",end=datetime.today()).strftime("%-m/%-d/%y")
+        new_columns = [REGION_NAME, REGION_TYPE, OBSERVATION]
+        new_columns.extend(dates)
+        df = df.rename(columns=dict(zip(df.columns,new_columns)))
+        # df.to_csv("../src/district_daily_observations.csv", index=False)
         return df
         
 
