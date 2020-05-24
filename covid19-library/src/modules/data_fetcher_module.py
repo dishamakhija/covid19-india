@@ -11,8 +11,6 @@ import urllib.request
 from datetime import datetime
 from io import StringIO  ## for Python 3
 
-from entities.forecast_variables import ForecastVariable
-
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
