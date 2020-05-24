@@ -11,8 +11,6 @@ import urllib.request
 from datetime import datetime
 from io import StringIO  ## for Python 3
 
-import sys
-sys.path.append('/Users/nayana/projects/covid/covid19-india/covid19-library/src')
 from entities.forecast_variables import ForecastVariable
 
 logger = logging.getLogger()
