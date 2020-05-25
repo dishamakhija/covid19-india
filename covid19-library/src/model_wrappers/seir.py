@@ -32,49 +32,6 @@ class SEIR(ModelWrapperBase):
         date_list = list(pd.date_range(start=start_date, end=end_date).strftime("%-m/%-d/%y"))
         prediction_dataset = prediction_dataset[prediction_dataset.date.isin(date_list)]
         return prediction_dataset
-    
-    def update_params_for_interventions(interventions):
-#         Accepts a list of interventions, each list will tell how the parameters change, with what fraction
-#         Example: 
-#         intervetion1 = dict()
-#         intervetion1['intervention_name'] = 'start_bus'
-#         intervention1['effects'] = dict()
-#         intervention1['effects']['fraction'] = 1
-#         intervention1['effects']['params'] = dict()
-#         intervention1['effects']['params']['r0'] = 0.2
-        
-#         intervetion2 = dict()
-#         intervetion2['intervention_name'] = 'increase_testing'
-#         intervention2['effects'] = dict()
-#         intervention2['effects']['fraction'] = 1
-#         intervention2['effects']['params'] = dict()
-#         intervention2['effects']['params']['infectious_period'] = -0.2
-
-#         intervetion3 = dict()
-#         intervetion3['intervention_name'] = 'schools_open'
-#         intervention3['effects'] = dict()
-#         intervention3['effects']['fraction'] = 0.2
-#         intervention3['effects']['params'] = dict()
-#         intervention3['effects']['params']['r0'] = 0.2
-#         intervention3['effects']['params']['infectious_period'] = 0.1
-       
-#         interventions = [intervention1, intervention2, intervention3]
-        
-        for intervention in interventions:
-            print("Intervetion:" intervention['intervention_name'])
-            fraction = intervention['effects']['fraction']
-            for keys in intervention['effects']['params']:
-                #check if param exists
-                if(self.model_parameters.get(key) == None):
-                    print("Wrong param effect in intervention")
-                    return
-                else:
-                    self.model_parameters['key'] = 
-                                            self.model_parameters['key'](1+fraction*intervention['effects']['params'][key])
-                    
-                    
-                    
-        
 
     def is_black_box(self):
         return True

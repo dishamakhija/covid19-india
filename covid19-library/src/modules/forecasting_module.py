@@ -57,6 +57,7 @@ class ForecastingModule(object):
         return preddf
     
     def convert_to_old_required_format(self, run_day, predictions_df, region_type, region_name):
+
         dates = predictions_df['date']
         preddf = predictions_df.set_index('date')
         columns = [ForecastVariable.active.name, ForecastVariable.hospitalized.name,
