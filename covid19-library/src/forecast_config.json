@@ -6,5 +6,6 @@
 	"forecast_end_date": "",
 	"model_class": "SEIHRD",
 	"model_parameters": "",
-	"forecast_variables": ["confirmed", "recovered", "deceased"]
+	"forecast_variables": ["confirmed", "recovered", "deceased"],
+    "add_initial_observation": "False"
 }

@@ -35,3 +35,4 @@ class ForecastingModuleConfig(BaseConfig):
     forecast_start_date: str
     forecast_end_date: str
     forecast_variables: List[ForecastVariable]
+    add_initial_observation: bool
