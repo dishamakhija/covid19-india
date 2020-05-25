@@ -20,6 +20,7 @@ logger.setLevel(logging.INFO)
 raw_data_url = "https://api.covid19india.org/raw_data.json"
 raw_data_urls = ["https://api.covid19india.org/raw_data1.json", "https://api.covid19india.org/raw_data2.json"]
 post_april27_url = "https://api.covid19india.org/raw_data3.json"
+district_daily_url = 'https://api.covid19india.org/districts_daily.json'
 INPUT_STATE_FIELD = "detectedstate"
 INPUT_DISTRICT_FIELD = "detecteddistrict"
 INPUT_CITY_FIELD = "detectedcity"
@@ -41,20 +42,47 @@ HOSPITALIZED = "hospitalized"
 ACTIVE = "active"
 
 @lru_cache(maxsize=3)
-def load_observations_data():
+def load_observations_data(data_source = 'tracker_district_daily'):
     raw_data = []
-    for url in raw_data_urls:
-        raw_data.extend(get_raw_data_dict(url)["raw_data"])
-    raw_data_post_april27 = get_raw_data_dict(post_april27_url)["raw_data"]
-    df_list = []
-    for region in [(INPUT_DISTRICT_FIELD, DISTRICT), (INPUT_CITY_FIELD, CITY), (INPUT_STATE_FIELD, STATE)]:
-        for variable in [CONFIRMED, HOSPITALIZED, RECOVERED, DECEASED]:
-            df = _get_covid_ts(raw_data, raw_data_post_april27, region[0], region[1], variable)
-            df_list.append(df)
-    merged_df = pd.concat(df_list)
-    merged_df.reset_index(inplace=True)
-    merged_df.to_csv("observations_latest.csv", index=False)
-    return merged_df
+    if data_source == 'tracker_raw_data':
+        for url in raw_data_urls:
+            raw_data.extend(get_raw_data_dict(url)["raw_data"])
+        raw_data_post_april27 = get_raw_data_dict(post_april27_url)["raw_data"]
+        df_list = []
+        for region in [(INPUT_DISTRICT_FIELD, DISTRICT), (INPUT_CITY_FIELD, CITY), (INPUT_STATE_FIELD, STATE)]:
+            for variable in [CONFIRMED, HOSPITALIZED, RECOVERED, DECEASED]:
+                df = _get_covid_ts(raw_data, raw_data_post_april27, region[0], region[1], variable)
+                df_list.append(df)
+        merged_df = pd.concat(df_list)
+        merged_df.reset_index(inplace=True)
+        merged_df.to_csv("observations_latest.csv", index=False)
+        return merged_df
+    elif data_source == 'direct_csv':
+        pass
+    elif data_source == 'tracker_district_daily':
+        raw_data = get_raw_data_dict(district_daily_url)["districtsDaily"]
+        dates = pd.date_range(start="2020-04-01",end=datetime.today()).strftime("%Y-%m-%d")
+        columns =[REGION_NAME, OBSERVATION]
+        columns.extend(dates)
+        df = pd.DataFrame(columns=columns)
+        for state_ut in raw_data:
+            for district in raw_data[state_ut]:
+                temp = pd.DataFrame(raw_data[state_ut][district])
+                temp = temp.drop('notes', axis = 1) 
+                temp = temp.set_index('date').transpose().reset_index().rename(columns={'index':OBSERVATION}).rename_axis(None)
+                temp.insert(0, column=REGION_NAME, value=district.lower().replace(',', ''))
+                df = pd.concat([df, temp], axis = 0, ignore_index = True, sort = False)
+        df.insert(1, column = REGION_TYPE, value = DISTRICT)
+        df = df.replace(ACTIVE, HOSPITALIZED)
+        df = df.sort_values(by=[OBSERVATION])
+        df = df.fillna(0)
+        dates = pd.date_range(start="4/1/20",end=datetime.today()).strftime("%-m/%-d/%y")
+        new_columns = [REGION_NAME, REGION_TYPE, OBSERVATION]
+        new_columns.extend(dates)
+        df = df.rename(columns=dict(zip(df.columns,new_columns)))
+        return df
+    else:
+        pass
 
 
 def load_regional_metadata(filepath):
@@ -102,10 +130,9 @@ def _get_covid_ts(stats, stats_post27_april, input_region_field, output_region_t
 
 
 class DataFetcherModule(object):
-
     @staticmethod
-    def get_observations_for_region(region_type, region_name):
-        observations_df = load_observations_data()
+    def get_observations_for_region(region_type, region_name, data_source = 'tracker_district_daily'):
+        observations_df = load_observations_data(data_source = data_source)
         region_df = observations_df[
             (observations_df["region_name"] == region_name) & (observations_df["region_type"] == region_type)]
         return region_df
