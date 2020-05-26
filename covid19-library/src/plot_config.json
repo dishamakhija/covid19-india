@@ -1,0 +1,28 @@
+{
+    "markers":{
+        "observed":"-o",
+        "rolling_average":"-",
+        "predicted":{
+            "mean":"-.",
+            "min":"--",
+            "max":"--"
+        }
+    },
+    "colors":{
+        "confirmed":"C0",
+        "recovered":"green",
+        "hospitalized":"orange",
+        "deceased":"red"
+    },
+    "labels":{
+        "confirmed":"Confirmed Cases",
+        "recovered":"Recovered Cases",
+        "hospitalized":"Hospitalized Cases",
+        "deceased":"Deceased Cases"
+    },
+    "observed": true,
+    "predicted": true,
+    "rolling_average": false,
+    "uncertainty": false,
+    "variables":["confirmed", "hospitalized", "recovered", "deceased"]
+}

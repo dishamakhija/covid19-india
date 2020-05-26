@@ -3,15 +3,18 @@
 	"region_type": "",
 	"train_start_date": "",
 	"train_end_date": "",
-	"model_class": "SEIR",
+	"model_class": "SEIHRD",
 	"model_parameters": {
-		"incubation_period": 5
+		"incubation_period": 5,
+        "F_icu" : 0.05
 	},
 	"search_space": {
 		"r0": [0.5, 6],
-		"EbyCRatio": [0.5, 70],
-		"IbyCRatio": [0.8, 1],
-		"infectious_period": [1, 10]
+		"EbyCRatio": [0.01, 70],
+		"IbyCRatio": [0.01, 2],
+		"infectious_period": [1, 10],
+        "F_hospitalization" : [0.04, 0.125],
+        "F_fatalities" : [0.02, 0.12] 
 	},
 	"search_parameters": {
 		"max_evals": 10
@@ -21,6 +24,15 @@
 		"variable_weights": [{
 			"variable": "confirmed",
 			"weight": 1
+		}, {
+			"variable": "recovered",
+			"weight": 1
+		}, {
+			"variable": "deceased",
+			"weight": 1
+		}, {
+			"variable": "hospitalized",
+			"weight": 1
 		}]
 	},
 	"loss_functions": [{
@@ -28,11 +40,38 @@
 		"variable_weights": [{
 			"variable": "confirmed",
 			"weight": 1
+		}, {
+			"variable": "recovered",
+			"weight": 1
+		}, {
+			"variable": "deceased",
+			"weight": 1
+		}, {
+			"variable": "hospitalized",
+			"weight": 1
 		}]
-	}, {
-		"metric_name": "rmsle",
+	},{
+		"metric_name": "mape",
 		"variable_weights": [{
 			"variable": "confirmed",
+			"weight": 1
+		}]
+	},{
+		"metric_name": "mape",
+		"variable_weights": [{
+			"variable": "hospitalized",
+			"weight": 1
+		}]
+	},{
+		"metric_name": "mape",
+		"variable_weights": [{
+			"variable": "recovered",
+			"weight": 1
+		}]
+	},{
+		"metric_name": "mape",
+		"variable_weights": [{
+			"variable": "deceased",
 			"weight": 1
 		}]
 	}],
