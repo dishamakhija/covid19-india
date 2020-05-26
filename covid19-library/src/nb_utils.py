@@ -1,6 +1,7 @@
 import json
 import pandas as pd
 import matplotlib.pyplot as plt
+import mlflow
 
 from copy import deepcopy
 from datetime import datetime, timedelta
@@ -48,8 +49,6 @@ def parse_params(parameters, interval='Train1'):
     """
     param_dict = dict() # The flattened dictionary to return
     for param in parameters:
-        if 'All' in param:
-            continue
         if isinstance(parameters[param], dict):
             for key in parameters[param]:
                 assert (not isinstance(parameters[param][key], dict))
@@ -58,6 +57,22 @@ def parse_params(parameters, interval='Train1'):
         else:
             param_dict[interval + '_' + param] = parameters[param]
     return param_dict
+
+def parse_metrics(metrics, interval = 'Train1'):
+    """
+        Flatten the list of loss metrics to enable logging.
+    
+    Note:
+        Consider only losses computed on individual buckets.
+    """
+    metric_dict = dict()
+    for metric in metrics:
+        prefix = interval + '_' + metric['metric_name'] + '_'
+        variables = metric['variable_weights']
+        if len(variables) == 1:
+            metric_dict[prefix + variables[0]['variable']] = metric['value']
+            metric_dict[prefix + variables[0]['variable'] + '_weight'] = variables[0]['weight']
+    return metric_dict
 
 
 def train_eval(region, region_type, 
@@ -70,7 +85,7 @@ def train_eval(region, region_type,
     """
         #TODO: Need to add hooks to consume data from appropriate source
 
-        Run train and evalation for (basic) SEIR model.
+        Run train and evualation for (basic) SEIR model.
     
     Arguments:
         region, region_type : Region info corresponding to the run
@@ -148,9 +163,9 @@ def train_eval(region, region_type,
 
     metrics['Train1RMLSE'] = train1RMSLE
     metrics['Train1MAPE'] = train1MAPE
-    metrics['Train1All'] = trainResults['train_metric_results']
     metrics.update(parse_params(trainResults['best_params'], 'Train1'))
     metrics.update(parse_params(trainResults['latent_params'], 'Train1')) 
+    metrics.update(parse_metrics(trainResults['train_metric_results'], 'Train1')) 
     train1_model_params['model_parameters'] = trainResults['model_parameters']
     
     test_config = deepcopy(default_test_config)
@@ -180,7 +195,7 @@ def train_eval(region, region_type,
 
     metrics['TestMAPE'] = testMAPE
     metrics['TestRMLSE'] = testRMSLE
-    metrics['TestAll'] = evalResults
+    metrics.update(parse_metrics(evalResults, 'Test')) 
     
     finalTrain_config = deepcopy(default_train_config)
     finalTrain_config['region_name'] = region
@@ -208,10 +223,10 @@ def train_eval(region, region_type,
 
     metrics['Train2MAPE'] = train2MAPE
     metrics['Train2RMLSE'] = train2RMSLE
-    metrics['Train2All'] = finalResults['train_metric_results']
     metrics.update(parse_params(finalResults['best_params'], 'Train2'))
     metrics.update(parse_params(finalResults['latent_params'], 'Train2'))
-        
+    metrics.update(parse_metrics(finalResults['train_metric_results'], 'Train2')) 
+    
     model_params['model_parameters'] = finalResults['model_parameters']
     train2_model_params['model_parameters'] = finalResults['model_parameters']
     
@@ -352,6 +367,13 @@ def plot_m1(train1_model_params, train1_run_day, train1_start_date, train1_end_d
             rolling_average = False, uncertainty = False, 
             forecast_config = 'forecast_config.json',
             plot_config = 'plot_config.json', plot_name = 'default.png'):
+    """
+        M1 plot consisting of:
+            - Actuals for train1 and test intervals
+            - Rolling average for train1 and test intervals
+            - M1 predictions for train1 period initialized on train1 run day
+            - M1 predictions for test period initialized on test run day
+    """
     
     ## TODO: Log scale
     with open(plot_config) as fin:
@@ -448,9 +470,15 @@ def plot_m2(train2_model_params, train_start_date, train_end_date,
             rolling_average = False, uncertainty = False, 
             forecast_config = 'forecast_config.json',
             plot_config = 'plot_config.json', plot_name = 'default.png'):
+    """
+        M2 plot consisting of:
+            - Actuals for train2 interval and preceding weeks
+            - Rolling average for train2 interval and preceding weeks
+            - M2 predictions for train2 period initialized on train2 run day
+    """
     
     ## TODO: Log scale
-    with open(plot_config) as fplot, \
+    with open(plot_config) as fplot, 
         open(forecast_config) as fcast:
         default_plot_config = json.load(fplot)
         default_forecast_config = json.load(fcast)
@@ -536,8 +564,14 @@ def plot_m3(train2_model_params, train1_start_date,
             rolling_average = False, uncertainty = False,
             forecast_config = 'forecast_config.json',
             plot_config = 'plot_config.json', plot_name = 'default.png'):
+    """
+        M3 plot consisting of:
+            - Forecast from forecast_start_date
+            - Actuals for preceding weeks
+    """
     
     ## TODO: Log scale
+    
     with open(plot_config) as fplot, \
         open(forecast_config) as fcast:
         default_plot_config = json.load(fplot)
@@ -616,3 +650,107 @@ def plot_m3(train2_model_params, train1_start_date,
     plt.grid()
     
     plt.savefig(plot_name)
+
+def set_dates(current_day):
+    
+    dates = dict()
+    
+    # Train1 : 1 week interval starting 2 weeks prior to current day
+    train1_start_date = current_day - timedelta(14)
+    train1_end_date = current_day - timedelta(8)
+    train1_run_day = train1_start_date - timedelta(1)
+
+    dates['train1_start_date'] = train1_start_date.strftime("%-m/%-d/%y")
+    dates['train1_end_date'] = train1_end_date.strftime("%-m/%-d/%y")
+    dates['train1_run_day'] = train1_run_day.strftime("%-m/%-d/%y")
+
+    # Train2 : 1 week interval starting 1 week prior to current day
+    train2_start_date = current_day - timedelta(7)
+    train2_end_date = current_day
+    train2_run_day = train2_start_date - timedelta(1)
+
+    dates['train2_start_date'] = train2_start_date.strftime("%-m/%-d/%y")
+    dates['train2_end_date'] = train2_end_date.strftime("%-m/%-d/%y")
+    dates['train2_run_day'] = train2_run_day.strftime("%-m/%-d/%y")
+
+    # Test: 1 week interval prior to current day
+    test_start_date = current_day - timedelta(7)
+    test_end_date = current_day
+    test_run_day = test_start_date - timedelta(1)
+
+    dates['test_start_date'] = test_start_date.strftime("%-m/%-d/%y")
+    dates['test_end_date'] = test_end_date.strftime("%-m/%-d/%y")
+    dates['test_run_day'] = test_run_day.strftime("%-m/%-d/%y")
+    
+    return dates
+    
+def train_eval_plot(region, region_type, 
+                    current_day, forecast_length,
+                    default_train_config, default_test_config,
+                    max_evals = 1000, data_source = None,
+                    mlflow_log = False):
+    
+    """
+        Run train, evaluation and plotting. 
+    
+    Arguments:
+        region, region_type : Region info corresponding to the run
+        current_day : Indicates end of test/train2 interval
+        forecast_length : Length of forecast interval
+        default_train_config : Default train config (loaded from train_config.json)
+        default_test_config : Default test config (loaded from test_config.json)
+        max_evals : number of search evaluations for SEIR (default: 1000)
+        data_source : Data source for picking the region data
+        mlflow_log : Experiment logged using MLFlow (default: True)
+        
+
+    Note:
+        date_format : datetime.date object 
+    """
+        
+    dates = set_dates(current_day)
+    
+    train1_start_date = dates['train1_start_date']
+    train1_end_date = dates['train1_end_date']
+    train1_run_day = dates['train1_run_day']
+    
+    train2_start_date = dates['train2_start_date']
+    train2_end_date = dates['train2_end_date']
+    train2_run_day = dates['train2_run_day']
+    
+    test_start_date = dates['test_start_date']
+    test_end_date = dates['test_end_date']
+    test_run_day = dates['test_run_day']
+    
+    with mlflow.start_run():
+    
+        params, metrics, train1_params, train2_params = train_eval(region, region_type, 
+                                                               train1_start_date, train1_end_date, 
+                                                               train2_start_date, train2_end_date, train2_run_day,
+                                                               test_start_date, test_end_date,
+                                                               default_train_config, default_test_config,
+                                                               max_evals = max_evals, data_source = data_source, 
+                                                               mlflow_log = mlflow_log,
+                                                               name_prefix = region)
+
+        plot_m1(train1_params, train1_run_day, train1_start_date, train1_end_date, 
+            test_run_day, test_start_date, test_end_date, 
+            rolling_average = False, uncertainty = False, 
+            plot_config = 'plot_config.json', plot_name = region+'_m1.png')
+
+        plot_m2(train2_params, train1_start_date, train1_end_date, 
+            test_run_day, test_start_date, test_end_date, plot_name = region+ '_m2.png')
+
+        forecast_start_date = train2_start_date
+        plot_m3(train2_params, train1_start_date, 
+                forecast_start_date, forecast_length, plot_name = region +'_m3.png')
+        
+        mlflow.log_params(params)
+        mlflow.log_metrics(metrics)
+        mlflow.log_artifact(region+'_m1.png')
+        mlflow.log_artifact(region+'_m2.png')
+        mlflow.log_artifact(region+'_m3.png')
+        mlflow.log_artifact('train_config.json')
+        mlflow.log_artifact('train1_output.json')
+        mlflow.log_artifact('test_output.json')
+        mlflow.log_artifact('train2_output.json')
