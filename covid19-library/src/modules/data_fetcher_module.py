@@ -131,10 +131,14 @@ def _get_covid_ts(stats, stats_post27_april, input_region_field, output_region_t
 
 class DataFetcherModule(object):
     @staticmethod
-    def get_observations_for_region(region_type, region_name, data_source = 'tracker_district_daily'):
+    def get_observations_for_region(region_type, region_name, data_source = 'tracker_district_daily', smooth=True):
         observations_df = load_observations_data(data_source = data_source)
         region_df = observations_df[
             (observations_df["region_name"] == region_name) & (observations_df["region_type"] == region_type)]
+        if smooth:
+            window_size, min_window_size = 3, 1
+            date_col = 3    # Beginning of date column
+            region_df.iloc[:,date_col:] = region_df.iloc[:,date_col:].rolling(window_size,axis=1, min_periods=min_window_size).mean()
         return region_df
 
     @staticmethod
