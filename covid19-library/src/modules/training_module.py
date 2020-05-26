@@ -81,7 +81,7 @@ class TrainingModule(object):
                                                                               config.loss_functions)
         if config.output_filepath is not None:
             with open(config.output_filepath, 'w') as outfile:
-                json.dump(results, outfile)
+                json.dump(results, outfile, indent = 4)
         return results
 
     @staticmethod
