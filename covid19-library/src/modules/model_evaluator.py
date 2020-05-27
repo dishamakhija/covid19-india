@@ -61,7 +61,7 @@ class ModelEvaluator(object):
                                                              config.loss_functions)
         if config.output_filepath is not None:
             with open(config.output_filepath, 'w') as outfile:
-                json.dump(metric_results, outfile)
+                json.dump(metric_results, outfile, indent = 4)
         return metric_results
 
     @staticmethod
