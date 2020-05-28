@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 from typing import List, Optional
 
-from entities import intervention_variable
 from entities.intervention_variable import InputType
 from entities.forecast_variables import ForecastVariable
 from entities.model_class import ModelClass
@@ -40,13 +39,16 @@ class ForecastingModuleConfig(BaseConfig):
 
 
 class Intervention(BaseModel):
-    intervention_variable: intervention_variable
+    intervention_variable: str
     value: float
 
 
 class ForecastTimeInterval(BaseModel):
     end_date: str
     interventions: List[Intervention]
+
+    def get_interventions_map(self):
+        return dict([tuple(intervention.dict().values()) for intervention in self.interventions])
 
 
 class ForecastScenario(BaseModel):
