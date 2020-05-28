@@ -19,32 +19,28 @@
     },
     "MAPE": 12.963666426755314
   },
-  "scenarios": [
+  "start_date": "4/1/20",
+  "input_type": "npi_list",
+  "time_intervals": [
     {
-      "start_date": "4/1/20",
-      "input_type": "npi_list",
-      "time_intervals": [
+      "end_date": "4/10/20",
+      "interventions": [
         {
-          "end_date": "4/10/20",
-          "interventions": [
-            {
-              "intervention_variable": "testing_rate",
-              "value": 0.1
-            }
-          ]
+          "intervention_variable": "testing_rate",
+          "value": 0.1
+        }
+      ]
+    },
+    {
+      "end_date": "4/20/20",
+      "interventions": [
+        {
+          "intervention_variable": "mask_compliance",
+          "value": 0.2
         },
         {
-          "end_date": "4/20/20",
-          "interventions": [
-            {
-              "intervention_variable": "mask_compliance",
-              "value": 0.2
-            },
-            {
-              "intervention_variable": "containment_fraction",
-              "value": 0.05
-            }
-          ]
+          "intervention_variable": "containment_fraction",
+          "value": 0.05
         }
       ]
     }

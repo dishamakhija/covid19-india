@@ -51,12 +51,8 @@ class ForecastTimeInterval(BaseModel):
         return dict([tuple(intervention.dict().values()) for intervention in self.interventions])
 
 
-class ForecastScenario(BaseModel):
+class ScenarioForecastingModuleConfig(BaseConfig):
+    run_day: str
     start_date: str
     time_intervals: List[ForecastTimeInterval]
     input_type: InputType
-
-
-class ScenarioForecastingModuleConfig(BaseConfig):
-    run_day: str
-    scenarios: List[ForecastScenario]
