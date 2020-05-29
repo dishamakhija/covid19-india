@@ -7,6 +7,7 @@ from entities.loss_function import LossFunction
 
 
 class BaseConfig(BaseModel):
+    data_source: str
     region_name: str
     region_type: str
     model_class: ModelClass
