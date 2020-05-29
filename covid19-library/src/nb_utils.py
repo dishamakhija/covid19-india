@@ -478,8 +478,8 @@ def plot_m2(train2_model_params, train_start_date, train_end_date,
     """
     
     ## TODO: Log scale
-    with open(plot_config) as fplot, 
-        open(forecast_config) as fcast:
+    with open(plot_config) as fplot, \
+    open(forecast_config) as fcast:
         default_plot_config = json.load(fplot)
         default_forecast_config = json.load(fcast)
     
@@ -688,7 +688,7 @@ def train_eval_plot(region, region_type,
                     current_day, forecast_length,
                     default_train_config, default_test_config,
                     max_evals = 1000, data_source = None,
-                    mlflow_log = False):
+                    mlflow_log = False, mlflow_run_name = None):
     
     """
         Run train, evaluation and plotting. 
@@ -702,7 +702,7 @@ def train_eval_plot(region, region_type,
         max_evals : number of search evaluations for SEIR (default: 1000)
         data_source : Data source for picking the region data
         mlflow_log : Experiment logged using MLFlow (default: True)
-        
+        mlflow_run_name : Name given to run in MLFlow (default: None)
 
     Note:
         date_format : datetime.date object 
@@ -722,7 +722,7 @@ def train_eval_plot(region, region_type,
     test_end_date = dates['test_end_date']
     test_run_day = dates['test_run_day']
     
-    with mlflow.start_run():
+    with mlflow.start_run(run_name = mlflow_run_name):
     
         params, metrics, train1_params, train2_params = train_eval(region, region_type, 
                                                                train1_start_date, train1_end_date, 
@@ -741,7 +741,7 @@ def train_eval_plot(region, region_type,
         plot_m2(train2_params, train1_start_date, train1_end_date, 
             test_run_day, test_start_date, test_end_date, plot_name = region+ '_m2.png')
 
-        forecast_start_date = train2_start_date
+        forecast_start_date = (datetime.strptime(train2_end_date, "%m/%d/%y") + timedelta(1)).strftime("%-m/%-d/%y")
         plot_m3(train2_params, train1_start_date, 
                 forecast_start_date, forecast_length, plot_name = region +'_m3.png')
         
