@@ -129,6 +129,7 @@ def train_eval(region, region_type,
     params['data_source'] = data_source
 
     train_config = deepcopy(default_train_config)
+    train_config['data_source'] = data_source
     train_config['region_name'] = region
     train_config['region_type'] = region_type
     train_config['train_start_date'] = train1_start_date
@@ -137,6 +138,7 @@ def train_eval(region, region_type,
     
     # model parameters
     model_params = dict()
+    model_params['data_source'] = data_source
     model_params['region'] = region
     model_params['region_type'] = region_type
     model_params['model_type'] = train_config['model_class']
@@ -169,6 +171,7 @@ def train_eval(region, region_type,
     train1_model_params['model_parameters'] = trainResults['model_parameters']
     
     test_config = deepcopy(default_test_config)
+    test_config['data_source'] = data_source
     test_config['region_name'] = region
     test_config['region_type'] = region_type
     test_config['test_start_date'] = test_start_date
@@ -198,6 +201,7 @@ def train_eval(region, region_type,
     metrics.update(parse_metrics(evalResults, 'Test')) 
     
     finalTrain_config = deepcopy(default_train_config)
+    finalTrain_config['data_source'] = data_source
     finalTrain_config['region_name'] = region
     finalTrain_config['region_type'] = region_type
     finalTrain_config['train_start_date'] = train2_start_date
@@ -247,6 +251,7 @@ def forecast(model_params, run_day, forecast_start_date, forecast_end_date,
         forecast_df : Dataframe containing forecasts
     """
     evalConfig = ForecastingModuleConfig.parse_obj(default_forecast_config)
+    evalConfig.data_source = model_params['data_source']
     evalConfig.region_name = model_params['region']
     evalConfig.region_type = model_params['region_type']
     evalConfig.model_parameters = model_params['model_parameters']
@@ -264,14 +269,14 @@ def forecast(model_params, run_day, forecast_start_date, forecast_end_date,
     return forecast_df
 
 
-def get_observations_in_range(region_name, region_type, 
+def get_observations_in_range(data_source, region_name, region_type, 
                               start_date, end_date,
                               obs_type = 'confirmed'):
     """
         Return a list of counts of obs_type cases
         from the region in the specified date range.
     """
-    observations = DataFetcherModule.get_observations_for_region(region_type, region_name)
+    observations = DataFetcherModule.get_observations_for_region(region_type, region_name, data_source)
     observations_df = observations[observations['observation'] == obs_type]
     
     start_date = datetime.strptime(start_date, '%m/%d/%y')
@@ -307,9 +312,10 @@ def plot(model_params, forecast_df, forecast_start_date, forecast_end_date, plot
     assert end_date < datetime.now()    
     
     # Fetch actual counts from the DataFetcher module
+    data_source = model_params['data_source']
     region_name = model_params['region']
     region_type = model_params['region_type']
-    actual_observations = DataFetcherModule.get_observations_for_region(region_name, region_type)
+    actual_observations = DataFetcherModule.get_observations_for_region(region_name, region_type, data_source)
     
     # Get relevant time-series of actual counts from actual_observations
     actual_observations = get_observations_in_range(region_name, region_type, 
@@ -400,7 +406,8 @@ def plot_m1(train1_model_params, train1_run_day, train1_start_date, train1_end_d
     pd_df_test = pd_df_test.sort_values(by=['index'])
 
     # Get observed data
-    actual = DataFetcherModule.get_observations_for_region(train1_model_params['region_type'], train1_model_params['region'])
+    actual = DataFetcherModule.get_observations_for_region(
+        train1_model_params['region_type'], train1_model_params['region'], train1_model_params['data_source'])
     actual = actual.set_index('observation')
     actual = actual.transpose()
     actual = actual.reset_index()
@@ -498,7 +505,8 @@ def plot_m2(train2_model_params, train_start_date, train_end_date,
     pd_df = pd_df_test.sort_values(by=['index'])
 
     # Get observed data
-    actual = DataFetcherModule.get_observations_for_region(train2_model_params['region_type'], train2_model_params['region'])
+    actual = DataFetcherModule.get_observations_for_region(
+        train2_model_params['region_type'], train2_model_params['region'], train2_model_params['data_source'])
     actual = actual.set_index('observation')
     actual = actual.transpose()
     actual = actual.reset_index()
@@ -595,7 +603,8 @@ def plot_m3(train2_model_params, train1_start_date,
     pd_df = pd_df_forecast.sort_values(by=['index'])
 
     # Get observed data
-    actual = DataFetcherModule.get_observations_for_region(train2_model_params['region_type'], train2_model_params['region'])
+    actual = DataFetcherModule.get_observations_for_region(
+        train2_model_params['region_type'], train2_model_params['region'], train2_model_params['data_source'])
     actual = actual.set_index('observation')
     actual = actual.transpose()
     actual = actual.reset_index()
