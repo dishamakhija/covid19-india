@@ -1,1 +1,4 @@
 *.pyc
+*.DS_Store
+covid19-library/src/mlflow-credentials.json
+
