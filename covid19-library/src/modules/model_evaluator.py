@@ -21,9 +21,9 @@ class ModelEvaluator(object):
         predictions = self._model.predict(region_metadata, observations, run_day, test_start_date, test_end_date)
         return self.evaluate_for_forecast(observations, predictions, loss_functions)
 
-    def evaluate_for_region(self, region_type, region_name, run_day, test_start_date, test_end_date, loss_functions):
-        observations = DataFetcherModule.get_observations_for_region(region_type, region_name)
-        region_metadata = DataFetcherModule.get_regional_metadata(region_type, region_name)
+    def evaluate_for_region(self, data_source, region_type, region_name, run_day, test_start_date, test_end_date, loss_functions):
+        observations = DataFetcherModule.get_observations_for_region(region_type, region_name, data_source)
+        region_metadata = DataFetcherModule.get_regional_metadata(region_type, region_name, data_source)
         return self.evaluate(region_metadata, observations, run_day, test_start_date, test_end_date, loss_functions)
 
     @staticmethod
@@ -56,7 +56,7 @@ class ModelEvaluator(object):
     @staticmethod
     def from_config(config: ModelEvaluatorConfig):
         model_evaluator = ModelEvaluator(config.model_class, config.model_parameters)
-        metric_results = model_evaluator.evaluate_for_region(config.region_type, config.region_name, config.run_day,
+        metric_results = model_evaluator.evaluate_for_region(config.data_source, config.region_type, config.region_name, config.run_day,
                                                              config.test_start_date, config.test_end_date,
                                                              config.loss_functions)
         if config.output_filepath is not None:
