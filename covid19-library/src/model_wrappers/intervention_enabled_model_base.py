@@ -38,7 +38,7 @@ class InterventionEnabledModelBase(ModelWrapperBase):
 
     @abc.abstractmethod
     def get_scale_factor_map(self):
-        """
+        """ intervention effect parameters
         :return: map of scale factor
         :rtype: dict<string, float>
         """
@@ -46,7 +46,7 @@ class InterventionEnabledModelBase(ModelWrapperBase):
 
     @abc.abstractmethod
     def get_change_factor_map(self):
-        """
+        """ intervention-model parameter change expressions
         :return: returns map of parameters, and
         lambda for calculation
         :rtype: dict<string, lambda>
