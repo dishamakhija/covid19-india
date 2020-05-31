@@ -29,7 +29,6 @@ class TrainingModule(object):
                 search_space[k] = hp.uniform(k, v[0], v[1])
             result = hyperparam_tuning(objective, search_space,
                                        search_parameters.get("max_evals", 100))
-            ##TODO: harsh to check this
             run_day = (datetime.strptime(train_start_date, "%m/%d/%y") - timedelta(days=1)).strftime(
                 "%-m/%-d/%y")
             latent_params = self._model.get_latent_params(region_metadata, region_observations, run_day,
@@ -40,7 +39,7 @@ class TrainingModule(object):
         model_params.update(latent_params["latent_params"])
         model_params.update(result["best_params"])
         model_params["MAPE"] = result["best_loss"]
-        result["model_parameters"]= model_params
+        result["model_parameters"] = model_params
         return result
 
     def optimize(self, search_space, region_metadata, region_observations, train_start_date, train_end_date,
@@ -72,7 +71,6 @@ class TrainingModule(object):
         config.model_parameters.update(
             results["latent_params"])
         model_evaluator = ModelEvaluator(config.model_class, config.model_parameters)
-        ##TODO harsh to check this
         run_day = (datetime.strptime(config.train_start_date, "%m/%d/%y") - timedelta(days=1)).strftime("%-m/%-d/%y")
         results["train_metric_results"] = model_evaluator.evaluate_for_region(config.region_type, config.region_name,
                                                                               run_day,
