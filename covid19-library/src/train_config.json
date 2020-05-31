@@ -9,11 +9,11 @@
         "F_icu" : 0.05
 	},
 	"search_space": {
-		"r0": [0.5, 6],
-		"EbyCRatio": [0.01, 70],
-		"IbyCRatio": [0.01, 2],
+		"r0": [0.5, 3],
+		"EbyCRatio": [0.001, 70],
+		"IbyCRatio": [0.001, 2],
 		"infectious_period": [1, 10],
-        "F_hospitalization" : [0.04, 0.125],
+        "F_hospitalization" : [0, 0.125],
         "F_fatalities" : [0.02, 0.12] 
 	},
 	"search_parameters": {
@@ -23,34 +23,19 @@
 		"metric_name": "mape",
 		"variable_weights": [{
 			"variable": "confirmed",
-			"weight": 1
+			"weight": 0.25
 		}, {
 			"variable": "recovered",
-			"weight": 1
+			"weight": 0.25
 		}, {
 			"variable": "deceased",
-			"weight": 1
+			"weight": 0.25
 		}, {
 			"variable": "hospitalized",
-			"weight": 1
+			"weight": 0.25
 		}]
 	},
 	"loss_functions": [{
-		"metric_name": "mape",
-		"variable_weights": [{
-			"variable": "confirmed",
-			"weight": 1
-		}, {
-			"variable": "recovered",
-			"weight": 1
-		}, {
-			"variable": "deceased",
-			"weight": 1
-		}, {
-			"variable": "hospitalized",
-			"weight": 1
-		}]
-	},{
 		"metric_name": "mape",
 		"variable_weights": [{
 			"variable": "confirmed",

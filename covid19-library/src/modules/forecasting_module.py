@@ -40,7 +40,7 @@ class ForecastingModule(object):
                    ForecastVariable.recovered.name, ForecastVariable.deceased.name, ForecastVariable.confirmed.name]
         for col in columns:
             preddf = preddf.rename(columns={col: col + '_mean'})
-        error = float(self._model_parameters['MAPE']) / 100
+        error = min(1, float(self._model_parameters['MAPE']) / 100)
         for col in columns:
             col_mean = col + '_mean'
             preddf[col + '_min'] = preddf[col_mean] * (1 - error)
