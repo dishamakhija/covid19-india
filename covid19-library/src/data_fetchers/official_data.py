@@ -4,23 +4,11 @@ from data_fetchers.data_fetcher_base import DataFetcherBase
 import copy
 import numpy as np
 import pandas as pd
-import json
 
 from pathlib import Path
 
 from pyathena import connect
 from pyathena.pandas_cursor import PandasCursor
-
-# column headers and static strings used in output CSV
-REGION_TYPE = "region_type"
-REGION_NAME = "region_name"
-DISTRICT = "district"
-OBSERVATION = "observation"
-CONFIRMED = "confirmed"
-DECEASED = "deceased"
-RECOVERED = "recovered"
-HOSPITALIZED = "hospitalized"
-ACTIVE = "active"
 
 def create_connection(pyathena_rc_path=None):
     """Creates SQL Server connection using AWS Athena credentials
@@ -104,23 +92,14 @@ def get_data_from_db(district):
     df_result.columns = [x if x != 'total' else 'confirmed' for x in df_result.columns]
 
     df_result = df_result.rename(columns={'date':'index'})
-    df_result = df_result.set_index('index').transpose().reset_index().rename(columns={'index':OBSERVATION})
-    df_result.insert(0, column = REGION_NAME, value = district.lower().replace(',', ''))
-    df_result.insert(1, column = REGION_TYPE, value = DISTRICT)
+    df_result = df_result.set_index('index').transpose().reset_index().rename(columns={'index':"observation"})
+    df_result.insert(0, column = "region_name", value = district.lower().replace(',', ''))
+    df_result.insert(1, column = "region_type", value = "district")
 
     return df_result
 
-def load_regional_metadata(filepath):
-    with open(filepath, 'r') as fp:
-        return json.load(fp)
 
 class OfficialData(DataFetcherBase):
 
     def get_observations_for_region_single(self, region_type, region_name):
         return get_data_from_db(region_name)
-
-    def get_regional_metadata_single(self, region_type, region_name, filepath):
-        metadata = load_regional_metadata(filepath)
-        for params in metadata["regional_metadata"]:
-            if params["region_type"] == region_type and params["region_name"] == region_name:
-                return params["metadata"]

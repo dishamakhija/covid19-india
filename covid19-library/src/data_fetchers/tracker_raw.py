@@ -1,10 +1,10 @@
 from entities.data_source import DataSource
 from data_fetchers.data_fetcher_base import DataFetcherBase
+from data_fetchers.data_fetcher_utils import get_raw_data_dict
 
 import json
 import pandas as pd
 import numpy as np
-from datetime import date
 import urllib.request
 from datetime import datetime
 from io import StringIO  ## for Python 3
@@ -51,15 +51,6 @@ def load_observations_data():
         merged_df.to_csv("observations_latest.csv", index=False)
         return merged_df
 
-def load_regional_metadata(filepath):
-    with open(filepath, 'r') as fp:
-        return json.load(fp)
-
-def get_raw_data_dict(input_url):
-    with urllib.request.urlopen(input_url) as url:
-        data_dict = json.loads(url.read().decode())
-        return data_dict
-
 def _get_covid_ts(stats, stats_post27_april, input_region_field, output_region_type_field, variable):
     if variable == CONFIRMED:
         df = pd.DataFrame \
@@ -99,9 +90,3 @@ class TrackerRaw(DataFetcherBase):
         region_df = observations_df[
             (observations_df["region_name"] == region_name) & (observations_df["region_type"] == region_type)]
         return region_df
-
-    def get_regional_metadata_single(self, region_type, region_name, filepath="../data/regional_metadata.json"):
-        metadata = load_regional_metadata(filepath)
-        for params in metadata["regional_metadata"]:
-            if params["region_type"] == region_type and params["region_name"] == region_name:
-                return params["metadata"]
