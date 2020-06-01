@@ -1,0 +1,14 @@
+{
+	"region_name": "",
+	"region_type": "",
+	"run_day": "",
+	"forecast_start_date": "",
+	"forecast_end_date": "",
+	"model_class": "SEIR_gen",
+	"model_parameters": "",
+    "latent_information":{
+      "latent_variables": ["exposed", "active"],
+      "latent_on": "confirmed"
+    },
+	"forecast_variables": ["confirmed", "recovered", "deceased"]
+}

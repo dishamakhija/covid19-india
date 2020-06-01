@@ -1,0 +1,55 @@
+{
+  "region_name": "mumbai",
+  "region_type": "district",
+  "train_start_date": "3/22/20",
+  "train_end_date": "4/1/20",
+  "model_class": "SEIR_gen",
+  "model_parameters": {
+    "incubation_period": 6
+  },
+  "latent_information":{
+      "latent_variables": ["exposed", "active"],
+      "latent_on": "confirmed"
+  },
+  "search_space": {
+    "r0": [0.8, 6],
+    "exposed_ratio": [1, 70],
+    "active_ratio": [0.2, 1],
+    "infectious_period": [0, 10],
+    "hospitalization_period": [10,20],
+    "deceased_ratio": [0,1]
+  },
+  "search_parameters": {
+    "max_evals": 100
+  },
+  "training_loss_function": {
+    "metric_name": "mape",
+    "variable_weights": [
+      {
+        "variable": "confirmed",
+        "weight": 1
+      }
+    ]
+  },
+  "loss_functions": [
+    {
+      "metric_name": "mape",
+      "variable_weights": [
+        {
+          "variable": "confirmed",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "metric_name": "rmse",
+      "variable_weights": [
+        {
+          "variable": "confirmed",
+          "weight": 1
+        }
+      ]
+    }
+  ],
+  "output_filepath": "seir_train.json"
+}

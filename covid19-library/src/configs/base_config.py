@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List, Optional, Dict, Union
 
 from entities.forecast_variables import ForecastVariable
 from entities.model_class import ModelClass
@@ -21,6 +21,7 @@ class TrainingModuleConfig(BaseConfig):
     search_parameters: dict
     training_loss_function: LossFunction
     loss_functions: List[LossFunction]
+    latent_information: Dict[str, Union[List[ForecastVariable], ForecastVariable]]
 
 
 class ModelEvaluatorConfig(BaseConfig):
@@ -28,6 +29,7 @@ class ModelEvaluatorConfig(BaseConfig):
     test_start_date: str
     test_end_date: str
     loss_functions: List[LossFunction]
+    latent_information: Dict[str, Union[List[ForecastVariable], ForecastVariable]]
 
 
 class ForecastingModuleConfig(BaseConfig):
@@ -35,3 +37,4 @@ class ForecastingModuleConfig(BaseConfig):
     forecast_start_date: str
     forecast_end_date: str
     forecast_variables: List[ForecastVariable]
+    latent_information: Dict[str, Union[List[ForecastVariable], ForecastVariable]]

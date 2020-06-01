@@ -1,0 +1,27 @@
+{
+	"region_name": "",
+	"region_type": "",
+	"run_day": "",
+	"test_start_date": "",
+	"test_end_date": "",
+	"model_class": "SEIR_gen",
+	"model_parameters": {"incubation_period" : 5},
+    "latent_information":{
+      "latent_variables": ["exposed", "active"],
+      "latent_on": "confirmed"
+    },
+	"loss_functions": [{
+		"metric_name": "mape",
+		"variable_weights": [{
+			"variable": "confirmed",
+			"weight": 1
+		}]
+	}, {
+		"metric_name": "rmsle",
+		"variable_weights": [{
+			"variable": "confirmed",
+			"weight": 1
+		}]
+	}],
+	"output_filepath": ""
+}

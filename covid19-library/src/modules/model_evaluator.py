@@ -17,14 +17,22 @@ class ModelEvaluator(object):
     def __init__(self, model_class: ModelClass, model_parameters: dict):
         self._model = ModelFactory.get_model(model_class, model_parameters)
 
-    def evaluate(self, region_metadata, observations, run_day, test_start_date, test_end_date, loss_functions):
-        predictions = self._model.predict(region_metadata, observations, run_day, test_start_date, test_end_date)
+    def evaluate(self, region_metadata, observations, run_day, 
+                 test_start_date, test_end_date, loss_functions, latent_information):
+        
+        predictions = self._model.predict(region_metadata, observations, run_day, test_start_date, 
+                                          test_end_date, latent_information['latent_variables'], latent_information['latent_on'])
+        
         return self.evaluate_for_forecast(observations, predictions, loss_functions)
 
-    def evaluate_for_region(self, region_type, region_name, run_day, test_start_date, test_end_date, loss_functions):
+    def evaluate_for_region(self, region_type, region_name, run_day, 
+                            test_start_date, test_end_date, loss_functions, latent_information):
+        
         observations = DataFetcherModule.get_observations_for_region(region_type, region_name)
         region_metadata = DataFetcherModule.get_regional_metadata(region_type, region_name)
-        return self.evaluate(region_metadata, observations, run_day, test_start_date, test_end_date, loss_functions)
+        
+        return self.evaluate(region_metadata, observations, run_day, 
+                             test_start_date, test_end_date, loss_functions, latent_information)
 
     @staticmethod
     def evaluate_for_forecast(observations, predictions_df, loss_functions: List[LossFunction]):
@@ -58,7 +66,7 @@ class ModelEvaluator(object):
         model_evaluator = ModelEvaluator(config.model_class, config.model_parameters)
         metric_results = model_evaluator.evaluate_for_region(config.region_type, config.region_name, config.run_day,
                                                              config.test_start_date, config.test_end_date,
-                                                             config.loss_functions)
+                                                             config.loss_functions, config.latent_information)
         if config.output_filepath is not None:
             with open(config.output_filepath, 'w') as outfile:
                 json.dump(metric_results, outfile)
