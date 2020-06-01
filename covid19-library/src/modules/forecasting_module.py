@@ -56,7 +56,7 @@ class ForecastingModule(object):
             preddf = preddf.append(newSeries, ignore_index=True)
             preddf = preddf.rename(columns={col: col + '_mean'})
         preddf.insert(0, 'Region Type', region_type)
-        preddf.insert(1, 'Region', region_name)
+        preddf.insert(1, 'Region', " ".join(region_name))
         preddf.insert(2, 'Country', 'India')
         preddf.insert(3, 'Lat', 20)
         preddf.insert(4, 'Long', 70)
@@ -77,7 +77,7 @@ class ForecastingModule(object):
            
         preddf.insert(0, 'run_day', run_day)
         preddf.insert(1, 'Region Type', region_type)
-        preddf.insert(2, 'Region', region_name)
+        preddf.insert(2, 'Region', " ".join(region_name))
         preddf.insert(3, 'Model', self._model.__class__.__name__)
         preddf.insert(4, 'Error', "MAPE")
         preddf.insert(5, "Error Value", error*100)

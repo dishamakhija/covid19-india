@@ -61,20 +61,13 @@ def get_raw_data_dict(input_url):
 
 class TrackerDistrictDaily(DataFetcherBase):
 
-    def get_observations_for_region(self, region_type, region_name):
+    def get_observations_for_region_single(self, region_type, region_name):
         observations_df = load_observations_data()
         region_df = observations_df[
             (observations_df["region_name"] == region_name) & (observations_df["region_type"] == region_type)]
-        window_size, min_window_size = 3, 1
-        date_col = 3    # Beginning of date column
-        region_df.iloc[:,date_col:] = region_df.iloc[:,date_col:].rolling(window_size,axis=1, min_periods=min_window_size).mean()
-        # if smooth:
-        #     window_size, min_window_size = 3, 1
-        #     date_col = 3    # Beginning of date column
-        #     region_df.iloc[:,date_col:] = region_df.iloc[:,date_col:].rolling(window_size,axis=1, min_periods=min_window_size).mean()
         return region_df
 
-    def get_regional_metadata(self, region_type, region_name, filepath):
+    def get_regional_metadata_single(self, region_type, region_name, filepath):
         metadata = load_regional_metadata(filepath)
         for params in metadata["regional_metadata"]:
             if params["region_type"] == region_type and params["region_name"] == region_name:
