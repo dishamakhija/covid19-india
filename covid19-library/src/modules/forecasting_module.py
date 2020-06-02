@@ -6,6 +6,8 @@ from utils.config_util import read_config_file
 from entities.forecast_variables import ForecastVariable
 import pandas as pd
 
+from utils.data_transformer_helper import convert_to_nhu_format
+
 
 class ForecastingModule(object):
 
@@ -18,64 +20,39 @@ class ForecastingModule(object):
                 forecast_end_date: str):
         predictions_df = self._model.predict(region_metadata, region_observations, run_day, forecast_start_date,
                                              forecast_end_date)
-        predictions_df = self.convert_to_required_format(predictions_df, region_type, region_name)
+        predictions_df = convert_to_nhu_format(predictions_df, region_type, region_name, self._model_parameters['MAPE'])
         return predictions_df.to_json()
-    
-    def predict_old_format(self, region_type: str, region_name: str, region_metadata: dict, region_observations: pd.DataFrame,
-                run_day: str, forecast_start_date: str,
-                forecast_end_date: str):
+
+    def predict_old_format(self, region_type: str, region_name: str, region_metadata: dict,
+                           region_observations: pd.DataFrame,
+                           run_day: str, forecast_start_date: str,
+                           forecast_end_date: str):
         predictions_df = self._model.predict(region_metadata, region_observations, run_day, forecast_start_date,
                                              forecast_end_date)
         predictions_df = self.convert_to_old_required_format(run_day, predictions_df, region_type, region_name)
         return predictions_df.to_json()
 
-    def convert_to_required_format(self, predictions_df, region_type, region_name):
-        dates = predictions_df['date']
-        preddf = predictions_df.set_index('date')
-        columns = [ForecastVariable.active.name, ForecastVariable.hospitalized.name, ForecastVariable.icu.name,
-                   ForecastVariable.recovered.name, ForecastVariable.deceased.name, ForecastVariable.confirmed.name]
-        for col in columns:
-            preddf = preddf.rename(columns={col: col + '_mean'})
-        preddf = preddf.transpose().reset_index()
-        preddf = preddf.rename(columns={"index": "prediction_type", })
-        error = min(1, float(self._model_parameters['MAPE']) / 100)
-        for col in columns:
-            col_mean = col + '_mean'
-            series = preddf[preddf['prediction_type'] == col_mean][dates]
-            newSeries = series.multiply((1 - error))
-            newSeries['prediction_type'] = col + '_min'
-            preddf = preddf.append(newSeries, ignore_index=True)
-            newSeries = series.multiply((1 + error))
-            newSeries['prediction_type'] = col + '_max'
-            preddf = preddf.append(newSeries, ignore_index=True)
-            preddf = preddf.rename(columns={col: col + '_mean'})
-        preddf.insert(0, 'Region Type', region_type)
-        preddf.insert(1, 'Region', " ".join(region_name))
-        preddf.insert(2, 'Country', 'India')
-        preddf.insert(3, 'Lat', 20)
-        preddf.insert(4, 'Long', 70)
-        return preddf
-    
     def convert_to_old_required_format(self, run_day, predictions_df, region_type, region_name):
+
         dates = predictions_df['date']
         preddf = predictions_df.set_index('date')
         columns = [ForecastVariable.active.name, ForecastVariable.hospitalized.name,
                    ForecastVariable.recovered.name, ForecastVariable.deceased.name, ForecastVariable.confirmed.name]
         for col in columns:
             preddf = preddf.rename(columns={col: col + '_mean'})
-        error = float(self._model_parameters['MAPE']) / 100
+        error = min(1, float(self._model_parameters['MAPE']) / 100)
         for col in columns:
             col_mean = col + '_mean'
-            preddf[col+'_min'] = preddf[col_mean]*(1-error)
-            preddf[col+'_max'] = preddf[col_mean]*(1+error)
-           
+            preddf[col + '_min'] = preddf[col_mean] * (1 - error)
+            preddf[col + '_max'] = preddf[col_mean] * (1 + error)
+
         preddf.insert(0, 'run_day', run_day)
         preddf.insert(1, 'Region Type', region_type)
         preddf.insert(2, 'Region', " ".join(region_name))
         preddf.insert(3, 'Model', self._model.__class__.__name__)
         preddf.insert(4, 'Error', "MAPE")
-        preddf.insert(5, "Error Value", error*100)
-            
+        preddf.insert(5, "Error Value", error * 100)
+
         return preddf
 
     def predict_for_region(self, data_source, region_type, region_name, run_day, forecast_start_date,
