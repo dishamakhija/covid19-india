@@ -25,11 +25,11 @@ class DataFetcherModule(object):
 
 if __name__ == "__main__":
     print(DataFetcherModule.get_observations_for_region(
-        "district",["pune", "bengaluru"],"tracker_district_daily","../../data/regional_metadata.json"))
+        "district",["pune", "bengaluru urban"],"tracker_district_daily","../../data/regional_metadata.json"))
     print(DataFetcherModule.get_observations_for_region(
-        "district",["pune", "bengaluru"],"tracker_raw_data","../../data/regional_metadata.json"))
+        "district",["pune", "bengaluru urban"],"tracker_raw_data","../../data/regional_metadata.json"))
     print(DataFetcherModule.get_observations_for_region(
-        "district",["pune", "bengaluru"],"official_data","../../data/regional_metadata.json"))
+        "district",["pune", "bengaluru urban"],"official_data","../../data/regional_metadata.json"))
     print(DataFetcherModule.get_observations_for_region(
         "district",["pune"],"tracker_district_daily","../../data/regional_metadata.json"))
     print(DataFetcherModule.get_observations_for_region(

@@ -90,6 +90,7 @@ def get_data_from_db(district):
 
     df_result.columns = [x if x != 'active' else 'hospitalized' for x in df_result.columns]
     df_result.columns = [x if x != 'total' else 'confirmed' for x in df_result.columns]
+    df_result = df_result.fillna(0)
 
     df_result = df_result.rename(columns={'date':'index'})
     df_result = df_result.set_index('index').transpose().reset_index().rename(columns={'index':"observation"})

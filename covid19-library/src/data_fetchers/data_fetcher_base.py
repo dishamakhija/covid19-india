@@ -25,22 +25,19 @@ class DataFetcherBase(ABC):
         region_name : List of regions
         """
         df_list = []
-        combined_region_name = " ".join(region_name)
+        
         for region in region_name:
             df_region = self.get_observations_for_region_single(region_type, region)
             df_list.append(df_region)
         df = pd.concat(df_list, sort = False)
 
-        # CHECK INDEX
+        combined_region_name = " ".join(region_name)
 
         if len(region_name) > 1:
-            df = df.groupby(["observation"]).sum().reset_index()
-            if "region_name" not in df.columns:
-                df.insert(0, column="region_name", value=combined_region_name)
-            else:
-                df.loc[:, "region_name"] = combined_region_name
-            if "region_type" not in df.columns:
-                df.insert(1, column="region_type", value=region_type)
+            cols = [col for col in list(df) if col not in {"region_name","region_type","observation"}]
+            df = df.groupby(["observation"])[cols].sum().reset_index()
+            df.insert(0, column="region_name", value=combined_region_name)
+            df.insert(1, column="region_type", value=region_type)
 
         if smooth:
             window_size, min_window_size = 3, 1
