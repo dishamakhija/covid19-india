@@ -15,15 +15,9 @@ class ForecastingModule(object):
 
     def predict(self, region_type: str, region_name: str, region_metadata: dict, region_observations: pd.DataFrame,
                 run_day: str, forecast_start_date: str,
-                forecast_end_date: str, add_initial_observation: bool):
+                forecast_end_date: str):
         predictions_df = self._model.predict(region_metadata, region_observations, run_day, forecast_start_date,
                                              forecast_end_date)
-        if add_initial_observation:
-            run_day_observations = region_observations[['observation', run_day]]
-            newSeries = pd.Series(run_day_observations[run_day].values, run_day_observations['observation']).to_dict()
-            newSeries['exposed'] = newSeries['icu'] = newSeries['active'] = newSeries['infected'] = newSeries['final'] = 0
-            newSeries['date'] = run_day
-            predictions_df = predictions_df.append(newSeries, ignore_index=True)
         predictions_df = self.convert_to_required_format(predictions_df, region_type, region_name)
         return predictions_df.to_json()
     
@@ -85,13 +79,12 @@ class ForecastingModule(object):
         return preddf
 
     def predict_for_region(self, data_source, region_type, region_name, run_day, forecast_start_date,
-                           forecast_end_date, add_initial_observation):
+                           forecast_end_date,):
         observations = DataFetcherModule.get_observations_for_region(region_type, region_name, data_source)
         region_metadata = DataFetcherModule.get_regional_metadata(region_type, region_name, data_source)
         return self.predict(region_type, region_name, region_metadata, observations, run_day,
                             forecast_start_date,
-                            forecast_end_date,
-                            add_initial_observation)
+                            forecast_end_date)
 
     @staticmethod
     def from_config_file(config_file_path):
@@ -104,7 +97,7 @@ class ForecastingModule(object):
         forecasting_module = ForecastingModule(config.model_class, config.model_parameters)
         predictions = forecasting_module.predict_for_region(config.data_source, config.region_type, config.region_name,
                                                             config.run_day, config.forecast_start_date,
-                                                            config.forecast_end_date, config.add_initial_observation)
+                                                            config.forecast_end_date)
         if config.output_filepath is not None:
             predictions.to_csv(config.output_filepath, index=False)
         return predictions

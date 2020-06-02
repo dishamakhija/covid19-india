@@ -393,8 +393,6 @@ def plot_m1(train1_model_params, train1_run_day, train1_start_date, train1_end_d
 
     with open(forecast_config) as fin:
         default_forecast_config = json.load(fin)
-
-    default_forecast_config['add_initial_observation'] = True
     
     # Get predictions
     pd_df_train = forecast(train1_model_params, train1_run_day, train1_start_date, train1_end_date, default_forecast_config)
@@ -494,8 +492,6 @@ def plot_m2(train2_model_params, train_start_date, train_end_date,
     plot_config['uncertainty'] = uncertainty
     plot_config['rolling_average'] = rolling_average
     
-    default_forecast_config['add_initial_observation'] = True
-    
     actual_start_date = (datetime.strptime(test_start_date, "%m/%d/%y") - timedelta(days=14)).strftime("%-m/%-d/%y")    
     
     # Get predictions
@@ -589,8 +585,6 @@ def plot_m3(train2_model_params, train1_start_date,
     plot_config = deepcopy(default_plot_config)
     plot_config['uncertainty'] = uncertainty
     plot_config['rolling_average'] = rolling_average
-    
-    default_forecast_config['add_initial_observation'] = True
     
     actual_start_date = (datetime.strptime(train1_start_date, "%m/%d/%y") - timedelta(days=14)).strftime("%-m/%-d/%y")    
     forecast_run_day = (datetime.strptime(forecast_start_date, "%m/%d/%y") - timedelta(days=1)).strftime("%-m/%-d/%y")
