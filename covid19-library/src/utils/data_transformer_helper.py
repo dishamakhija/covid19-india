@@ -20,7 +20,7 @@ def convert_to_nhu_format(predictions_df, region_type, region_name, mape):
         preddf = preddf.rename(columns={col: col + '_mean'})
     preddf = preddf.transpose().reset_index()
     preddf = preddf.rename(columns={"index": "prediction_type", })
-    error = float(mape) / 100
+    error = min(1, float(mape) / 100)
     for col in columns:
         col_mean = col + '_mean'
         series = preddf[preddf['prediction_type'] == col_mean][dates]
@@ -32,7 +32,7 @@ def convert_to_nhu_format(predictions_df, region_type, region_name, mape):
         preddf = preddf.append(newSeries, ignore_index=True)
         preddf = preddf.rename(columns={col: col + '_mean'})
     preddf.insert(0, 'Region Type', region_type)
-    preddf.insert(1, 'Region', region_name)
+    preddf.insert(1, 'Region', " ".join(region_name))
     preddf.insert(2, 'Country', 'India')
     preddf.insert(3, 'Lat', 20)
     preddf.insert(4, 'Long', 70)
