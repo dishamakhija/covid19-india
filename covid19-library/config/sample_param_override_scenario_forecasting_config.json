@@ -1,0 +1,52 @@
+{
+  "region_name": "bengaluru urban",
+  "region_type": "district",
+  "run_day": "3/22/20",
+  "model_class": "SEIHRD",
+  "model_parameters": {
+    "EbyCRatio": 0.518754725345212,
+    "IbyCRatio": 0.9253497785591837,
+    "infectious_period": 1.17922843495018,
+    "incubation_period": 5,
+    "r0": 0.5970526229197348,
+    "F_hospitalization": 0.04,
+    "F_icu": 0.05,
+    "F_fatalities": 0.08,
+    "LatentEbyCRatio": {
+      "4/15/20": 0.518754725345212,
+      "4/27/20": 0.07717399825771437
+    },
+    "LatentIbyCRatio": {
+      "4/15/20": 0.9253497785591837,
+      "4/27/20": 0.02268673204433395
+    },
+    "MAPE": 12.963666426755314
+  },
+  "start_date": "4/1/20",
+  "input_type": "param_override",
+  "time_intervals": [
+    {
+      "end_date": "4/10/20",
+      "interventions": [
+        {
+          "intervention_variable": "r0",
+          "value": 1.1
+        }
+      ]
+    },
+    {
+      "end_date": "4/20/20",
+      "interventions": [
+        {
+          "intervention_variable": "r0",
+          "value": 1.5
+        },
+        {
+          "intervention_variable": "incubation_period",
+          "value": 14
+        }
+      ]
+    }
+  ],
+  "output_filepath": "seir_forecast_param_override.csv"
+}
