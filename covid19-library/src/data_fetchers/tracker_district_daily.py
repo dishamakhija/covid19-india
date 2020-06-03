@@ -38,7 +38,7 @@ def load_observations_data():
 
 class TrackerDistrictDaily(DataFetcherBase):
 
-    def get_observations_for_region_single(self, region_type, region_name):
+    def get_observations_for_single_region(self, region_type, region_name):
         observations_df = load_observations_data()
         region_df = observations_df[
             (observations_df["region_name"] == region_name) & (observations_df["region_type"] == region_type)]
