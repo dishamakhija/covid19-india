@@ -1,5 +1,6 @@
 {
-	"region_name": "",
+	"data_source": "",
+	"region_name": [],
 	"region_type": "",
 	"run_day": "",
 	"test_start_date": "",

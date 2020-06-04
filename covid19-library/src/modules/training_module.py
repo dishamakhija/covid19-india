@@ -51,17 +51,17 @@ class TrainingModule(object):
         metrics_result = ModelEvaluator.evaluate_for_forecast(region_observations, predict_df, [loss_function])
         return metrics_result[0]["value"]
 
-    def train_for_region(self, region_type, region_name, train_start_date, train_end_date,
+    def train_for_region(self, data_source, region_type, region_name, train_start_date, train_end_date,
                          search_space, search_parameters, train_loss_function):
-        observations = DataFetcherModule.get_observations_for_region(region_type, region_name)
-        region_metadata = DataFetcherModule.get_regional_metadata(region_type, region_name)
+        observations = DataFetcherModule.get_observations_for_region(region_type, region_name, data_source)
+        region_metadata = DataFetcherModule.get_regional_metadata(region_type, region_name, data_source)
         return self.train(region_metadata, observations, train_start_date, train_end_date,
                           search_space, search_parameters, train_loss_function)
 
     @staticmethod
     def from_config(config: TrainingModuleConfig):
         training_module = TrainingModule(config.model_class, config.model_parameters)
-        results = training_module.train_for_region(config.region_type, config.region_name,
+        results = training_module.train_for_region(config.data_source, config.region_type, config.region_name,
                                                    config.train_start_date,
                                                    config.train_end_date,
                                                    config.search_space,
@@ -72,7 +72,7 @@ class TrainingModule(object):
             results["latent_params"])
         model_evaluator = ModelEvaluator(config.model_class, config.model_parameters)
         run_day = (datetime.strptime(config.train_start_date, "%m/%d/%y") - timedelta(days=1)).strftime("%-m/%-d/%y")
-        results["train_metric_results"] = model_evaluator.evaluate_for_region(config.region_type, config.region_name,
+        results["train_metric_results"] = model_evaluator.evaluate_for_region(config.data_source, config.region_type, config.region_name,
                                                                               run_day,
                                                                               config.train_start_date,
                                                                               config.train_end_date,
