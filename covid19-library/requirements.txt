@@ -1,5 +1,5 @@
 seirsplus==0.1.1
-pydantic==1.2
+pydantic==1.6.2
 pandas==0.24.2
 numpy==1.16.2
 kneed==0.6.0
